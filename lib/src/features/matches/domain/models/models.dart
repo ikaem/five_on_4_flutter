@@ -1,1 +1,1 @@
-export "match/match.dart";
+export 'match/match.dart';

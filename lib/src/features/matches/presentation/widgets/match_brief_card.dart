@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 
 // TODO defining typedefs in widgert that uses that  - or in the file that uses them originally
 
-typedef OnMatchBriefCardTap = void Function();
+typedef OnMatchBriefCardTap = void Function({
+  required String matchId,
+  required BuildContext context,
+});
 
 class MatchBriefCard extends StatelessWidget {
   const MatchBriefCard({
@@ -20,13 +23,16 @@ class MatchBriefCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        onTap: () => onMatchBriefCardTap(),
+        onTap: () => onMatchBriefCardTap(
+          matchId: match.id,
+          context: context,
+        ),
         title: Text(match.name),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text("Some location"),
-            Text("Some time"),
+            Text('Some location'),
+            Text('Some time'),
           ],
         ),
       ),

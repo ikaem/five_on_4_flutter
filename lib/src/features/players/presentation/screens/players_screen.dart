@@ -16,9 +16,9 @@ class _PlayersView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Matches screen"),
+        title: const Text('Matches screen'),
       ),
-      body: const Text("Players Screeen"),
+      body: const Text('Players Screeen'),
     );
   }
 }

@@ -16,9 +16,9 @@ class _MatchesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Matches screen"),
+        title: const Text('Matches screen'),
       ),
-      body: const Text("Matches Screeen"),
+      body: const Text('Matches Screeen'),
     );
   }
 }

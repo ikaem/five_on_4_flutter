@@ -1,1 +1,1 @@
-export "match_brief_card.dart";
+export 'match_brief_card.dart';

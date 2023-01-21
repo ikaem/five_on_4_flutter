@@ -1,11 +1,25 @@
 import 'package:five_on_4_flutter/src/domain/models/models.dart';
 
 abstract class AppRoutes {
-  static const AppRouteModel home = AppRouteModel(path: "/", name: "Home");
+  static const String idPlaceholder = ':id';
 
-  static const AppRouteModel matches =
-      AppRouteModel(path: "/matches", name: "Matches");
+  static AppRouteModel get home => const AppRouteModel(path: '/', name: 'Home');
 
-  static const AppRouteModel players =
-      AppRouteModel(path: "/players", name: "Players");
+  static AppRouteModel get matches =>
+      const AppRouteModel(path: '/matches', name: 'Matches');
+
+  static AppRouteModel get players =>
+      const AppRouteModel(path: '/players', name: 'Players');
+
+  static AppRouteModel match([String? id]) {
+    final String matchId = id ?? idPlaceholder;
+
+    return AppRouteModel(path: '/matches/$matchId', name: 'Match');
+  }
+
+  static AppRouteModel player([String? id]) {
+    final String player = id ?? idPlaceholder;
+
+    return AppRouteModel(path: '/matches/$player', name: 'Match');
+  }
 }

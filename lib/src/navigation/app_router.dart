@@ -1,7 +1,7 @@
 // TODO - later, create functions to create rotues later
 
 import 'package:five_on_4_flutter/src/features/matches/matches.dart'
-    show MatchesScreen;
+    show MatchScreen, MatchesScreen;
 import 'package:five_on_4_flutter/src/features/players/players.dart'
     show PlayersScreen;
 import 'package:five_on_4_flutter/src/navigation/navigation.dart'
@@ -11,7 +11,7 @@ import 'package:five_on_4_flutter/src/presentation/presentation.dart'
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
-import 'app_routing_scaffold.dart';
+import 'package:five_on_4_flutter/src/navigation/app_routing_scaffold.dart';
 
 // as per https://snehmehta.medium.com/dynamic-bottom-navigation-with-go-router-flutter-power-series-part-1-2437e2d72546
 // https://codewithandrea.com/articles/flutter-bottom-navigation-bar-nested-routes-gorouter-beamer/
@@ -26,18 +26,22 @@ final GoRouter appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
   // TODO not sure if this is needed at a ll
   initialLocation: AppRoutes.home.path,
-  routes: [_shellRoute],
+  routes: [
+    _shellRoute,
+    _matchRoute,
+  ],
 );
 
 final ShellRoute _shellRoute = ShellRoute(
-    navigatorKey: _shellNavigatorKey,
-    // TODO this child is what will be returned from each go route
-    builder: (context, state, child) => AppRoutingScaffold(child: child),
-    routes: [
-      _homeRoute,
-      _playersRoute,
-      _matchesRoute,
-    ]);
+  navigatorKey: _shellNavigatorKey,
+  // TODO this child is what will be returned from each go route
+  builder: (context, state, child) => AppRoutingScaffold(child: child),
+  routes: [
+    _homeRoute,
+    _playersRoute,
+    _matchesRoute,
+  ],
+);
 
 // TODO make functions form these - and export them from libraries
 final GoRoute _homeRoute = GoRoute(
@@ -57,6 +61,18 @@ final GoRoute _matchesRoute = GoRoute(
   path: AppRoutes.matches.path,
   name: AppRoutes.matches.name,
   builder: (context, state) => const MatchesScreen(),
+);
+
+final GoRoute _matchRoute = GoRoute(
+  path: AppRoutes.match().path,
+  name: AppRoutes.match().name,
+  builder: (context, state) {
+    final String matchId = state.params['id']!;
+
+    return MatchScreen(
+      matchId: matchId,
+    );
+  },
 );
 
 // TODO test
