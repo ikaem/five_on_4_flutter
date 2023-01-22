@@ -1,0 +1,1 @@
+enum FormFieldError { empty, invalid }

@@ -3,6 +3,7 @@ import 'package:collection/collection.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_sources.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/exceptions/exceptions.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 
 class MatchesRemoteFakeDataSource implements MatchesRemoteDataSource {
   @override
@@ -24,6 +25,20 @@ class MatchesRemoteFakeDataSource implements MatchesRemoteDataSource {
     final List<MatchRemoteDTO> dtos = _matches;
 
     return dtos;
+  }
+
+  @override
+  Future<String> createMatch(NewMatchValue newMatch) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    final String id = _matches.length.toString();
+
+    final MatchRemoteDTO newDto =
+        MatchRemoteDTO(id: id, name: 'Created match nr. $id');
+
+    _matches.add(newDto);
+
+    return id;
   }
 }
 

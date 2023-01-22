@@ -55,11 +55,16 @@ class AppDatabase {
 
     final Isar db = _validateDatabaseInitialized();
 
-// TODO this should either add it all updated it - depending on wherther it already exists
-    final int id = await db.collection<T>().put(item);
-    // TODO we need some error handling for failed to insert too
+    final int itemId = await db.writeTxn<int>(() async {
+      final int id = await db.collection<T>().put(item);
+      // TODO we need some error handling for failed to insert too
 
-    return id;
+      return id;
+    });
+
+    return itemId;
+
+// TODO this should either add it all updated it - depending on wherther it already exists
   }
 
   Future<List<int>> insertItems<T>(List<T> items) async {

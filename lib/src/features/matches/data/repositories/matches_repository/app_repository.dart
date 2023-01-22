@@ -2,6 +2,7 @@ import 'package:five_on_4_flutter/src/features/matches/data/data.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_sources.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/models/match/model.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 
 class MatchesAppRepository implements MatchesRepository {
   const MatchesAppRepository({
@@ -48,5 +49,15 @@ class MatchesAppRepository implements MatchesRepository {
         remoteDtos.map((dto) => MatchModel.fromRemoteDto(dto)).toList();
 
     return matches;
+  }
+
+  @override
+  Future<String> createMatch(NewMatchValue newMatch) async {
+    final String remoteMatchId =
+        await matchesRemoteDataSource.createMatch(newMatch);
+
+    // TODO we probably dont want to refetch it again, just to be able to cache it - we will cache it when we get to the page
+
+    return remoteMatchId;
   }
 }

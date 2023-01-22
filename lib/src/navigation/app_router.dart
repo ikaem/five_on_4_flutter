@@ -1,17 +1,16 @@
 // TODO - later, create functions to create rotues later
 
 import 'package:five_on_4_flutter/src/features/matches/matches.dart'
-    show MatchScreen, MatchesScreen;
+    show MatchCreateScreen, MatchScreen, MatchesScreen;
 import 'package:five_on_4_flutter/src/features/players/players.dart'
     show PlayersScreen;
+import 'package:five_on_4_flutter/src/navigation/app_routing_scaffold.dart';
 import 'package:five_on_4_flutter/src/navigation/navigation.dart'
     show AppRoutes;
 import 'package:five_on_4_flutter/src/presentation/presentation.dart'
     show HomeScreen;
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:five_on_4_flutter/src/navigation/app_routing_scaffold.dart';
 
 // as per https://snehmehta.medium.com/dynamic-bottom-navigation-with-go-router-flutter-power-series-part-1-2437e2d72546
 // https://codewithandrea.com/articles/flutter-bottom-navigation-bar-nested-routes-gorouter-beamer/
@@ -29,6 +28,7 @@ final GoRouter appRouter = GoRouter(
   routes: [
     _shellRoute,
     _matchRoute,
+    _matchCreateRoute,
   ],
 );
 
@@ -72,6 +72,14 @@ final GoRoute _matchRoute = GoRoute(
     return MatchScreen(
       matchId: matchId,
     );
+  },
+);
+
+final GoRoute _matchCreateRoute = GoRoute(
+  path: AppRoutes.matchCreate.path,
+  name: AppRoutes.matchCreate.name,
+  builder: (context, state) {
+    return const MatchCreateScreen();
   },
 );
 

@@ -1,5 +1,6 @@
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 
 class MatchesUseCases {
   const MatchesUseCases({
@@ -35,5 +36,17 @@ class MatchesUseCases {
     final List<MatchModel> matches = await matchesRepository.getMatches();
 
     return matches;
+  }
+
+  Future<MatchModel> getMatch(String id) async {
+    final MatchModel match = await matchesRepository.getMatch(id);
+
+    return match;
+  }
+
+  Future<String> createMatch(NewMatchValue newMatch) async {
+    final String id = await matchesRepository.createMatch(newMatch);
+
+    return id;
   }
 }

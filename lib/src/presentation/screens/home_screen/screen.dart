@@ -51,6 +51,10 @@ class _HomeView extends StatelessWidget {
           title: const Text('Home screen'),
           actions: const [Icon(Icons.more_vert)],
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _onCreateMatch(context: context),
+          child: const Icon(Icons.sports_soccer),
+        ),
         body: Column(
           children: <Widget>[
             // TODO - this porbably needs some match and weather passed in
@@ -82,13 +86,21 @@ class _HomeView extends StatelessWidget {
     );
   }
 
+  void _onCreateMatch({
+    required BuildContext context,
+  }) {
+    final String path = AppRoutes.matchCreate.path;
+
+    context.push(path);
+  }
+
   // TODO test
-  void _navigateToMatch({
+  void _onGoToMatch({
     required String matchId,
     required BuildContext context,
   }) {
     final Map<String, String> param = {
-      'id': matchId.toString(),
+      'id': matchId,
     };
 
     final String path = AppRoutes.match(matchId).path;
@@ -120,7 +132,7 @@ class _HomeView extends StatelessWidget {
         ),
       ),
       success: (matches) => MyMatchesOverview(
-        onMatchBriefCardTap: _navigateToMatch,
+        onMatchBriefCardTap: _onGoToMatch,
         matches: matches,
       ),
     );
@@ -164,7 +176,7 @@ class _HomeView extends StatelessWidget {
         ),
       ),
       success: (matches) => MyTodayMatchesOverview(
-        onMatchBriefCardTap: _navigateToMatch,
+        onMatchBriefCardTap: _onGoToMatch,
         matches: matches,
       ),
     );
