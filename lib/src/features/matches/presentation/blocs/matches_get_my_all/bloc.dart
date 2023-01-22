@@ -8,11 +8,11 @@ part 'bloc_events.dart';
 part 'bloc_state.dart';
 part 'bloc.freezed.dart';
 
-class MatchesGetMyTodaysBloc
-    extends Bloc<MatchesGetMyTodaysBlocEvent, MatchesGetMyTodaysBlocState> {
-  MatchesGetMyTodaysBloc({
+class MatchesGetMyAllBloc
+    extends Bloc<MatchesGetMyAllBlocEvent, MatchesGetMyAllBlocState> {
+  MatchesGetMyAllBloc({
     required this.matchesUseCases,
-  }) : super(MatchesGetMyTodaysBlocStateInitial()) {
+  }) : super(MatchesGetMyAllBlocStateInitial()) {
     _registerEventHandlers();
   }
 
@@ -20,26 +20,25 @@ class MatchesGetMyTodaysBloc
 
   void _registerEventHandlers() {
     // TODO register all events here
-    on<MatchesGetMyTodaysBlocLoadMatchesEvent>(_onMatchesLoad);
+    on<MatchesGetMyAllBlocLoadMatchesEvent>(_onMatchesLoad);
   }
 
   Future<void> _onMatchesLoad(
-    MatchesGetMyTodaysBlocLoadMatchesEvent event,
-    Emitter<MatchesGetMyTodaysBlocState> emitter,
+    MatchesGetMyAllBlocLoadMatchesEvent event,
+    Emitter<MatchesGetMyAllBlocState> emitter,
   ) async {
-    emitter(MatchesGetMyTodaysBlocStateLoading());
+    emitter(MatchesGetMyAllBlocStateLoading());
     // TODO, LATER, do make sure that we first provide local maches to the staste, and only then to we go and fetch remote ones
 
     try {
       // TODO eventually, this will require a pagination of some sort
-      final List<MatchModel> matches =
-          await matchesUseCases.getMyTodaysMatches();
+      final List<MatchModel> matches = await matchesUseCases.getMyAllMatches();
 
-      emitter(MatchesGetMyTodaysBlocStateSuccess(matches: matches));
+      emitter(MatchesGetMyAllBlocStateSuccess(matches: matches));
     } catch (e) {
       emitter(
-        MatchesGetMyTodaysBlocStateFailure(
-          message: "Failed to retrive your today's matches",
+        MatchesGetMyAllBlocStateFailure(
+          message: 'Failed to retrive your matches',
         ),
       );
     }

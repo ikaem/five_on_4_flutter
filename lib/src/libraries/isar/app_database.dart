@@ -22,6 +22,7 @@ class AppDatabase {
         MatchLocalDTOSchema,
       ],
       directory: directory.path,
+      // TODO this should be happening only in dev
       // ignore: avoid_redundant_argument_values
       inspector: true,
     );
@@ -50,6 +51,7 @@ class AppDatabase {
 
   Future<int> insertItem<T>(T item) async {
     // TODO we will throw an error
+    // TODO this will also need transactions
 
     final Isar db = _validateDatabaseInitialized();
 
@@ -58,6 +60,31 @@ class AppDatabase {
     // TODO we need some error handling for failed to insert too
 
     return id;
+  }
+
+  Future<List<int>> insertItems<T>(List<T> items) async {
+    // TODO we will throw an error
+
+    final Isar db = _validateDatabaseInitialized();
+
+// TODO this should either add it all updated it - depending on wherther it already exists
+
+// TODO return try catch
+    try {
+      final List<int> upsertedIds = await db.writeTxn<List<int>>(() async {
+        final List<int> ids = await db.collection<T>().putAll(items);
+        // TODO we need some error handling for failed to insert too
+
+        return ids;
+      });
+
+      return upsertedIds;
+    } catch (e) {
+      final exception = e;
+      // TODO test
+
+      rethrow;
+    }
   }
 
   // TODO and now some database thing to make sure we have good data

@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$MatchesGetMyTodaysBlocEvent {
+mixin _$MatchesGetMyAllBlocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadMatches,
@@ -34,38 +34,35 @@ mixin _$MatchesGetMyTodaysBlocEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchesGetMyTodaysBlocLoadMatchesEvent value)
+    required TResult Function(MatchesGetMyAllBlocLoadMatchesEvent value)
         loadMatches,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchesGetMyTodaysBlocLoadMatchesEvent value)?
-        loadMatches,
+    TResult? Function(MatchesGetMyAllBlocLoadMatchesEvent value)? loadMatches,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchesGetMyTodaysBlocLoadMatchesEvent value)? loadMatches,
+    TResult Function(MatchesGetMyAllBlocLoadMatchesEvent value)? loadMatches,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MatchesGetMyTodaysBlocEventCopyWith<$Res> {
-  factory $MatchesGetMyTodaysBlocEventCopyWith(
-          MatchesGetMyTodaysBlocEvent value,
-          $Res Function(MatchesGetMyTodaysBlocEvent) then) =
-      _$MatchesGetMyTodaysBlocEventCopyWithImpl<$Res,
-          MatchesGetMyTodaysBlocEvent>;
+abstract class $MatchesGetMyAllBlocEventCopyWith<$Res> {
+  factory $MatchesGetMyAllBlocEventCopyWith(MatchesGetMyAllBlocEvent value,
+          $Res Function(MatchesGetMyAllBlocEvent) then) =
+      _$MatchesGetMyAllBlocEventCopyWithImpl<$Res, MatchesGetMyAllBlocEvent>;
 }
 
 /// @nodoc
-class _$MatchesGetMyTodaysBlocEventCopyWithImpl<$Res,
-        $Val extends MatchesGetMyTodaysBlocEvent>
-    implements $MatchesGetMyTodaysBlocEventCopyWith<$Res> {
-  _$MatchesGetMyTodaysBlocEventCopyWithImpl(this._value, this._then);
+class _$MatchesGetMyAllBlocEventCopyWithImpl<$Res,
+        $Val extends MatchesGetMyAllBlocEvent>
+    implements $MatchesGetMyAllBlocEventCopyWith<$Res> {
+  _$MatchesGetMyAllBlocEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -74,40 +71,40 @@ class _$MatchesGetMyTodaysBlocEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$MatchesGetMyTodaysBlocLoadMatchesEventCopyWith<$Res> {
-  factory _$$MatchesGetMyTodaysBlocLoadMatchesEventCopyWith(
-          _$MatchesGetMyTodaysBlocLoadMatchesEvent value,
-          $Res Function(_$MatchesGetMyTodaysBlocLoadMatchesEvent) then) =
-      __$$MatchesGetMyTodaysBlocLoadMatchesEventCopyWithImpl<$Res>;
+abstract class _$$MatchesGetMyAllBlocLoadMatchesEventCopyWith<$Res> {
+  factory _$$MatchesGetMyAllBlocLoadMatchesEventCopyWith(
+          _$MatchesGetMyAllBlocLoadMatchesEvent value,
+          $Res Function(_$MatchesGetMyAllBlocLoadMatchesEvent) then) =
+      __$$MatchesGetMyAllBlocLoadMatchesEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$MatchesGetMyTodaysBlocLoadMatchesEventCopyWithImpl<$Res>
-    extends _$MatchesGetMyTodaysBlocEventCopyWithImpl<$Res,
-        _$MatchesGetMyTodaysBlocLoadMatchesEvent>
-    implements _$$MatchesGetMyTodaysBlocLoadMatchesEventCopyWith<$Res> {
-  __$$MatchesGetMyTodaysBlocLoadMatchesEventCopyWithImpl(
-      _$MatchesGetMyTodaysBlocLoadMatchesEvent _value,
-      $Res Function(_$MatchesGetMyTodaysBlocLoadMatchesEvent) _then)
+class __$$MatchesGetMyAllBlocLoadMatchesEventCopyWithImpl<$Res>
+    extends _$MatchesGetMyAllBlocEventCopyWithImpl<$Res,
+        _$MatchesGetMyAllBlocLoadMatchesEvent>
+    implements _$$MatchesGetMyAllBlocLoadMatchesEventCopyWith<$Res> {
+  __$$MatchesGetMyAllBlocLoadMatchesEventCopyWithImpl(
+      _$MatchesGetMyAllBlocLoadMatchesEvent _value,
+      $Res Function(_$MatchesGetMyAllBlocLoadMatchesEvent) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$MatchesGetMyTodaysBlocLoadMatchesEvent
-    implements MatchesGetMyTodaysBlocLoadMatchesEvent {
-  _$MatchesGetMyTodaysBlocLoadMatchesEvent();
+class _$MatchesGetMyAllBlocLoadMatchesEvent
+    implements MatchesGetMyAllBlocLoadMatchesEvent {
+  _$MatchesGetMyAllBlocLoadMatchesEvent();
 
   @override
   String toString() {
-    return 'MatchesGetMyTodaysBlocEvent.loadMatches()';
+    return 'MatchesGetMyAllBlocEvent.loadMatches()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchesGetMyTodaysBlocLoadMatchesEvent);
+            other is _$MatchesGetMyAllBlocLoadMatchesEvent);
   }
 
   @override
@@ -144,7 +141,7 @@ class _$MatchesGetMyTodaysBlocLoadMatchesEvent
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchesGetMyTodaysBlocLoadMatchesEvent value)
+    required TResult Function(MatchesGetMyAllBlocLoadMatchesEvent value)
         loadMatches,
   }) {
     return loadMatches(this);
@@ -153,8 +150,7 @@ class _$MatchesGetMyTodaysBlocLoadMatchesEvent
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchesGetMyTodaysBlocLoadMatchesEvent value)?
-        loadMatches,
+    TResult? Function(MatchesGetMyAllBlocLoadMatchesEvent value)? loadMatches,
   }) {
     return loadMatches?.call(this);
   }
@@ -162,7 +158,7 @@ class _$MatchesGetMyTodaysBlocLoadMatchesEvent
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchesGetMyTodaysBlocLoadMatchesEvent value)? loadMatches,
+    TResult Function(MatchesGetMyAllBlocLoadMatchesEvent value)? loadMatches,
     required TResult orElse(),
   }) {
     if (loadMatches != null) {
@@ -172,14 +168,14 @@ class _$MatchesGetMyTodaysBlocLoadMatchesEvent
   }
 }
 
-abstract class MatchesGetMyTodaysBlocLoadMatchesEvent
-    implements MatchesGetMyTodaysBlocEvent {
-  factory MatchesGetMyTodaysBlocLoadMatchesEvent() =
-      _$MatchesGetMyTodaysBlocLoadMatchesEvent;
+abstract class MatchesGetMyAllBlocLoadMatchesEvent
+    implements MatchesGetMyAllBlocEvent {
+  factory MatchesGetMyAllBlocLoadMatchesEvent() =
+      _$MatchesGetMyAllBlocLoadMatchesEvent;
 }
 
 /// @nodoc
-mixin _$MatchesGetMyTodaysBlocState {
+mixin _$MatchesGetMyAllBlocState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -207,45 +203,43 @@ mixin _$MatchesGetMyTodaysBlocState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchesGetMyTodaysBlocStateInitial value) initial,
-    required TResult Function(MatchesGetMyTodaysBlocStateLoading value) loading,
-    required TResult Function(MatchesGetMyTodaysBlocStateSuccess value) success,
-    required TResult Function(MatchesGetMyTodaysBlocStateFailure value) failure,
+    required TResult Function(MatchesGetMyAllBlocStateInitial value) initial,
+    required TResult Function(MatchesGetMyAllBlocStateLoading value) loading,
+    required TResult Function(MatchesGetMyAllBlocStateSuccess value) success,
+    required TResult Function(MatchesGetMyAllBlocStateFailure value) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchesGetMyTodaysBlocStateInitial value)? initial,
-    TResult? Function(MatchesGetMyTodaysBlocStateLoading value)? loading,
-    TResult? Function(MatchesGetMyTodaysBlocStateSuccess value)? success,
-    TResult? Function(MatchesGetMyTodaysBlocStateFailure value)? failure,
+    TResult? Function(MatchesGetMyAllBlocStateInitial value)? initial,
+    TResult? Function(MatchesGetMyAllBlocStateLoading value)? loading,
+    TResult? Function(MatchesGetMyAllBlocStateSuccess value)? success,
+    TResult? Function(MatchesGetMyAllBlocStateFailure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchesGetMyTodaysBlocStateInitial value)? initial,
-    TResult Function(MatchesGetMyTodaysBlocStateLoading value)? loading,
-    TResult Function(MatchesGetMyTodaysBlocStateSuccess value)? success,
-    TResult Function(MatchesGetMyTodaysBlocStateFailure value)? failure,
+    TResult Function(MatchesGetMyAllBlocStateInitial value)? initial,
+    TResult Function(MatchesGetMyAllBlocStateLoading value)? loading,
+    TResult Function(MatchesGetMyAllBlocStateSuccess value)? success,
+    TResult Function(MatchesGetMyAllBlocStateFailure value)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MatchesGetMyTodaysBlocStateCopyWith<$Res> {
-  factory $MatchesGetMyTodaysBlocStateCopyWith(
-          MatchesGetMyTodaysBlocState value,
-          $Res Function(MatchesGetMyTodaysBlocState) then) =
-      _$MatchesGetMyTodaysBlocStateCopyWithImpl<$Res,
-          MatchesGetMyTodaysBlocState>;
+abstract class $MatchesGetMyAllBlocStateCopyWith<$Res> {
+  factory $MatchesGetMyAllBlocStateCopyWith(MatchesGetMyAllBlocState value,
+          $Res Function(MatchesGetMyAllBlocState) then) =
+      _$MatchesGetMyAllBlocStateCopyWithImpl<$Res, MatchesGetMyAllBlocState>;
 }
 
 /// @nodoc
-class _$MatchesGetMyTodaysBlocStateCopyWithImpl<$Res,
-        $Val extends MatchesGetMyTodaysBlocState>
-    implements $MatchesGetMyTodaysBlocStateCopyWith<$Res> {
-  _$MatchesGetMyTodaysBlocStateCopyWithImpl(this._value, this._then);
+class _$MatchesGetMyAllBlocStateCopyWithImpl<$Res,
+        $Val extends MatchesGetMyAllBlocState>
+    implements $MatchesGetMyAllBlocStateCopyWith<$Res> {
+  _$MatchesGetMyAllBlocStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -254,40 +248,40 @@ class _$MatchesGetMyTodaysBlocStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$MatchesGetMyTodaysBlocStateInitialCopyWith<$Res> {
-  factory _$$MatchesGetMyTodaysBlocStateInitialCopyWith(
-          _$MatchesGetMyTodaysBlocStateInitial value,
-          $Res Function(_$MatchesGetMyTodaysBlocStateInitial) then) =
-      __$$MatchesGetMyTodaysBlocStateInitialCopyWithImpl<$Res>;
+abstract class _$$MatchesGetMyAllBlocStateInitialCopyWith<$Res> {
+  factory _$$MatchesGetMyAllBlocStateInitialCopyWith(
+          _$MatchesGetMyAllBlocStateInitial value,
+          $Res Function(_$MatchesGetMyAllBlocStateInitial) then) =
+      __$$MatchesGetMyAllBlocStateInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$MatchesGetMyTodaysBlocStateInitialCopyWithImpl<$Res>
-    extends _$MatchesGetMyTodaysBlocStateCopyWithImpl<$Res,
-        _$MatchesGetMyTodaysBlocStateInitial>
-    implements _$$MatchesGetMyTodaysBlocStateInitialCopyWith<$Res> {
-  __$$MatchesGetMyTodaysBlocStateInitialCopyWithImpl(
-      _$MatchesGetMyTodaysBlocStateInitial _value,
-      $Res Function(_$MatchesGetMyTodaysBlocStateInitial) _then)
+class __$$MatchesGetMyAllBlocStateInitialCopyWithImpl<$Res>
+    extends _$MatchesGetMyAllBlocStateCopyWithImpl<$Res,
+        _$MatchesGetMyAllBlocStateInitial>
+    implements _$$MatchesGetMyAllBlocStateInitialCopyWith<$Res> {
+  __$$MatchesGetMyAllBlocStateInitialCopyWithImpl(
+      _$MatchesGetMyAllBlocStateInitial _value,
+      $Res Function(_$MatchesGetMyAllBlocStateInitial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$MatchesGetMyTodaysBlocStateInitial
-    implements MatchesGetMyTodaysBlocStateInitial {
-  _$MatchesGetMyTodaysBlocStateInitial();
+class _$MatchesGetMyAllBlocStateInitial
+    implements MatchesGetMyAllBlocStateInitial {
+  _$MatchesGetMyAllBlocStateInitial();
 
   @override
   String toString() {
-    return 'MatchesGetMyTodaysBlocState.initial()';
+    return 'MatchesGetMyAllBlocState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchesGetMyTodaysBlocStateInitial);
+            other is _$MatchesGetMyAllBlocStateInitial);
   }
 
   @override
@@ -333,10 +327,10 @@ class _$MatchesGetMyTodaysBlocStateInitial
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchesGetMyTodaysBlocStateInitial value) initial,
-    required TResult Function(MatchesGetMyTodaysBlocStateLoading value) loading,
-    required TResult Function(MatchesGetMyTodaysBlocStateSuccess value) success,
-    required TResult Function(MatchesGetMyTodaysBlocStateFailure value) failure,
+    required TResult Function(MatchesGetMyAllBlocStateInitial value) initial,
+    required TResult Function(MatchesGetMyAllBlocStateLoading value) loading,
+    required TResult Function(MatchesGetMyAllBlocStateSuccess value) success,
+    required TResult Function(MatchesGetMyAllBlocStateFailure value) failure,
   }) {
     return initial(this);
   }
@@ -344,10 +338,10 @@ class _$MatchesGetMyTodaysBlocStateInitial
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchesGetMyTodaysBlocStateInitial value)? initial,
-    TResult? Function(MatchesGetMyTodaysBlocStateLoading value)? loading,
-    TResult? Function(MatchesGetMyTodaysBlocStateSuccess value)? success,
-    TResult? Function(MatchesGetMyTodaysBlocStateFailure value)? failure,
+    TResult? Function(MatchesGetMyAllBlocStateInitial value)? initial,
+    TResult? Function(MatchesGetMyAllBlocStateLoading value)? loading,
+    TResult? Function(MatchesGetMyAllBlocStateSuccess value)? success,
+    TResult? Function(MatchesGetMyAllBlocStateFailure value)? failure,
   }) {
     return initial?.call(this);
   }
@@ -355,10 +349,10 @@ class _$MatchesGetMyTodaysBlocStateInitial
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchesGetMyTodaysBlocStateInitial value)? initial,
-    TResult Function(MatchesGetMyTodaysBlocStateLoading value)? loading,
-    TResult Function(MatchesGetMyTodaysBlocStateSuccess value)? success,
-    TResult Function(MatchesGetMyTodaysBlocStateFailure value)? failure,
+    TResult Function(MatchesGetMyAllBlocStateInitial value)? initial,
+    TResult Function(MatchesGetMyAllBlocStateLoading value)? loading,
+    TResult Function(MatchesGetMyAllBlocStateSuccess value)? success,
+    TResult Function(MatchesGetMyAllBlocStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -368,47 +362,46 @@ class _$MatchesGetMyTodaysBlocStateInitial
   }
 }
 
-abstract class MatchesGetMyTodaysBlocStateInitial
-    implements MatchesGetMyTodaysBlocState {
-  factory MatchesGetMyTodaysBlocStateInitial() =
-      _$MatchesGetMyTodaysBlocStateInitial;
+abstract class MatchesGetMyAllBlocStateInitial
+    implements MatchesGetMyAllBlocState {
+  factory MatchesGetMyAllBlocStateInitial() = _$MatchesGetMyAllBlocStateInitial;
 }
 
 /// @nodoc
-abstract class _$$MatchesGetMyTodaysBlocStateLoadingCopyWith<$Res> {
-  factory _$$MatchesGetMyTodaysBlocStateLoadingCopyWith(
-          _$MatchesGetMyTodaysBlocStateLoading value,
-          $Res Function(_$MatchesGetMyTodaysBlocStateLoading) then) =
-      __$$MatchesGetMyTodaysBlocStateLoadingCopyWithImpl<$Res>;
+abstract class _$$MatchesGetMyAllBlocStateLoadingCopyWith<$Res> {
+  factory _$$MatchesGetMyAllBlocStateLoadingCopyWith(
+          _$MatchesGetMyAllBlocStateLoading value,
+          $Res Function(_$MatchesGetMyAllBlocStateLoading) then) =
+      __$$MatchesGetMyAllBlocStateLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$MatchesGetMyTodaysBlocStateLoadingCopyWithImpl<$Res>
-    extends _$MatchesGetMyTodaysBlocStateCopyWithImpl<$Res,
-        _$MatchesGetMyTodaysBlocStateLoading>
-    implements _$$MatchesGetMyTodaysBlocStateLoadingCopyWith<$Res> {
-  __$$MatchesGetMyTodaysBlocStateLoadingCopyWithImpl(
-      _$MatchesGetMyTodaysBlocStateLoading _value,
-      $Res Function(_$MatchesGetMyTodaysBlocStateLoading) _then)
+class __$$MatchesGetMyAllBlocStateLoadingCopyWithImpl<$Res>
+    extends _$MatchesGetMyAllBlocStateCopyWithImpl<$Res,
+        _$MatchesGetMyAllBlocStateLoading>
+    implements _$$MatchesGetMyAllBlocStateLoadingCopyWith<$Res> {
+  __$$MatchesGetMyAllBlocStateLoadingCopyWithImpl(
+      _$MatchesGetMyAllBlocStateLoading _value,
+      $Res Function(_$MatchesGetMyAllBlocStateLoading) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$MatchesGetMyTodaysBlocStateLoading
-    implements MatchesGetMyTodaysBlocStateLoading {
-  _$MatchesGetMyTodaysBlocStateLoading();
+class _$MatchesGetMyAllBlocStateLoading
+    implements MatchesGetMyAllBlocStateLoading {
+  _$MatchesGetMyAllBlocStateLoading();
 
   @override
   String toString() {
-    return 'MatchesGetMyTodaysBlocState.loading()';
+    return 'MatchesGetMyAllBlocState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchesGetMyTodaysBlocStateLoading);
+            other is _$MatchesGetMyAllBlocStateLoading);
   }
 
   @override
@@ -454,10 +447,10 @@ class _$MatchesGetMyTodaysBlocStateLoading
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchesGetMyTodaysBlocStateInitial value) initial,
-    required TResult Function(MatchesGetMyTodaysBlocStateLoading value) loading,
-    required TResult Function(MatchesGetMyTodaysBlocStateSuccess value) success,
-    required TResult Function(MatchesGetMyTodaysBlocStateFailure value) failure,
+    required TResult Function(MatchesGetMyAllBlocStateInitial value) initial,
+    required TResult Function(MatchesGetMyAllBlocStateLoading value) loading,
+    required TResult Function(MatchesGetMyAllBlocStateSuccess value) success,
+    required TResult Function(MatchesGetMyAllBlocStateFailure value) failure,
   }) {
     return loading(this);
   }
@@ -465,10 +458,10 @@ class _$MatchesGetMyTodaysBlocStateLoading
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchesGetMyTodaysBlocStateInitial value)? initial,
-    TResult? Function(MatchesGetMyTodaysBlocStateLoading value)? loading,
-    TResult? Function(MatchesGetMyTodaysBlocStateSuccess value)? success,
-    TResult? Function(MatchesGetMyTodaysBlocStateFailure value)? failure,
+    TResult? Function(MatchesGetMyAllBlocStateInitial value)? initial,
+    TResult? Function(MatchesGetMyAllBlocStateLoading value)? loading,
+    TResult? Function(MatchesGetMyAllBlocStateSuccess value)? success,
+    TResult? Function(MatchesGetMyAllBlocStateFailure value)? failure,
   }) {
     return loading?.call(this);
   }
@@ -476,10 +469,10 @@ class _$MatchesGetMyTodaysBlocStateLoading
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchesGetMyTodaysBlocStateInitial value)? initial,
-    TResult Function(MatchesGetMyTodaysBlocStateLoading value)? loading,
-    TResult Function(MatchesGetMyTodaysBlocStateSuccess value)? success,
-    TResult Function(MatchesGetMyTodaysBlocStateFailure value)? failure,
+    TResult Function(MatchesGetMyAllBlocStateInitial value)? initial,
+    TResult Function(MatchesGetMyAllBlocStateLoading value)? loading,
+    TResult Function(MatchesGetMyAllBlocStateSuccess value)? success,
+    TResult Function(MatchesGetMyAllBlocStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -489,30 +482,29 @@ class _$MatchesGetMyTodaysBlocStateLoading
   }
 }
 
-abstract class MatchesGetMyTodaysBlocStateLoading
-    implements MatchesGetMyTodaysBlocState {
-  factory MatchesGetMyTodaysBlocStateLoading() =
-      _$MatchesGetMyTodaysBlocStateLoading;
+abstract class MatchesGetMyAllBlocStateLoading
+    implements MatchesGetMyAllBlocState {
+  factory MatchesGetMyAllBlocStateLoading() = _$MatchesGetMyAllBlocStateLoading;
 }
 
 /// @nodoc
-abstract class _$$MatchesGetMyTodaysBlocStateSuccessCopyWith<$Res> {
-  factory _$$MatchesGetMyTodaysBlocStateSuccessCopyWith(
-          _$MatchesGetMyTodaysBlocStateSuccess value,
-          $Res Function(_$MatchesGetMyTodaysBlocStateSuccess) then) =
-      __$$MatchesGetMyTodaysBlocStateSuccessCopyWithImpl<$Res>;
+abstract class _$$MatchesGetMyAllBlocStateSuccessCopyWith<$Res> {
+  factory _$$MatchesGetMyAllBlocStateSuccessCopyWith(
+          _$MatchesGetMyAllBlocStateSuccess value,
+          $Res Function(_$MatchesGetMyAllBlocStateSuccess) then) =
+      __$$MatchesGetMyAllBlocStateSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({List<MatchModel> matches});
 }
 
 /// @nodoc
-class __$$MatchesGetMyTodaysBlocStateSuccessCopyWithImpl<$Res>
-    extends _$MatchesGetMyTodaysBlocStateCopyWithImpl<$Res,
-        _$MatchesGetMyTodaysBlocStateSuccess>
-    implements _$$MatchesGetMyTodaysBlocStateSuccessCopyWith<$Res> {
-  __$$MatchesGetMyTodaysBlocStateSuccessCopyWithImpl(
-      _$MatchesGetMyTodaysBlocStateSuccess _value,
-      $Res Function(_$MatchesGetMyTodaysBlocStateSuccess) _then)
+class __$$MatchesGetMyAllBlocStateSuccessCopyWithImpl<$Res>
+    extends _$MatchesGetMyAllBlocStateCopyWithImpl<$Res,
+        _$MatchesGetMyAllBlocStateSuccess>
+    implements _$$MatchesGetMyAllBlocStateSuccessCopyWith<$Res> {
+  __$$MatchesGetMyAllBlocStateSuccessCopyWithImpl(
+      _$MatchesGetMyAllBlocStateSuccess _value,
+      $Res Function(_$MatchesGetMyAllBlocStateSuccess) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -520,7 +512,7 @@ class __$$MatchesGetMyTodaysBlocStateSuccessCopyWithImpl<$Res>
   $Res call({
     Object? matches = null,
   }) {
-    return _then(_$MatchesGetMyTodaysBlocStateSuccess(
+    return _then(_$MatchesGetMyAllBlocStateSuccess(
       matches: null == matches
           ? _value._matches
           : matches // ignore: cast_nullable_to_non_nullable
@@ -531,10 +523,9 @@ class __$$MatchesGetMyTodaysBlocStateSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MatchesGetMyTodaysBlocStateSuccess
-    implements MatchesGetMyTodaysBlocStateSuccess {
-  _$MatchesGetMyTodaysBlocStateSuccess(
-      {required final List<MatchModel> matches})
+class _$MatchesGetMyAllBlocStateSuccess
+    implements MatchesGetMyAllBlocStateSuccess {
+  _$MatchesGetMyAllBlocStateSuccess({required final List<MatchModel> matches})
       : _matches = matches;
 
   final List<MatchModel> _matches;
@@ -547,14 +538,14 @@ class _$MatchesGetMyTodaysBlocStateSuccess
 
   @override
   String toString() {
-    return 'MatchesGetMyTodaysBlocState.success(matches: $matches)';
+    return 'MatchesGetMyAllBlocState.success(matches: $matches)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchesGetMyTodaysBlocStateSuccess &&
+            other is _$MatchesGetMyAllBlocStateSuccess &&
             const DeepCollectionEquality().equals(other._matches, _matches));
   }
 
@@ -565,10 +556,9 @@ class _$MatchesGetMyTodaysBlocStateSuccess
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MatchesGetMyTodaysBlocStateSuccessCopyWith<
-          _$MatchesGetMyTodaysBlocStateSuccess>
-      get copyWith => __$$MatchesGetMyTodaysBlocStateSuccessCopyWithImpl<
-          _$MatchesGetMyTodaysBlocStateSuccess>(this, _$identity);
+  _$$MatchesGetMyAllBlocStateSuccessCopyWith<_$MatchesGetMyAllBlocStateSuccess>
+      get copyWith => __$$MatchesGetMyAllBlocStateSuccessCopyWithImpl<
+          _$MatchesGetMyAllBlocStateSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -610,10 +600,10 @@ class _$MatchesGetMyTodaysBlocStateSuccess
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchesGetMyTodaysBlocStateInitial value) initial,
-    required TResult Function(MatchesGetMyTodaysBlocStateLoading value) loading,
-    required TResult Function(MatchesGetMyTodaysBlocStateSuccess value) success,
-    required TResult Function(MatchesGetMyTodaysBlocStateFailure value) failure,
+    required TResult Function(MatchesGetMyAllBlocStateInitial value) initial,
+    required TResult Function(MatchesGetMyAllBlocStateLoading value) loading,
+    required TResult Function(MatchesGetMyAllBlocStateSuccess value) success,
+    required TResult Function(MatchesGetMyAllBlocStateFailure value) failure,
   }) {
     return success(this);
   }
@@ -621,10 +611,10 @@ class _$MatchesGetMyTodaysBlocStateSuccess
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchesGetMyTodaysBlocStateInitial value)? initial,
-    TResult? Function(MatchesGetMyTodaysBlocStateLoading value)? loading,
-    TResult? Function(MatchesGetMyTodaysBlocStateSuccess value)? success,
-    TResult? Function(MatchesGetMyTodaysBlocStateFailure value)? failure,
+    TResult? Function(MatchesGetMyAllBlocStateInitial value)? initial,
+    TResult? Function(MatchesGetMyAllBlocStateLoading value)? loading,
+    TResult? Function(MatchesGetMyAllBlocStateSuccess value)? success,
+    TResult? Function(MatchesGetMyAllBlocStateFailure value)? failure,
   }) {
     return success?.call(this);
   }
@@ -632,10 +622,10 @@ class _$MatchesGetMyTodaysBlocStateSuccess
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchesGetMyTodaysBlocStateInitial value)? initial,
-    TResult Function(MatchesGetMyTodaysBlocStateLoading value)? loading,
-    TResult Function(MatchesGetMyTodaysBlocStateSuccess value)? success,
-    TResult Function(MatchesGetMyTodaysBlocStateFailure value)? failure,
+    TResult Function(MatchesGetMyAllBlocStateInitial value)? initial,
+    TResult Function(MatchesGetMyAllBlocStateLoading value)? loading,
+    TResult Function(MatchesGetMyAllBlocStateSuccess value)? success,
+    TResult Function(MatchesGetMyAllBlocStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -645,37 +635,36 @@ class _$MatchesGetMyTodaysBlocStateSuccess
   }
 }
 
-abstract class MatchesGetMyTodaysBlocStateSuccess
-    implements MatchesGetMyTodaysBlocState {
-  factory MatchesGetMyTodaysBlocStateSuccess(
+abstract class MatchesGetMyAllBlocStateSuccess
+    implements MatchesGetMyAllBlocState {
+  factory MatchesGetMyAllBlocStateSuccess(
           {required final List<MatchModel> matches}) =
-      _$MatchesGetMyTodaysBlocStateSuccess;
+      _$MatchesGetMyAllBlocStateSuccess;
 
   List<MatchModel> get matches;
   @JsonKey(ignore: true)
-  _$$MatchesGetMyTodaysBlocStateSuccessCopyWith<
-          _$MatchesGetMyTodaysBlocStateSuccess>
+  _$$MatchesGetMyAllBlocStateSuccessCopyWith<_$MatchesGetMyAllBlocStateSuccess>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MatchesGetMyTodaysBlocStateFailureCopyWith<$Res> {
-  factory _$$MatchesGetMyTodaysBlocStateFailureCopyWith(
-          _$MatchesGetMyTodaysBlocStateFailure value,
-          $Res Function(_$MatchesGetMyTodaysBlocStateFailure) then) =
-      __$$MatchesGetMyTodaysBlocStateFailureCopyWithImpl<$Res>;
+abstract class _$$MatchesGetMyAllBlocStateFailureCopyWith<$Res> {
+  factory _$$MatchesGetMyAllBlocStateFailureCopyWith(
+          _$MatchesGetMyAllBlocStateFailure value,
+          $Res Function(_$MatchesGetMyAllBlocStateFailure) then) =
+      __$$MatchesGetMyAllBlocStateFailureCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$MatchesGetMyTodaysBlocStateFailureCopyWithImpl<$Res>
-    extends _$MatchesGetMyTodaysBlocStateCopyWithImpl<$Res,
-        _$MatchesGetMyTodaysBlocStateFailure>
-    implements _$$MatchesGetMyTodaysBlocStateFailureCopyWith<$Res> {
-  __$$MatchesGetMyTodaysBlocStateFailureCopyWithImpl(
-      _$MatchesGetMyTodaysBlocStateFailure _value,
-      $Res Function(_$MatchesGetMyTodaysBlocStateFailure) _then)
+class __$$MatchesGetMyAllBlocStateFailureCopyWithImpl<$Res>
+    extends _$MatchesGetMyAllBlocStateCopyWithImpl<$Res,
+        _$MatchesGetMyAllBlocStateFailure>
+    implements _$$MatchesGetMyAllBlocStateFailureCopyWith<$Res> {
+  __$$MatchesGetMyAllBlocStateFailureCopyWithImpl(
+      _$MatchesGetMyAllBlocStateFailure _value,
+      $Res Function(_$MatchesGetMyAllBlocStateFailure) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -683,7 +672,7 @@ class __$$MatchesGetMyTodaysBlocStateFailureCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$MatchesGetMyTodaysBlocStateFailure(
+    return _then(_$MatchesGetMyAllBlocStateFailure(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -694,23 +683,23 @@ class __$$MatchesGetMyTodaysBlocStateFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MatchesGetMyTodaysBlocStateFailure
-    implements MatchesGetMyTodaysBlocStateFailure {
-  _$MatchesGetMyTodaysBlocStateFailure({required this.message});
+class _$MatchesGetMyAllBlocStateFailure
+    implements MatchesGetMyAllBlocStateFailure {
+  _$MatchesGetMyAllBlocStateFailure({required this.message});
 
   @override
   final String message;
 
   @override
   String toString() {
-    return 'MatchesGetMyTodaysBlocState.failure(message: $message)';
+    return 'MatchesGetMyAllBlocState.failure(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchesGetMyTodaysBlocStateFailure &&
+            other is _$MatchesGetMyAllBlocStateFailure &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -720,10 +709,9 @@ class _$MatchesGetMyTodaysBlocStateFailure
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MatchesGetMyTodaysBlocStateFailureCopyWith<
-          _$MatchesGetMyTodaysBlocStateFailure>
-      get copyWith => __$$MatchesGetMyTodaysBlocStateFailureCopyWithImpl<
-          _$MatchesGetMyTodaysBlocStateFailure>(this, _$identity);
+  _$$MatchesGetMyAllBlocStateFailureCopyWith<_$MatchesGetMyAllBlocStateFailure>
+      get copyWith => __$$MatchesGetMyAllBlocStateFailureCopyWithImpl<
+          _$MatchesGetMyAllBlocStateFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -765,10 +753,10 @@ class _$MatchesGetMyTodaysBlocStateFailure
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchesGetMyTodaysBlocStateInitial value) initial,
-    required TResult Function(MatchesGetMyTodaysBlocStateLoading value) loading,
-    required TResult Function(MatchesGetMyTodaysBlocStateSuccess value) success,
-    required TResult Function(MatchesGetMyTodaysBlocStateFailure value) failure,
+    required TResult Function(MatchesGetMyAllBlocStateInitial value) initial,
+    required TResult Function(MatchesGetMyAllBlocStateLoading value) loading,
+    required TResult Function(MatchesGetMyAllBlocStateSuccess value) success,
+    required TResult Function(MatchesGetMyAllBlocStateFailure value) failure,
   }) {
     return failure(this);
   }
@@ -776,10 +764,10 @@ class _$MatchesGetMyTodaysBlocStateFailure
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchesGetMyTodaysBlocStateInitial value)? initial,
-    TResult? Function(MatchesGetMyTodaysBlocStateLoading value)? loading,
-    TResult? Function(MatchesGetMyTodaysBlocStateSuccess value)? success,
-    TResult? Function(MatchesGetMyTodaysBlocStateFailure value)? failure,
+    TResult? Function(MatchesGetMyAllBlocStateInitial value)? initial,
+    TResult? Function(MatchesGetMyAllBlocStateLoading value)? loading,
+    TResult? Function(MatchesGetMyAllBlocStateSuccess value)? success,
+    TResult? Function(MatchesGetMyAllBlocStateFailure value)? failure,
   }) {
     return failure?.call(this);
   }
@@ -787,10 +775,10 @@ class _$MatchesGetMyTodaysBlocStateFailure
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchesGetMyTodaysBlocStateInitial value)? initial,
-    TResult Function(MatchesGetMyTodaysBlocStateLoading value)? loading,
-    TResult Function(MatchesGetMyTodaysBlocStateSuccess value)? success,
-    TResult Function(MatchesGetMyTodaysBlocStateFailure value)? failure,
+    TResult Function(MatchesGetMyAllBlocStateInitial value)? initial,
+    TResult Function(MatchesGetMyAllBlocStateLoading value)? loading,
+    TResult Function(MatchesGetMyAllBlocStateSuccess value)? success,
+    TResult Function(MatchesGetMyAllBlocStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -800,14 +788,13 @@ class _$MatchesGetMyTodaysBlocStateFailure
   }
 }
 
-abstract class MatchesGetMyTodaysBlocStateFailure
-    implements MatchesGetMyTodaysBlocState {
-  factory MatchesGetMyTodaysBlocStateFailure({required final String message}) =
-      _$MatchesGetMyTodaysBlocStateFailure;
+abstract class MatchesGetMyAllBlocStateFailure
+    implements MatchesGetMyAllBlocState {
+  factory MatchesGetMyAllBlocStateFailure({required final String message}) =
+      _$MatchesGetMyAllBlocStateFailure;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$MatchesGetMyTodaysBlocStateFailureCopyWith<
-          _$MatchesGetMyTodaysBlocStateFailure>
+  _$$MatchesGetMyAllBlocStateFailureCopyWith<_$MatchesGetMyAllBlocStateFailure>
       get copyWith => throw _privateConstructorUsedError;
 }

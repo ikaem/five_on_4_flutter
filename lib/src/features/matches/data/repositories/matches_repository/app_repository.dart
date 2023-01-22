@@ -39,6 +39,11 @@ class MatchesAppRepository implements MatchesRepository {
     final List<MatchRemoteDTO> remoteDtos =
         await matchesRemoteDataSource.getMatches();
 
+    final List<MatchLocalDTO> localDtos =
+        remoteDtos.map((dto) => MatchLocalDTO.fromRemoteDto(dto)).toList();
+
+    await matchesLocalDataSource.upsertMatches(localDtos);
+
     final List<MatchModel> matches =
         remoteDtos.map((dto) => MatchModel.fromRemoteDto(dto)).toList();
 

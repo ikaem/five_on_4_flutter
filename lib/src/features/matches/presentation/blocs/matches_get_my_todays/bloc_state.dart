@@ -7,7 +7,7 @@ class MatchesGetMyTodaysBlocState with _$MatchesGetMyTodaysBlocState {
   factory MatchesGetMyTodaysBlocState.loading() =
       MatchesGetMyTodaysBlocStateLoading;
   factory MatchesGetMyTodaysBlocState.success({
-    required WeatherModel weather,
+    required List<MatchModel> matches,
   }) = MatchesGetMyTodaysBlocStateSuccess;
   factory MatchesGetMyTodaysBlocState.failure({
     required String message,

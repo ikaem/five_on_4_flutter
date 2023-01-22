@@ -20,8 +20,17 @@ class MatchesLocalAppDataSource implements MatchesLocalDataSource {
 
   @override
   Future<int> upsertMatch(MatchLocalDTO dto) async {
+    // TODO test
     final int id = await appDatabase.insertItem<MatchLocalDTO>(dto);
 
     return id;
+  }
+
+  @override
+  Future<List<int>> upsertMatches(List<MatchLocalDTO> dtos) async {
+    // TODO test
+    final List<int> ids = await appDatabase.insertItems<MatchLocalDTO>(dtos);
+
+    return ids;
   }
 }

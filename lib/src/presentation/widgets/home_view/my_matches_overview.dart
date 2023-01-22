@@ -6,9 +6,11 @@ class MyMatchesOverview extends StatelessWidget {
   const MyMatchesOverview({
     super.key,
     required this.onMatchBriefCardTap,
+    required this.matches,
   });
 
   final OnMatchBriefCardTap onMatchBriefCardTap;
+  final List<MatchModel> matches;
 
   @override
   Widget build(BuildContext context) {
@@ -16,25 +18,13 @@ class MyMatchesOverview extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Text('My matches'),
-        ..._matches
-            .map(
-              (m) => MatchBriefCard(
-                match: m,
-                onMatchBriefCardTap: onMatchBriefCardTap,
-              ),
-            )
-            .toList(),
+        ...matches.map(
+          (m) => MatchBriefCard(
+            match: m,
+            onMatchBriefCardTap: onMatchBriefCardTap,
+          ),
+        ),
       ],
     );
   }
 }
-
-// TODO this is temp only
-final List<MatchModel> _matches = [
-  const MatchModel(id: '2', name: 'Some match name 2'),
-  const MatchModel(id: '3', name: 'Some match name 3'),
-  const MatchModel(id: '4', name: 'Some match name 4'),
-  const MatchModel(id: '5', name: 'Some match name 5'),
-  const MatchModel(id: '6', name: 'Some match name 6'),
-  const MatchModel(id: '7', name: 'Some match name 7'),
-];
