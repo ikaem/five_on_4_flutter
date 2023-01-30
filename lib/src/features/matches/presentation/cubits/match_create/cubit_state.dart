@@ -19,14 +19,22 @@ part of 'cubit.dart';
 
 @freezed
 class MatchCreateCubitState with _$MatchCreateCubitState {
-  const factory MatchCreateCubitState({
-    @Default(false) bool isLoading,
-    bool? isSuccess,
-    FormFieldError? nameError,
-    FormFieldError? organizerError,
-    FormFieldError? timeAndDateError,
-    FormFieldError? locationError,
-  }) = _MatchCreateCubitState;
+  factory MatchCreateCubitState.initial() = MatchCreateCubitStateInitial;
+  factory MatchCreateCubitState.loading() = MatchCreateCubitStateLoading;
+  factory MatchCreateCubitState.failure(String message) =
+      MatchCreateCubitStateFailure;
+  factory MatchCreateCubitState.success(String matchId) =
+      MatchCreateCubitStateSuccess;
+
+  // const factory MatchCreateCubitState({
+  //   @Default(false) bool isLoading,
+  //   bool? isSuccess,
+  //   bool? isFailure,
+  //   FormFieldError? nameError,
+  //   FormFieldError? organizerError,
+  //   FormFieldError? timeAndDateError,
+  //   FormFieldError? locationError,
+  // }) = _MatchCreateCubitState;
 
   // TODO we could have a state here for - error, success, loading - do test it eventually
   // but if we do this, we lose state if we want to return, from and error? or do we? we dont if we dont keep the inputs values in the bloc, but isntead keep it isnide the controllers

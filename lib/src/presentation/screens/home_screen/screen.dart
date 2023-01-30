@@ -95,6 +95,7 @@ class _HomeView extends StatelessWidget {
   }
 
   // TODO test
+  // TODO should have some service for navigation, so dont have to repeat this everyswhere
   void _onGoToMatch({
     required String matchId,
     required BuildContext context,

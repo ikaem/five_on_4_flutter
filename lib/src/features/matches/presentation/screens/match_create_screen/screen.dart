@@ -2,10 +2,17 @@
 
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/cubits.dart';
+import 'package:five_on_4_flutter/src/navigation/app_routes.dart';
 import 'package:five_on_4_flutter/src/theme/constants/constants.dart';
 import 'package:five_on_4_flutter/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+typedef OnMatchCreateSuccess = void Function({
+  required String matchId,
+  required BuildContext context,
+});
 
 class MatchCreateScreen extends StatelessWidget {
   const MatchCreateScreen({super.key});
@@ -30,7 +37,9 @@ class MatchCreateScreen extends StatelessWidget {
     BuildContext context,
     MatchCreateCubitState state,
   ) {
-    return const _MatchCreateView();
+    return _MatchCreateView(
+      onMatchCreateSuccess: _onMatchCreateSuccess,
+    );
   }
 
   void _matchCreateCubitListener(
@@ -44,10 +53,25 @@ class MatchCreateScreen extends StatelessWidget {
       SnackBarVariant.error,
     );
   }
+
+  void _onMatchCreateSuccess({
+    required String matchId,
+    required BuildContext context,
+  }) {
+    final Map<String, String> param = {
+      'id': matchId,
+    };
+
+    final String path = AppRoutes.match(matchId).path;
+
+    context.push(path);
+  }
 }
 
 class _MatchCreateView extends StatefulWidget {
-  const _MatchCreateView();
+  const _MatchCreateView({required this.onMatchCreateSuccess});
+
+  final OnMatchCreateSuccess onMatchCreateSuccess;
 
   @override
   State<_MatchCreateView> createState() => _MatchCreateViewState();
@@ -59,8 +83,15 @@ class _MatchCreateViewState extends State<_MatchCreateView> {
   final TextEditingController _timeAndDateController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
 
+// TODO not sure when should this be closed? should it be closed manually in dispose()?
   late final MatchCreateCubit _matchCreateCubit =
       context.read<MatchCreateCubit>();
+
+  @override
+  void initState() {
+    _onWidgetInitialize();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -70,14 +101,14 @@ class _MatchCreateViewState extends State<_MatchCreateView> {
 
   @override
   Widget build(BuildContext context) {
-    final MatchCreateCubitState createState = _matchCreateCubit.state;
+    // final MatchCreateCubitState createState = _matchCreateCubit.state;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create new match'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _handleMatchSubmit,
             icon: const Icon(
               Icons.check,
             ),
@@ -86,42 +117,88 @@ class _MatchCreateViewState extends State<_MatchCreateView> {
       ),
       body: Column(
         children: [
-          TextField(
-            controller: _nameController,
-            onChanged: (value) => _matchCreateCubit.onChangeName(value),
-            decoration: InputDecoration(
-              labelText: 'Match name',
-              labelStyle: TextStyle(
-                color: createState.nameError == null ? Colors.grey : Colors.red,
-              ),
-            ),
+          BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
+            selector: (state) {
+              final bool isNameError = state.nameError != null;
+              return isNameError;
+            },
+            builder: (context, isNameError) {
+              return TextField(
+                controller: _nameController,
+                onChanged: (value) => _matchCreateCubit.onChangeName(value),
+                decoration: InputDecoration(
+                  labelText: 'Match name',
+                  labelStyle: TextStyle(
+                    color: isNameError ? Colors.red : Colors.grey,
+                  ),
+                ),
+              );
+            },
           ),
           const SizedBox(
             height: SpacingConstants.xSmall,
           ),
-          TextField(
-            controller: _organizerController,
-            decoration: const InputDecoration(
-              labelText: 'Match organizer',
-            ),
+          BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
+            selector: (state) {
+              final bool isOrganizerError = state.organizerError != null;
+              return isOrganizerError;
+            },
+            builder: (context, isOrganizerError) {
+              return TextField(
+                controller: _organizerController,
+                onChanged: (value) =>
+                    _matchCreateCubit.onChangeOrganizer(value),
+                decoration: InputDecoration(
+                  labelText: 'Match organizer',
+                  labelStyle: TextStyle(
+                    color: isOrganizerError ? Colors.red : Colors.grey,
+                  ),
+                ),
+              );
+            },
           ),
           const SizedBox(
             height: SpacingConstants.xSmall,
           ),
-          TextField(
-            controller: _timeAndDateController,
-            decoration: const InputDecoration(
-              labelText: 'Match time',
-            ),
+          BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
+            selector: (state) {
+              final bool isTimeAndDateError = state.timeAndDateError != null;
+              return isTimeAndDateError;
+            },
+            builder: (context, isTimeAndDateError) {
+              return TextField(
+                controller: _timeAndDateController,
+                onChanged: (value) =>
+                    _matchCreateCubit.onChangeTimeAndDate(value),
+                decoration: InputDecoration(
+                  labelText: 'Match time',
+                  labelStyle: TextStyle(
+                    color: isTimeAndDateError ? Colors.red : Colors.grey,
+                  ),
+                ),
+              );
+            },
           ),
           const SizedBox(
             height: SpacingConstants.xSmall,
           ),
-          TextField(
-            controller: _locationController,
-            decoration: const InputDecoration(
-              labelText: 'Match location',
-            ),
+          BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
+            selector: (state) {
+              final bool isLocationError = state.organizerError != null;
+              return isLocationError;
+            },
+            builder: (context, isLocationError) {
+              return TextField(
+                controller: _locationController,
+                onChanged: (value) => _matchCreateCubit.onChangeLocation(value),
+                decoration: InputDecoration(
+                  labelText: 'Match organizer',
+                  labelStyle: TextStyle(
+                    color: isLocationError ? Colors.red : Colors.grey,
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -133,5 +210,39 @@ class _MatchCreateViewState extends State<_MatchCreateView> {
     _nameController.dispose();
     _organizerController.dispose();
     _timeAndDateController.dispose();
+
+    // TODO not sure if this is needed - but we are not using bloc builder, so maybe
+    _matchCreateCubit.close();
+  }
+
+  void _onWidgetInitialize() {
+    _matchCreateCubit.stream.listen((state) {
+      final bool isSuccess = state.isSuccess == true && !state.isLoading;
+      final bool isFailure = state.isFailure == true && !state.isLoading;
+
+      if (isSuccess) {
+        context.showSnackBarMessage('Match has been created successfully');
+        return;
+      }
+
+      if (isFailure) {
+        context.showSnackBarMessage(
+          'There was an error creating the match',
+          SnackBarVariant.error,
+        );
+        return;
+      }
+    });
+  }
+
+  Future<void> _handleMatchSubmit() async {
+// TODO not sure if bloc should be creating these values , and here jsut values are passed?
+
+    await _matchCreateCubit.onSubmit(
+      name: _nameController.text,
+      organizer: _organizerController.text,
+      timeAndDate: _timeAndDateController.text,
+      location: _timeAndDateController.text,
+    );
   }
 }

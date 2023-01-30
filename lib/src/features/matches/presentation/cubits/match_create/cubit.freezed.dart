@@ -16,15 +16,55 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MatchCreateCubitState {
-  bool get isLoading => throw _privateConstructorUsedError;
-  bool? get isSuccess => throw _privateConstructorUsedError;
-  FormFieldError? get nameError => throw _privateConstructorUsedError;
-  FormFieldError? get organizerError => throw _privateConstructorUsedError;
-  FormFieldError? get timeAndDateError => throw _privateConstructorUsedError;
-  FormFieldError? get locationError => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $MatchCreateCubitStateCopyWith<MatchCreateCubitState> get copyWith =>
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) failure,
+    required TResult Function(String matchId) success,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? failure,
+    TResult? Function(String matchId)? success,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? failure,
+    TResult Function(String matchId)? success,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MatchCreateCubitStateInitial value) initial,
+    required TResult Function(MatchCreateCubitStateLoading value) loading,
+    required TResult Function(MatchCreateCubitStateFailure value) failure,
+    required TResult Function(MatchCreateCubitStateSuccess value) success,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MatchCreateCubitStateInitial value)? initial,
+    TResult? Function(MatchCreateCubitStateLoading value)? loading,
+    TResult? Function(MatchCreateCubitStateFailure value)? failure,
+    TResult? Function(MatchCreateCubitStateSuccess value)? success,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MatchCreateCubitStateInitial value)? initial,
+    TResult Function(MatchCreateCubitStateLoading value)? loading,
+    TResult Function(MatchCreateCubitStateFailure value)? failure,
+    TResult Function(MatchCreateCubitStateSuccess value)? success,
+    required TResult orElse(),
+  }) =>
       throw _privateConstructorUsedError;
 }
 
@@ -33,14 +73,6 @@ abstract class $MatchCreateCubitStateCopyWith<$Res> {
   factory $MatchCreateCubitStateCopyWith(MatchCreateCubitState value,
           $Res Function(MatchCreateCubitState) then) =
       _$MatchCreateCubitStateCopyWithImpl<$Res, MatchCreateCubitState>;
-  @useResult
-  $Res call(
-      {bool isLoading,
-      bool? isSuccess,
-      FormFieldError? nameError,
-      FormFieldError? organizerError,
-      FormFieldError? timeAndDateError,
-      FormFieldError? locationError});
 }
 
 /// @nodoc
@@ -53,194 +85,540 @@ class _$MatchCreateCubitStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-    Object? isSuccess = freezed,
-    Object? nameError = freezed,
-    Object? organizerError = freezed,
-    Object? timeAndDateError = freezed,
-    Object? locationError = freezed,
-  }) {
-    return _then(_value.copyWith(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSuccess: freezed == isSuccess
-          ? _value.isSuccess
-          : isSuccess // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      nameError: freezed == nameError
-          ? _value.nameError
-          : nameError // ignore: cast_nullable_to_non_nullable
-              as FormFieldError?,
-      organizerError: freezed == organizerError
-          ? _value.organizerError
-          : organizerError // ignore: cast_nullable_to_non_nullable
-              as FormFieldError?,
-      timeAndDateError: freezed == timeAndDateError
-          ? _value.timeAndDateError
-          : timeAndDateError // ignore: cast_nullable_to_non_nullable
-              as FormFieldError?,
-      locationError: freezed == locationError
-          ? _value.locationError
-          : locationError // ignore: cast_nullable_to_non_nullable
-              as FormFieldError?,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_MatchCreateCubitStateCopyWith<$Res>
-    implements $MatchCreateCubitStateCopyWith<$Res> {
-  factory _$$_MatchCreateCubitStateCopyWith(_$_MatchCreateCubitState value,
-          $Res Function(_$_MatchCreateCubitState) then) =
-      __$$_MatchCreateCubitStateCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {bool isLoading,
-      bool? isSuccess,
-      FormFieldError? nameError,
-      FormFieldError? organizerError,
-      FormFieldError? timeAndDateError,
-      FormFieldError? locationError});
+abstract class _$$MatchCreateCubitStateInitialCopyWith<$Res> {
+  factory _$$MatchCreateCubitStateInitialCopyWith(
+          _$MatchCreateCubitStateInitial value,
+          $Res Function(_$MatchCreateCubitStateInitial) then) =
+      __$$MatchCreateCubitStateInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_MatchCreateCubitStateCopyWithImpl<$Res>
-    extends _$MatchCreateCubitStateCopyWithImpl<$Res, _$_MatchCreateCubitState>
-    implements _$$_MatchCreateCubitStateCopyWith<$Res> {
-  __$$_MatchCreateCubitStateCopyWithImpl(_$_MatchCreateCubitState _value,
-      $Res Function(_$_MatchCreateCubitState) _then)
+class __$$MatchCreateCubitStateInitialCopyWithImpl<$Res>
+    extends _$MatchCreateCubitStateCopyWithImpl<$Res,
+        _$MatchCreateCubitStateInitial>
+    implements _$$MatchCreateCubitStateInitialCopyWith<$Res> {
+  __$$MatchCreateCubitStateInitialCopyWithImpl(
+      _$MatchCreateCubitStateInitial _value,
+      $Res Function(_$MatchCreateCubitStateInitial) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-    Object? isSuccess = freezed,
-    Object? nameError = freezed,
-    Object? organizerError = freezed,
-    Object? timeAndDateError = freezed,
-    Object? locationError = freezed,
-  }) {
-    return _then(_$_MatchCreateCubitState(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSuccess: freezed == isSuccess
-          ? _value.isSuccess
-          : isSuccess // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      nameError: freezed == nameError
-          ? _value.nameError
-          : nameError // ignore: cast_nullable_to_non_nullable
-              as FormFieldError?,
-      organizerError: freezed == organizerError
-          ? _value.organizerError
-          : organizerError // ignore: cast_nullable_to_non_nullable
-              as FormFieldError?,
-      timeAndDateError: freezed == timeAndDateError
-          ? _value.timeAndDateError
-          : timeAndDateError // ignore: cast_nullable_to_non_nullable
-              as FormFieldError?,
-      locationError: freezed == locationError
-          ? _value.locationError
-          : locationError // ignore: cast_nullable_to_non_nullable
-              as FormFieldError?,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$_MatchCreateCubitState implements _MatchCreateCubitState {
-  const _$_MatchCreateCubitState(
-      {this.isLoading = false,
-      this.isSuccess,
-      this.nameError,
-      this.organizerError,
-      this.timeAndDateError,
-      this.locationError});
-
-  @override
-  @JsonKey()
-  final bool isLoading;
-  @override
-  final bool? isSuccess;
-  @override
-  final FormFieldError? nameError;
-  @override
-  final FormFieldError? organizerError;
-  @override
-  final FormFieldError? timeAndDateError;
-  @override
-  final FormFieldError? locationError;
+class _$MatchCreateCubitStateInitial implements MatchCreateCubitStateInitial {
+  _$MatchCreateCubitStateInitial();
 
   @override
   String toString() {
-    return 'MatchCreateCubitState(isLoading: $isLoading, isSuccess: $isSuccess, nameError: $nameError, organizerError: $organizerError, timeAndDateError: $timeAndDateError, locationError: $locationError)';
+    return 'MatchCreateCubitState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MatchCreateCubitState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.isSuccess, isSuccess) ||
-                other.isSuccess == isSuccess) &&
-            (identical(other.nameError, nameError) ||
-                other.nameError == nameError) &&
-            (identical(other.organizerError, organizerError) ||
-                other.organizerError == organizerError) &&
-            (identical(other.timeAndDateError, timeAndDateError) ||
-                other.timeAndDateError == timeAndDateError) &&
-            (identical(other.locationError, locationError) ||
-                other.locationError == locationError));
+            other is _$MatchCreateCubitStateInitial);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isSuccess, nameError,
-      organizerError, timeAndDateError, locationError);
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) failure,
+    required TResult Function(String matchId) success,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? failure,
+    TResult? Function(String matchId)? success,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? failure,
+    TResult Function(String matchId)? success,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MatchCreateCubitStateInitial value) initial,
+    required TResult Function(MatchCreateCubitStateLoading value) loading,
+    required TResult Function(MatchCreateCubitStateFailure value) failure,
+    required TResult Function(MatchCreateCubitStateSuccess value) success,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MatchCreateCubitStateInitial value)? initial,
+    TResult? Function(MatchCreateCubitStateLoading value)? loading,
+    TResult? Function(MatchCreateCubitStateFailure value)? failure,
+    TResult? Function(MatchCreateCubitStateSuccess value)? success,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MatchCreateCubitStateInitial value)? initial,
+    TResult Function(MatchCreateCubitStateLoading value)? loading,
+    TResult Function(MatchCreateCubitStateFailure value)? failure,
+    TResult Function(MatchCreateCubitStateSuccess value)? success,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MatchCreateCubitStateInitial implements MatchCreateCubitState {
+  factory MatchCreateCubitStateInitial() = _$MatchCreateCubitStateInitial;
+}
+
+/// @nodoc
+abstract class _$$MatchCreateCubitStateLoadingCopyWith<$Res> {
+  factory _$$MatchCreateCubitStateLoadingCopyWith(
+          _$MatchCreateCubitStateLoading value,
+          $Res Function(_$MatchCreateCubitStateLoading) then) =
+      __$$MatchCreateCubitStateLoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MatchCreateCubitStateLoadingCopyWithImpl<$Res>
+    extends _$MatchCreateCubitStateCopyWithImpl<$Res,
+        _$MatchCreateCubitStateLoading>
+    implements _$$MatchCreateCubitStateLoadingCopyWith<$Res> {
+  __$$MatchCreateCubitStateLoadingCopyWithImpl(
+      _$MatchCreateCubitStateLoading _value,
+      $Res Function(_$MatchCreateCubitStateLoading) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$MatchCreateCubitStateLoading implements MatchCreateCubitStateLoading {
+  _$MatchCreateCubitStateLoading();
+
+  @override
+  String toString() {
+    return 'MatchCreateCubitState.loading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MatchCreateCubitStateLoading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) failure,
+    required TResult Function(String matchId) success,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? failure,
+    TResult? Function(String matchId)? success,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? failure,
+    TResult Function(String matchId)? success,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MatchCreateCubitStateInitial value) initial,
+    required TResult Function(MatchCreateCubitStateLoading value) loading,
+    required TResult Function(MatchCreateCubitStateFailure value) failure,
+    required TResult Function(MatchCreateCubitStateSuccess value) success,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MatchCreateCubitStateInitial value)? initial,
+    TResult? Function(MatchCreateCubitStateLoading value)? loading,
+    TResult? Function(MatchCreateCubitStateFailure value)? failure,
+    TResult? Function(MatchCreateCubitStateSuccess value)? success,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MatchCreateCubitStateInitial value)? initial,
+    TResult Function(MatchCreateCubitStateLoading value)? loading,
+    TResult Function(MatchCreateCubitStateFailure value)? failure,
+    TResult Function(MatchCreateCubitStateSuccess value)? success,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MatchCreateCubitStateLoading implements MatchCreateCubitState {
+  factory MatchCreateCubitStateLoading() = _$MatchCreateCubitStateLoading;
+}
+
+/// @nodoc
+abstract class _$$MatchCreateCubitStateFailureCopyWith<$Res> {
+  factory _$$MatchCreateCubitStateFailureCopyWith(
+          _$MatchCreateCubitStateFailure value,
+          $Res Function(_$MatchCreateCubitStateFailure) then) =
+      __$$MatchCreateCubitStateFailureCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$MatchCreateCubitStateFailureCopyWithImpl<$Res>
+    extends _$MatchCreateCubitStateCopyWithImpl<$Res,
+        _$MatchCreateCubitStateFailure>
+    implements _$$MatchCreateCubitStateFailureCopyWith<$Res> {
+  __$$MatchCreateCubitStateFailureCopyWithImpl(
+      _$MatchCreateCubitStateFailure _value,
+      $Res Function(_$MatchCreateCubitStateFailure) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$MatchCreateCubitStateFailure(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MatchCreateCubitStateFailure implements MatchCreateCubitStateFailure {
+  _$MatchCreateCubitStateFailure(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'MatchCreateCubitState.failure(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MatchCreateCubitStateFailure &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MatchCreateCubitStateCopyWith<_$_MatchCreateCubitState> get copyWith =>
-      __$$_MatchCreateCubitStateCopyWithImpl<_$_MatchCreateCubitState>(
-          this, _$identity);
+  _$$MatchCreateCubitStateFailureCopyWith<_$MatchCreateCubitStateFailure>
+      get copyWith => __$$MatchCreateCubitStateFailureCopyWithImpl<
+          _$MatchCreateCubitStateFailure>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) failure,
+    required TResult Function(String matchId) success,
+  }) {
+    return failure(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? failure,
+    TResult? Function(String matchId)? success,
+  }) {
+    return failure?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? failure,
+    TResult Function(String matchId)? success,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MatchCreateCubitStateInitial value) initial,
+    required TResult Function(MatchCreateCubitStateLoading value) loading,
+    required TResult Function(MatchCreateCubitStateFailure value) failure,
+    required TResult Function(MatchCreateCubitStateSuccess value) success,
+  }) {
+    return failure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MatchCreateCubitStateInitial value)? initial,
+    TResult? Function(MatchCreateCubitStateLoading value)? loading,
+    TResult? Function(MatchCreateCubitStateFailure value)? failure,
+    TResult? Function(MatchCreateCubitStateSuccess value)? success,
+  }) {
+    return failure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MatchCreateCubitStateInitial value)? initial,
+    TResult Function(MatchCreateCubitStateLoading value)? loading,
+    TResult Function(MatchCreateCubitStateFailure value)? failure,
+    TResult Function(MatchCreateCubitStateSuccess value)? success,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _MatchCreateCubitState implements MatchCreateCubitState {
-  const factory _MatchCreateCubitState(
-      {final bool isLoading,
-      final bool? isSuccess,
-      final FormFieldError? nameError,
-      final FormFieldError? organizerError,
-      final FormFieldError? timeAndDateError,
-      final FormFieldError? locationError}) = _$_MatchCreateCubitState;
+abstract class MatchCreateCubitStateFailure implements MatchCreateCubitState {
+  factory MatchCreateCubitStateFailure(final String message) =
+      _$MatchCreateCubitStateFailure;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$MatchCreateCubitStateFailureCopyWith<_$MatchCreateCubitStateFailure>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MatchCreateCubitStateSuccessCopyWith<$Res> {
+  factory _$$MatchCreateCubitStateSuccessCopyWith(
+          _$MatchCreateCubitStateSuccess value,
+          $Res Function(_$MatchCreateCubitStateSuccess) then) =
+      __$$MatchCreateCubitStateSuccessCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String matchId});
+}
+
+/// @nodoc
+class __$$MatchCreateCubitStateSuccessCopyWithImpl<$Res>
+    extends _$MatchCreateCubitStateCopyWithImpl<$Res,
+        _$MatchCreateCubitStateSuccess>
+    implements _$$MatchCreateCubitStateSuccessCopyWith<$Res> {
+  __$$MatchCreateCubitStateSuccessCopyWithImpl(
+      _$MatchCreateCubitStateSuccess _value,
+      $Res Function(_$MatchCreateCubitStateSuccess) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? matchId = null,
+  }) {
+    return _then(_$MatchCreateCubitStateSuccess(
+      null == matchId
+          ? _value.matchId
+          : matchId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MatchCreateCubitStateSuccess implements MatchCreateCubitStateSuccess {
+  _$MatchCreateCubitStateSuccess(this.matchId);
 
   @override
-  bool get isLoading;
+  final String matchId;
+
   @override
-  bool? get isSuccess;
+  String toString() {
+    return 'MatchCreateCubitState.success(matchId: $matchId)';
+  }
+
   @override
-  FormFieldError? get nameError;
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MatchCreateCubitStateSuccess &&
+            (identical(other.matchId, matchId) || other.matchId == matchId));
+  }
+
   @override
-  FormFieldError? get organizerError;
-  @override
-  FormFieldError? get timeAndDateError;
-  @override
-  FormFieldError? get locationError;
-  @override
+  int get hashCode => Object.hash(runtimeType, matchId);
+
   @JsonKey(ignore: true)
-  _$$_MatchCreateCubitStateCopyWith<_$_MatchCreateCubitState> get copyWith =>
-      throw _privateConstructorUsedError;
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MatchCreateCubitStateSuccessCopyWith<_$MatchCreateCubitStateSuccess>
+      get copyWith => __$$MatchCreateCubitStateSuccessCopyWithImpl<
+          _$MatchCreateCubitStateSuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) failure,
+    required TResult Function(String matchId) success,
+  }) {
+    return success(matchId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? failure,
+    TResult? Function(String matchId)? success,
+  }) {
+    return success?.call(matchId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? failure,
+    TResult Function(String matchId)? success,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(matchId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MatchCreateCubitStateInitial value) initial,
+    required TResult Function(MatchCreateCubitStateLoading value) loading,
+    required TResult Function(MatchCreateCubitStateFailure value) failure,
+    required TResult Function(MatchCreateCubitStateSuccess value) success,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MatchCreateCubitStateInitial value)? initial,
+    TResult? Function(MatchCreateCubitStateLoading value)? loading,
+    TResult? Function(MatchCreateCubitStateFailure value)? failure,
+    TResult? Function(MatchCreateCubitStateSuccess value)? success,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MatchCreateCubitStateInitial value)? initial,
+    TResult Function(MatchCreateCubitStateLoading value)? loading,
+    TResult Function(MatchCreateCubitStateFailure value)? failure,
+    TResult Function(MatchCreateCubitStateSuccess value)? success,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MatchCreateCubitStateSuccess implements MatchCreateCubitState {
+  factory MatchCreateCubitStateSuccess(final String matchId) =
+      _$MatchCreateCubitStateSuccess;
+
+  String get matchId;
+  @JsonKey(ignore: true)
+  _$$MatchCreateCubitStateSuccessCopyWith<_$MatchCreateCubitStateSuccess>
+      get copyWith => throw _privateConstructorUsedError;
 }
