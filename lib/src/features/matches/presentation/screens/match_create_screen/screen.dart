@@ -26,6 +26,7 @@ class MatchCreateScreen extends StatelessWidget {
         matchesUseCases: matchesUseCases,
       ),
       // TODO with this approach, we lose way to go back to existing inputs state - so maybe we should move the consumer into the view so that controllers could be reused if error, and user wants to go back to its inputs
+      // TODO this should be moved below, to the view
       child: BlocConsumer<MatchCreateCubit, MatchCreateCubitState>(
         listener: _matchCreateCubitListener,
         builder: _matchCreateCubitBuilder,
@@ -46,11 +47,25 @@ class MatchCreateScreen extends StatelessWidget {
     BuildContext context,
     MatchCreateCubitState state,
   ) {
-    if (state.isSuccess != false) return;
+    // if (state is! MatchCreateCubitStateFailure) return;
 
-    context.showSnackBarMessage(
-      'There was an error creating a new match',
-      SnackBarVariant.error,
+    // context.showSnackBarMessage(
+    //   'There was an error creating a new match',
+    //   SnackBarVariant.error,
+    // );
+
+    state.when(
+      initial: () => null,
+      loading: () => null,
+      failure: (message) => context.showSnackBarMessage(
+        'There was an error creating a new match',
+        SnackBarVariant.error,
+      ),
+      success: (matchId) {
+        final String path = AppRoutes.match(matchId).path;
+
+        context.pushReplacement(path);
+      },
     );
   }
 
@@ -107,101 +122,182 @@ class _MatchCreateViewState extends State<_MatchCreateView> {
       appBar: AppBar(
         title: const Text('Create new match'),
         actions: [
-          IconButton(
-            onPressed: _handleMatchSubmit,
-            icon: const Icon(
-              Icons.check,
-            ),
-          )
+          StreamBuilder<bool>(
+              stream: _matchCreateCubit.inputsValidationStream,
+              builder: (context, snapshot) {
+                final bool isValid = snapshot.data == true;
+
+                return IconButton(
+                  onPressed: isValid ? _handleMatchSubmit : null,
+                  icon: Icon(
+                    Icons.check,
+                    color: isValid ? Colors.blue : Colors.red,
+                  ),
+                );
+              })
         ],
       ),
       body: Column(
         children: [
-          BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
-            selector: (state) {
-              final bool isNameError = state.nameError != null;
-              return isNameError;
-            },
-            builder: (context, isNameError) {
+          StreamBuilder<String>(
+            builder: (context, snapshot) {
+              final bool hasError = snapshot.hasError;
+
               return TextField(
                 controller: _nameController,
                 onChanged: (value) => _matchCreateCubit.onChangeName(value),
                 decoration: InputDecoration(
                   labelText: 'Match name',
                   labelStyle: TextStyle(
-                    color: isNameError ? Colors.red : Colors.grey,
+                    color: hasError ? Colors.red : Colors.grey,
                   ),
                 ),
               );
             },
+            stream: _matchCreateCubit.nameStream,
           ),
-          const SizedBox(
-            height: SpacingConstants.xSmall,
-          ),
-          BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
-            selector: (state) {
-              final bool isOrganizerError = state.organizerError != null;
-              return isOrganizerError;
-            },
-            builder: (context, isOrganizerError) {
+          StreamBuilder<String>(
+            builder: (context, snapshot) {
+              final bool hasError = snapshot.hasError;
+
               return TextField(
                 controller: _organizerController,
                 onChanged: (value) =>
                     _matchCreateCubit.onChangeOrganizer(value),
                 decoration: InputDecoration(
-                  labelText: 'Match organizer',
+                  labelText: 'Orgnaizer name',
                   labelStyle: TextStyle(
-                    color: isOrganizerError ? Colors.red : Colors.grey,
+                    color: hasError ? Colors.red : Colors.grey,
                   ),
                 ),
               );
             },
+            stream: _matchCreateCubit.organizerStream,
           ),
-          const SizedBox(
-            height: SpacingConstants.xSmall,
-          ),
-          BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
-            selector: (state) {
-              final bool isTimeAndDateError = state.timeAndDateError != null;
-              return isTimeAndDateError;
-            },
-            builder: (context, isTimeAndDateError) {
+          StreamBuilder<String>(
+            builder: (context, snapshot) {
+              final bool hasError = snapshot.hasError;
+
               return TextField(
                 controller: _timeAndDateController,
                 onChanged: (value) =>
                     _matchCreateCubit.onChangeTimeAndDate(value),
                 decoration: InputDecoration(
-                  labelText: 'Match time',
+                  labelText: 'Time and date',
                   labelStyle: TextStyle(
-                    color: isTimeAndDateError ? Colors.red : Colors.grey,
+                    color: hasError ? Colors.red : Colors.grey,
                   ),
                 ),
               );
             },
+            stream: _matchCreateCubit.timeAndDateStream,
           ),
-          const SizedBox(
-            height: SpacingConstants.xSmall,
-          ),
-          BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
-            selector: (state) {
-              final bool isLocationError = state.organizerError != null;
-              return isLocationError;
-            },
-            builder: (context, isLocationError) {
+          StreamBuilder<String>(
+            builder: (context, snapshot) {
+              final bool hasError = snapshot.hasError;
+
               return TextField(
                 controller: _locationController,
                 onChanged: (value) => _matchCreateCubit.onChangeLocation(value),
                 decoration: InputDecoration(
-                  labelText: 'Match organizer',
+                  labelText: 'Location',
                   labelStyle: TextStyle(
-                    color: isLocationError ? Colors.red : Colors.grey,
+                    color: hasError ? Colors.red : Colors.grey,
                   ),
                 ),
               );
             },
+            stream: _matchCreateCubit.locationStream,
           ),
         ],
       ),
+      // body: Column(
+      //   children: [
+      //     BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
+      //       selector: (state) {
+      //         final bool isNameError = state.nameError != null;
+      //         return isNameError;
+      //       },
+      //       builder: (context, isNameError) {
+      //         return TextField(
+      //           controller: _nameController,
+      //           onChanged: (value) => _matchCreateCubit.onChangeName(value),
+      //           decoration: InputDecoration(
+      //             labelText: 'Match name',
+      //             labelStyle: TextStyle(
+      //               color: isNameError ? Colors.red : Colors.grey,
+      //             ),
+      //           ),
+      //         );
+      //       },
+      //     ),
+      //     const SizedBox(
+      //       height: SpacingConstants.xSmall,
+      //     ),
+      //     BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
+      //       selector: (state) {
+      //         final bool isOrganizerError = state.organizerError != null;
+      //         return isOrganizerError;
+      //       },
+      //       builder: (context, isOrganizerError) {
+      //         return TextField(
+      //           controller: _organizerController,
+      //           onChanged: (value) =>
+      //               _matchCreateCubit.onChangeOrganizer(value),
+      //           decoration: InputDecoration(
+      //             labelText: 'Match organizer',
+      //             labelStyle: TextStyle(
+      //               color: isOrganizerError ? Colors.red : Colors.grey,
+      //             ),
+      //           ),
+      //         );
+      //       },
+      //     ),
+      //     const SizedBox(
+      //       height: SpacingConstants.xSmall,
+      //     ),
+      //     BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
+      //       selector: (state) {
+      //         final bool isTimeAndDateError = state.timeAndDateError != null;
+      //         return isTimeAndDateError;
+      //       },
+      //       builder: (context, isTimeAndDateError) {
+      //         return TextField(
+      //           controller: _timeAndDateController,
+      //           onChanged: (value) =>
+      //               _matchCreateCubit.onChangeTimeAndDate(value),
+      //           decoration: InputDecoration(
+      //             labelText: 'Match time',
+      //             labelStyle: TextStyle(
+      //               color: isTimeAndDateError ? Colors.red : Colors.grey,
+      //             ),
+      //           ),
+      //         );
+      //       },
+      //     ),
+      //     const SizedBox(
+      //       height: SpacingConstants.xSmall,
+      //     ),
+      //     BlocSelector<MatchCreateCubit, MatchCreateCubitState, bool>(
+      //       selector: (state) {
+      //         final bool isLocationError = state.organizerError != null;
+      //         return isLocationError;
+      //       },
+      //       builder: (context, isLocationError) {
+      //         return TextField(
+      //           controller: _locationController,
+      //           onChanged: (value) => _matchCreateCubit.onChangeLocation(value),
+      //           decoration: InputDecoration(
+      //             labelText: 'Match organizer',
+      //             labelStyle: TextStyle(
+      //               color: isLocationError ? Colors.red : Colors.grey,
+      //             ),
+      //           ),
+      //         );
+      //       },
+      //     ),
+      //   ],
+      // ),
     );
   }
 
@@ -216,33 +312,39 @@ class _MatchCreateViewState extends State<_MatchCreateView> {
   }
 
   void _onWidgetInitialize() {
-    _matchCreateCubit.stream.listen((state) {
-      final bool isSuccess = state.isSuccess == true && !state.isLoading;
-      final bool isFailure = state.isFailure == true && !state.isLoading;
+    // _matchCreateCubit.stream.listen((state) {
+    //   final bool isSuccess = state.isSuccess == true && !state.isLoading;
+    //   final bool isFailure = state.isFailure == true && !state.isLoading;
 
-      if (isSuccess) {
-        context.showSnackBarMessage('Match has been created successfully');
-        return;
-      }
+    //   if (isSuccess) {
+    //     context.showSnackBarMessage('Match has been created successfully');
+    //     return;
+    //   }
 
-      if (isFailure) {
-        context.showSnackBarMessage(
-          'There was an error creating the match',
-          SnackBarVariant.error,
-        );
-        return;
-      }
-    });
+    //   if (isFailure) {
+    //     context.showSnackBarMessage(
+    //       'There was an error creating the match',
+    //       SnackBarVariant.error,
+    //     );
+    //     return;
+    //   }
+    // });
   }
 
   Future<void> _handleMatchSubmit() async {
-// TODO not sure if bloc should be creating these values , and here jsut values are passed?
-
     await _matchCreateCubit.onSubmit(
       name: _nameController.text,
       organizer: _organizerController.text,
+      location: _locationController.text,
       timeAndDate: _timeAndDateController.text,
-      location: _timeAndDateController.text,
     );
+// TODO not sure if bloc should be creating these values , and here jsut values are passed?
+
+    // await _matchCreateCubit.onSubmit(
+    //   name: _nameController.text,
+    //   organizer: _organizerController.text,
+    //   timeAndDate: _timeAndDateController.text,
+    //   location: _timeAndDateController.text,
+    // );
   }
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:five_on_4_flutter/src/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/new_match.dart';
 import 'package:five_on_4_flutter/src/utils/mixins/validation_mixin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,16 +21,17 @@ class MatchCreateCubit extends Cubit<MatchCreateCubitState>
 
   final MatchesUseCases matchesUseCases;
 
-  final BehaviorSubject<String> _nameSubject = BehaviorSubject.seeded('');
-  final BehaviorSubject<String> _organizerSubject = BehaviorSubject.seeded('');
-  final BehaviorSubject<String> _timeAndDateSubject =
-      BehaviorSubject.seeded('');
-  final BehaviorSubject<String> _locationSubject = BehaviorSubject.seeded('');
+// TODO temp disabled to not show error immeidately when open page
+  // final BehaviorSubject<String> _nameSubject = BehaviorSubject.seeded('');
+  final BehaviorSubject<String> _nameSubject = BehaviorSubject();
+  final BehaviorSubject<String> _organizerSubject = BehaviorSubject();
+  final BehaviorSubject<String> _timeAndDateSubject = BehaviorSubject();
+  final BehaviorSubject<String> _locationSubject = BehaviorSubject();
 
-  Sink<String> get _nameSink => _nameSubject.sink;
-  Sink<String> get _organizerSink => _organizerSubject.sink;
-  Sink<String> get _timeAndDateSink => _timeAndDateSubject.sink;
-  Sink<String> get _locationSink => _locationSubject.sink;
+  StreamSink<String> get _nameSink => _nameSubject.sink;
+  StreamSink<String> get _organizerSink => _organizerSubject.sink;
+  StreamSink<String> get _timeAndDateSink => _timeAndDateSubject.sink;
+  StreamSink<String> get _locationSink => _locationSubject.sink;
 
   Stream<String> get nameStream =>
       _nameSubject.stream.transform(_nameValidationTransformer);
@@ -39,6 +41,14 @@ class MatchCreateCubit extends Cubit<MatchCreateCubitState>
       _timeAndDateSubject.stream.transform(_timeAndDateValidationTransformer);
   Stream<String> get organizerStream =>
       _organizerSubject.stream.transform(_organizerValidationTransformer);
+
+  Stream<bool> get inputsValidationStream => Rx.combineLatest4(
+        nameStream,
+        locationStream,
+        timeAndDateStream,
+        organizerStream,
+        (a, b, c, d) => true,
+      );
 
   void onChangeName(
     String value,
@@ -120,7 +130,12 @@ class MatchCreateCubit extends Cubit<MatchCreateCubitState>
     // emit(currentState);
   }
 
-  Future<void> onSubmit() async {
+  Future<void> onSubmit({
+    required String name,
+    required String organizer,
+    required String location,
+    required String timeAndDate,
+  }) async {
 // TODO bold assumption here that we dont need data
 // and that all data is valid in streams
 // TODO question is
@@ -128,10 +143,48 @@ class MatchCreateCubit extends Cubit<MatchCreateCubitState>
 
 // ok, if last elemnt completed with error, it stops processing - but how do we inform ui that there was an error?
 
+    final FormFieldError? nameError = _validateName(name);
+    final FormFieldError? organizerError = _validateName(organizer);
+    final FormFieldError? locationError = _validateName(location);
+    final FormFieldError? timeAndDateError = _validateName(timeAndDate);
+
+    final bool isValid = nameError == null &&
+        organizerError == null &&
+        locationError == null &&
+        timeAndDateError == null;
+
+    if (!isValid) {
+      if (nameError != null) _nameSink.addError(nameError);
+      if (organizerError != null) _organizerSink.addError(organizerError);
+      if (locationError != null) _locationSink.addError(locationError);
+      if (timeAndDateError != null) _timeAndDateSink.addError(timeAndDateError);
+
+      return;
+    }
+
+    final NewMatchValue newMatch = NewMatchValue(
+      name: name,
+      organizer: organizer,
+      timeAndDate: DateTime.now().millisecondsSinceEpoch,
+      location: location,
+    );
+
+    emit(MatchCreateCubitStateLoading());
+
     try {
-      final String name = await nameStream.last;
+      final String matchId = await matchesUseCases.createMatch(newMatch);
+      // final String name = await nameStream.last;
+      // final String organizer = await organizerStream.last;
+      // final String location = await locationStream.last;
+      // final String timeAndDate = await timeAndDateStream.last;
+
+      // TODO test
+
+      emit(MatchCreateCubitStateSuccess(matchId));
     } catch (e) {
       // TODO so in catch, we should somhow reemit - or resend events,so ui knows what is what
+
+      emit(MatchCreateCubitStateFailure('Error crteating match'));
     }
   }
 
@@ -251,15 +304,7 @@ class MatchCreateCubit extends Cubit<MatchCreateCubitState>
   late final StreamTransformer<String, String> _nameValidationTransformer =
       StreamTransformer<String, String>.fromHandlers(
     handleData: (value, sink) {
-      final bool isEmpty = isFieldEmpty(value);
-      final bool isValid = isFieldValid(value, _validateRegularFieldForTesting);
-
-      FormFieldError? nameError;
-      if (isEmpty) {
-        nameError = FormFieldError.empty;
-      } else if (!isValid) {
-        nameError = FormFieldError.invalid;
-      }
+      final FormFieldError? nameError = _validateName(value);
 
       if (nameError != null) {
         sink.addError(nameError);
@@ -273,15 +318,7 @@ class MatchCreateCubit extends Cubit<MatchCreateCubitState>
   late final StreamTransformer<String, String> _organizerValidationTransformer =
       StreamTransformer<String, String>.fromHandlers(
     handleData: (value, sink) {
-      final bool isEmpty = isFieldEmpty(value);
-      final bool isValid = isFieldValid(value, _validateRegularFieldForTesting);
-
-      FormFieldError? organizerError;
-      if (isEmpty) {
-        organizerError = FormFieldError.empty;
-      } else if (!isValid) {
-        organizerError = FormFieldError.invalid;
-      }
+      final FormFieldError? organizerError = _validateName(value);
 
       if (organizerError != null) {
         sink.addError(organizerError);
@@ -296,15 +333,7 @@ class MatchCreateCubit extends Cubit<MatchCreateCubitState>
       _timeAndDateValidationTransformer =
       StreamTransformer<String, String>.fromHandlers(
     handleData: (value, sink) {
-      final bool isEmpty = isFieldEmpty(value);
-      final bool isValid = isFieldValid(value, _validateRegularFieldForTesting);
-
-      FormFieldError? timeAndDateError;
-      if (isEmpty) {
-        timeAndDateError = FormFieldError.empty;
-      } else if (!isValid) {
-        timeAndDateError = FormFieldError.invalid;
-      }
+      final FormFieldError? timeAndDateError = _validateName(value);
 
       if (timeAndDateError != null) {
         sink.addError(timeAndDateError);
@@ -318,15 +347,7 @@ class MatchCreateCubit extends Cubit<MatchCreateCubitState>
   late final StreamTransformer<String, String> _locationValidationTransformer =
       StreamTransformer<String, String>.fromHandlers(
     handleData: (value, sink) {
-      final bool isEmpty = isFieldEmpty(value);
-      final bool isValid = isFieldValid(value, _validateRegularFieldForTesting);
-
-      FormFieldError? locationError;
-      if (isEmpty) {
-        locationError = FormFieldError.empty;
-      } else if (!isValid) {
-        locationError = FormFieldError.invalid;
-      }
+      final FormFieldError? locationError = _validateName(value);
 
       if (locationError != null) {
         sink.addError(locationError);
@@ -336,6 +357,62 @@ class MatchCreateCubit extends Cubit<MatchCreateCubitState>
       sink.add(value);
     },
   );
+
+  FormFieldError? _validateName(String value) {
+    final bool isEmpty = isFieldEmpty(value);
+    final bool isValid = isFieldValid(value, _validateRegularFieldForTesting);
+
+    FormFieldError? error;
+    if (isEmpty) {
+      error = FormFieldError.empty;
+    } else if (!isValid) {
+      error = FormFieldError.invalid;
+    }
+
+    return error;
+  }
+
+  FormFieldError? _validateLocation(String value) {
+    final bool isEmpty = isFieldEmpty(value);
+    final bool isValid = isFieldValid(value, _validateRegularFieldForTesting);
+
+    FormFieldError? error;
+    if (isEmpty) {
+      error = FormFieldError.empty;
+    } else if (!isValid) {
+      error = FormFieldError.invalid;
+    }
+
+    return error;
+  }
+
+  FormFieldError? _validateOrganizer(String value) {
+    final bool isEmpty = isFieldEmpty(value);
+    final bool isValid = isFieldValid(value, _validateRegularFieldForTesting);
+
+    FormFieldError? error;
+    if (isEmpty) {
+      error = FormFieldError.empty;
+    } else if (!isValid) {
+      error = FormFieldError.invalid;
+    }
+
+    return error;
+  }
+
+  FormFieldError? _validateTimeAndDate(String value) {
+    final bool isEmpty = isFieldEmpty(value);
+    final bool isValid = isFieldValid(value, _validateRegularFieldForTesting);
+
+    FormFieldError? error;
+    if (isEmpty) {
+      error = FormFieldError.empty;
+    } else if (!isValid) {
+      error = FormFieldError.invalid;
+    }
+
+    return error;
+  }
 }
 
 // TODO this could be a cubit
