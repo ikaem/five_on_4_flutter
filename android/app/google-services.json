@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "433908250361",
+    "project_id": "five-on-4",
+    "storage_bucket": "five-on-4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433908250361:android:3fb829c3f8b06008ce5428",
+        "android_client_info": {
+          "package_name": "com.example.five_on_4_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "433908250361-j1c3b1piob4if7g2lt1rmcv7nnge0f5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKFJHWXp33igG6N5XsxmYyLAwMAcDB5o4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "433908250361-j1c3b1piob4if7g2lt1rmcv7nnge0f5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
