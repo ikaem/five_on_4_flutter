@@ -1,20 +1,46 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:five_on_4_flutter/src/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
+
+export 'package:firebase_auth/firebase_auth.dart'
+    show User, FirebaseAuthException;
 
 class FirebaseAuthWrapper {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  User? checkAuth() {
-    try {
-      final User? auth = _auth.currentUser;
+  Future<User?> checkAuth() async {
+    final User? auth = _auth.currentUser;
+    return auth;
+  }
 
-      return auth;
-    } on FirebaseAuthException catch (e) {
-      throw AuthException(message: e.message);
-    } catch (e) {
-      throw const AuthException(
-        message: 'There was an error while checking auth status',
-      );
-    }
+  Future<User?> registerWithUsernameAndPassword(
+    AuthCredentialsArgs credentialsArgs,
+  ) async {
+    final UserCredential userCredential =
+        await _auth.createUserWithEmailAndPassword(
+      email: credentialsArgs.email,
+      password: credentialsArgs.password,
+    );
+
+    final User? user = userCredential.user;
+
+    return user;
+  }
+
+  Future<User?> loginWithUsernameAndPassword(
+    AuthCredentialsArgs credentialsArgs,
+  ) async {
+    final UserCredential userCredential =
+        await _auth.signInWithEmailAndPassword(
+      email: credentialsArgs.email,
+      password: credentialsArgs.password,
+    );
+
+    final User? user = userCredential.user;
+
+    return user;
+  }
+
+  Future<void> logout() async {
+    await _auth.signOut();
   }
 }

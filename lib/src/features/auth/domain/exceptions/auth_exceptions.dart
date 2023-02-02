@@ -35,3 +35,19 @@ class AuthInvalidCredentialsException extends AuthException {
   @override
   String toString() => 'AuthInvalidCredentialsException';
 }
+
+@immutable
+class AuthRegistrationFailedException extends AuthException {
+  const AuthRegistrationFailedException();
+
+  @override
+  String toString() => 'AuthRegistrationFailedException';
+}
+
+@immutable
+class AuthLoginFailedException extends AuthException {
+  const AuthLoginFailedException();
+
+  @override
+  String toString() => 'AuthLoginFailedException';
+}
