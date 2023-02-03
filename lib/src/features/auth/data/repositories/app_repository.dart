@@ -34,7 +34,7 @@ class AuthAppRepository implements AuthRepository {
   }
 
   @override
-  Future<void> logout(AuthCredentialsArgs credentialsArgs) async {
+  Future<void> logout() async {
     await authRemoteDataSource.logout();
     await authLocalDataSource.deleteAuth();
 

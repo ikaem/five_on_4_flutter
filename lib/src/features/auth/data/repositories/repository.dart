@@ -5,6 +5,6 @@ abstract class AuthRepository {
   Stream<AuthModel?> get observeAuth;
   Future<void> login(AuthCredentialsArgs credentialsArgs);
   Future<void> register(AuthCredentialsArgs credentialsArgs);
-  Future<void> logout(AuthCredentialsArgs credentialsArgs);
+  Future<void> logout();
   Future<void> checkAuth();
 }
