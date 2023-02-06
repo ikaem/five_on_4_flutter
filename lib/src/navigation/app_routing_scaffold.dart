@@ -57,11 +57,8 @@ class _AppRoutingScaffoldState extends State<AppRoutingScaffold> {
       };
 
   int _generateBarIndexFromLocation(BuildContext context) {
-    // final GoRouter router = GoRouter.of(context);
-    // final String location = router.location;
-
-    // TODO could htis work too
-    final location = appRouter.location;
+    final GoRouter router = GoRouter.of(context);
+    final String location = router.location;
 
     final homePath = AppRoutes.home.path;
     final matchesPath = AppRoutes.matches.path;

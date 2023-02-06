@@ -1,3 +1,4 @@
+import 'package:five_on_4_flutter/src/features/auth/auth.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_sources.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/matches_remote_data_source/fake_data_source.dart';
 import 'package:five_on_4_flutter/src/features/weather/data/data.dart';
@@ -8,12 +9,16 @@ class AppDataSources {
     required this.httpWrapper,
     required this.locationWrapper,
     required this.appDatabase,
+    required this.secureStorageWrapper,
+    required this.firebaseAuthWrapper,
     // TODO eventually, we will provide database here as well
   });
 
   final HttpWrapper httpWrapper;
   final LocationWrapper locationWrapper;
   final AppDatabase appDatabase;
+  final SecureStorageWrapper secureStorageWrapper;
+  final FirebaseAuthWrapper firebaseAuthWrapper;
 
   late final WeatherRemoteDataSource weatherRemoteDataSource =
       WeatherRemoteAppDataSource(
@@ -27,5 +32,14 @@ class AppDataSources {
   late final MatchesLocalDataSource matchesLocalDataSource =
       MatchesLocalAppDataSource(
     appDatabase: appDatabase,
+  );
+
+  late final AuthLocalDataSource authLocalDataSource = AuthLocalAppDataSource(
+    secureStorageWrapper: secureStorageWrapper,
+  );
+
+  late final AuthRemoteDataSource authRemoteDataSource =
+      AuthRemoteAppDataSource(
+    firebaseAuthWrapper: firebaseAuthWrapper,
   );
 }

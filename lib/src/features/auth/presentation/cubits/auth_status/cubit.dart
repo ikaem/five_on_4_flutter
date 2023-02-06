@@ -39,4 +39,10 @@ class AuthStatusCubit extends Cubit<AuthStatusCubitState> {
       ),
     );
   }
+
+  @override
+  Future<void> close() async {
+    authUseCases.cancelAuthSubscription();
+    await super.close();
+  }
 }

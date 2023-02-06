@@ -8,6 +8,11 @@ abstract class AppRoutes {
         name: 'Home',
       );
 
+  static AppRouteModel get login => const AppRouteModel(
+        path: '/login',
+        name: 'Login',
+      );
+
   static AppRouteModel get matches => const AppRouteModel(
         path: '/matches',
         name: 'Matches',

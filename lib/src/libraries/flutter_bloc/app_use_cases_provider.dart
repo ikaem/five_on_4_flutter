@@ -1,4 +1,5 @@
 import 'package:five_on_4_flutter/src/domain/use_cases/app_use_cases.dart';
+import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/weather/domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,9 @@ class AppUseCasesProvider extends StatelessWidget {
         ),
         RepositoryProvider<MatchesUseCases>(
           create: (context) => appUseCases.matchesUseCases,
+        ),
+        RepositoryProvider<AuthUseCases>(
+          create: (context) => appUseCases.authUseCases,
         ),
       ],
       child: child,

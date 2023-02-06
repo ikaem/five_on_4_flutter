@@ -15,7 +15,8 @@ class AuthAppRepository implements AuthRepository {
   final AuthLocalDataSource authLocalDataSource;
   final AuthRemoteDataSource authRemoteDataSource;
 
-  final BehaviorSubject<AuthModel?> _authSubject = BehaviorSubject<AuthModel>();
+  final BehaviorSubject<AuthModel?> _authSubject =
+      BehaviorSubject<AuthModel?>();
 
   StreamSink<AuthModel?> get _authSink => _authSubject.sink;
 

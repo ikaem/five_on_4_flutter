@@ -2,7 +2,6 @@ import 'package:five_on_4_flutter/src/app.dart';
 import 'package:five_on_4_flutter/src/data/data_sources/app_data_sources.dart';
 import 'package:five_on_4_flutter/src/data/repositories/app_repositories.dart';
 import 'package:five_on_4_flutter/src/domain/use_cases/app_use_cases.dart';
-import 'package:five_on_4_flutter/src/libraries/firebase/firebase.dart';
 import 'package:five_on_4_flutter/src/libraries/libraries.dart';
 import 'package:flutter/material.dart';
 
@@ -33,11 +32,15 @@ AppUseCases _getInitializedAppUseCases({
 }) {
   final HttpWrapper httpWrapper = HttpWrapper();
   final LocationWrapper locationWrapper = LocationWrapper();
+  final SecureStorageWrapper secureStorageWrapper = SecureStorageWrapper();
+  final FirebaseAuthWrapper firebaseAuthWrapper = FirebaseAuthWrapper();
 
   final AppDataSources appDataSources = AppDataSources(
     httpWrapper: httpWrapper,
     locationWrapper: locationWrapper,
     appDatabase: appDatabase,
+    secureStorageWrapper: secureStorageWrapper,
+    firebaseAuthWrapper: firebaseAuthWrapper,
   );
 
   final AppRepositories appRepositories = AppRepositories(
