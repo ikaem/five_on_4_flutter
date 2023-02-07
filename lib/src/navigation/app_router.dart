@@ -1,6 +1,7 @@
 // TODO - later, create functions to create rotues later
 
 import 'package:five_on_4_flutter/src/features/auth/presentation/presentation.dart';
+import 'package:five_on_4_flutter/src/features/auth/presentation/screens/register_screen/login_screen.dart';
 import 'package:five_on_4_flutter/src/features/matches/matches.dart'
     show MatchCreateScreen, MatchScreen, MatchesScreen;
 import 'package:five_on_4_flutter/src/features/players/players.dart'
@@ -37,16 +38,22 @@ class AppRouter {
     routes: [
       _shellRoute,
       _loginRoute,
+      _registerRoute,
       _matchRoute,
       _matchCreateRoute,
     ],
     refreshListenable: authStatusProvider,
     redirect: (context, state) {
       if (!authStatusProvider.isLoggedIn) {
-        return AppRoutes.login.path;
+        switch (state.location) {
+          case AppRoutes.registerPath:
+            return AppRoutes.registerPath;
+          default:
+            return AppRoutes.loginPath;
+        }
       }
 
-      return state.location;
+      return AppRoutes.homePath;
     },
   );
 
@@ -74,6 +81,13 @@ class AppRouter {
     name: AppRoutes.login.name,
     // TODO check if page builder will make .go naivgation actuvate back otpion on screen
     builder: (context, state) => const LoginScreen(),
+  );
+
+  final GoRoute _registerRoute = GoRoute(
+    path: AppRoutes.register.path,
+    name: AppRoutes.register.name,
+    // TODO check if page builder will make .go naivgation actuvate back otpion on screen
+    builder: (context, state) => const RegisterScreen(),
   );
 
   final GoRoute _playersRoute = GoRoute(

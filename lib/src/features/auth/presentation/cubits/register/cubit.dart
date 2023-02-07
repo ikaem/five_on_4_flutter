@@ -11,10 +11,11 @@ import 'package:rxdart/rxdart.dart';
 part 'cubit.freezed.dart';
 part 'cubit_state.dart';
 
-class LoginCubit extends Cubit<LoginCubitState> with ValidationMixin {
-  LoginCubit({
+// TODO move all validation logic to use case
+class RegisterCubit extends Cubit<RegisterCubitState> with ValidationMixin {
+  RegisterCubit({
     required this.authUseCases,
-  }) : super(LoginCubitStateInitial());
+  }) : super(RegisterCubitStateInitial());
 
   final AuthUseCases authUseCases;
 
@@ -43,35 +44,28 @@ class LoginCubit extends Cubit<LoginCubitState> with ValidationMixin {
   }
 
   Future<void> onSubmit() async {
-    // TODO lets see if we can get values from the stream
-    // TODO these could potentrually create errors
+    final bool isValid = await authUseCases.handleAuthInputsValidation(
+      emailSubject: _emailSubject,
+      passwordSubject: _passwordSubject,
+    );
+
+    if (!isValid) return;
+
     final String email = await _emailSubject.first;
     final String password = await _passwordSubject.first;
-
-    final FormFieldError? emailError = _validateEmail(email);
-    final FormFieldError? passwordError = _validatePassword(password);
-
-    final bool isValid = emailError == null && passwordError == null;
-
-    if (!isValid) {
-      if (emailError != null) _emailSink.addError(emailError);
-      if (passwordError != null) _passwordSink.addError(passwordError);
-
-      return;
-    }
 
     final AuthCredentialsArgs credentials =
         AuthCredentialsArgs(email: email, password: password);
 
-    emit(LoginCubitStateLoading());
+    emit(RegisterCubitStateLoading());
 
     try {
-      await authUseCases.login(credentials);
-      emit(LoginCubitStateSuccess());
+      await authUseCases.register(credentials);
+      emit(RegisterCubitStateSuccess());
     } catch (e) {
       // TODO we do or should have auth exceptions for better UI feedback
       log('Error -> ${e.toString()}');
-      emit(LoginCubitStateFailure('There was an error logging you in'));
+      emit(RegisterCubitStateFailure('There was an error registering you'));
     }
 
     // TODO test
@@ -80,7 +74,7 @@ class LoginCubit extends Cubit<LoginCubitState> with ValidationMixin {
   late final StreamTransformer<String, String> _emailValidationTransformer =
       StreamTransformer<String, String>.fromHandlers(
     handleData: (data, sink) {
-      final FormFieldError? error = _validateEmail(data);
+      final FormFieldError? error = authUseCases.validateEmail(data);
 
       if (error != null) {
         sink.addError(error);
@@ -94,7 +88,7 @@ class LoginCubit extends Cubit<LoginCubitState> with ValidationMixin {
   late final StreamTransformer<String, String> _passwordValidationTransformer =
       StreamTransformer<String, String>.fromHandlers(
     handleData: (data, sink) {
-      final FormFieldError? error = _validatePassword(data);
+      final FormFieldError? error = authUseCases.validatePassword(data);
 
       if (error != null) {
         sink.addError(error);
@@ -104,34 +98,4 @@ class LoginCubit extends Cubit<LoginCubitState> with ValidationMixin {
       sink.add(data);
     },
   );
-
-  FormFieldError? _validateEmail(String value) {
-    final bool isEmpty = isFieldEmpty(value);
-    final bool isValid = isFieldEmail(value);
-
-    FormFieldError? error;
-
-    if (isEmpty) {
-      error = FormFieldError.empty;
-    } else if (!isValid) {
-      error = FormFieldError.invalid;
-    }
-
-    return error;
-  }
-
-  FormFieldError? _validatePassword(String value) {
-    final bool isEmpty = isFieldEmpty(value);
-    final bool isValid = isFieldValidPassword(value);
-
-    FormFieldError? error;
-
-    if (isEmpty) {
-      error = FormFieldError.empty;
-    } else if (!isValid) {
-      error = FormFieldError.invalid;
-    }
-
-    return error;
-  }
 }

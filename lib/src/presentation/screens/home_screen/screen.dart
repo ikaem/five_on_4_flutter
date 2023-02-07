@@ -4,6 +4,7 @@ import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matche
 import 'package:five_on_4_flutter/src/features/weather/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/weather/presentation/cubits/cubits.dart';
 import 'package:five_on_4_flutter/src/navigation/app_routes.dart';
+import 'package:five_on_4_flutter/src/presentation/widgets/layout/app_bar_more_actions.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/widgets.dart'
     show MyMatchesOverview, MyTodayMatchesOverview, TodayWeather;
 import 'package:five_on_4_flutter/src/theme/theme.dart' show SpacingConstants;
@@ -46,11 +47,11 @@ class _HomeView extends StatelessWidget {
                 ..add(MatchesGetMyAllBlocLoadMatchesEvent()),
         ),
       ],
+      // TODO move this to view
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Home screen'),
-          actions: const [Icon(Icons.more_vert)],
-        ),
+        appBar: AppBar(title: const Text('Home screen'), actions: [
+          AppBarMoreActions(),
+        ]),
         floatingActionButton: FloatingActionButton(
           onPressed: () => _onCreateMatch(context: context),
           child: const Icon(Icons.sports_soccer),

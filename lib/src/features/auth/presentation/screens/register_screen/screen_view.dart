@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/cubits.dart';
+import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/register/cubit.dart';
 import 'package:five_on_4_flutter/src/navigation/app_routes.dart';
 import 'package:five_on_4_flutter/src/theme/constants/constants.dart';
 import 'package:five_on_4_flutter/src/utils/utils.dart';
@@ -8,20 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreenView extends StatelessWidget {
-  const LoginScreenView({super.key});
+class RegisterScreenView extends StatelessWidget {
+  const RegisterScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginCubitState>(
-      listener: _loginCubitListener,
-      builder: _loginCubitBuilder,
+    return BlocConsumer<RegisterCubit, RegisterCubitState>(
+      listener: _registerCubitListener,
+      builder: _registerCubitBuilder,
     );
   }
 
-  void _loginCubitListener(
+  void _registerCubitListener(
     BuildContext context,
-    LoginCubitState state,
+    RegisterCubitState state,
   ) {
     state.when(
       initial: () => null,
@@ -35,36 +35,36 @@ class LoginScreenView extends StatelessWidget {
     );
   }
 
-  Widget _loginCubitBuilder(
+  Widget _registerCubitBuilder(
     BuildContext context,
-    LoginCubitState state,
+    RegisterCubitState state,
   ) {
-    final LoginCubit loginCubit = context.read<LoginCubit>();
+    final RegisterCubit registerCubit = context.read<RegisterCubit>();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('Register'),
       ),
       // TODO make this thing a separate widget, and make it stateful
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           StreamBuilder(
-            stream: loginCubit.emailStream,
+            stream: registerCubit.emailStream,
             builder: _emailInputStreamBuilder,
           ),
           const SizedBox(
             height: SpacingConstants.small,
           ),
           StreamBuilder(
-            stream: loginCubit.passwordStream,
+            stream: registerCubit.passwordStream,
             builder: _passwordInputStreamBuilder,
           ),
           const SizedBox(
             height: SpacingConstants.small,
           ),
           StreamBuilder(
-            stream: loginCubit.inputsValidationStream,
+            stream: registerCubit.inputsValidationStream,
             builder: _submitButtonStreamBuilder,
           ),
           const SizedBox(
@@ -72,9 +72,9 @@ class LoginScreenView extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              context.pushNamed(AppRoutes.register.name);
+              context.pushNamed(AppRoutes.login.name);
             },
-            child: Text('Register'),
+            child: Text('Login'),
           ),
         ],
       ),
@@ -86,7 +86,7 @@ class LoginScreenView extends StatelessWidget {
     final bool isError = emailData.hasError;
 
     return TextField(
-      onChanged: context.read<LoginCubit>().onEmailChange,
+      onChanged: context.read<RegisterCubit>().onEmailChange,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: '@',
@@ -104,7 +104,7 @@ class LoginScreenView extends StatelessWidget {
 
     return TextField(
       obscureText: true,
-      onChanged: context.read<LoginCubit>().onPasswordChange,
+      onChanged: context.read<RegisterCubit>().onPasswordChange,
       decoration: InputDecoration(
         hintText: '*',
         labelText: 'Password',
@@ -122,7 +122,7 @@ class LoginScreenView extends StatelessWidget {
     log('IS VALID: $isValid');
 
     return ElevatedButton(
-      onPressed: isValid ? context.read<LoginCubit>().onSubmit : null,
+      onPressed: isValid ? context.read<RegisterCubit>().onSubmit : null,
       child: Text('Submit'),
     );
   }

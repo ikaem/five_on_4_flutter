@@ -3,28 +3,40 @@ import 'package:five_on_4_flutter/src/domain/models/models.dart';
 abstract class AppRoutes {
   static const String idPlaceholder = ':id';
 
+  static const homePath = '/';
+  static const loginPath = '/login';
+  static const registerPath = '/register';
+  static const matchesPath = '/matches';
+  static const playersPath = '/players';
+  static const matchCreatePath = '/match-create';
+
   static AppRouteModel get home => const AppRouteModel(
-        path: '/',
+        path: '$homePath',
         name: 'Home',
       );
 
   static AppRouteModel get login => const AppRouteModel(
-        path: '/login',
+        path: '$loginPath',
         name: 'Login',
       );
 
+  static AppRouteModel get register => const AppRouteModel(
+        path: '$registerPath',
+        name: 'Register',
+      );
+
   static AppRouteModel get matches => const AppRouteModel(
-        path: '/matches',
+        path: '$matchesPath',
         name: 'Matches',
       );
 
   static AppRouteModel get players => const AppRouteModel(
-        path: '/players',
+        path: '$playersPath',
         name: 'Players',
       );
 
   static AppRouteModel get matchCreate => const AppRouteModel(
-        path: '/match-create',
+        path: '$matchCreatePath',
         name: 'MatchCreate',
       );
 
@@ -32,7 +44,7 @@ abstract class AppRoutes {
     final String matchId = id ?? idPlaceholder;
 
     return AppRouteModel(
-      path: '/matches/$matchId',
+      path: '$matchesPath/$matchId',
       name: 'Match',
     );
   }
@@ -41,7 +53,7 @@ abstract class AppRoutes {
     final String player = id ?? idPlaceholder;
 
     return AppRouteModel(
-      path: '/players/$player',
+      path: '$playersPath/$player',
       name: 'Player',
     );
   }
