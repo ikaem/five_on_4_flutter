@@ -21,6 +21,14 @@ class AuthUserNotFoundException extends AuthException {
 }
 
 @immutable
+class AuthNoSessionException extends AuthException {
+  const AuthNoSessionException();
+
+  @override
+  String toString() => 'AuthNoSessionException';
+}
+
+@immutable
 class AuthUnauthorizedException extends AuthException {
   const AuthUnauthorizedException();
 

@@ -1,3 +1,6 @@
+import 'package:five_on_4_flutter/src/features/auth/data/repositories/repositories.dart';
+import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/auth/domain/models/auth/auth.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
@@ -5,9 +8,29 @@ import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/v
 class MatchesUseCases {
   const MatchesUseCases({
     required this.matchesRepository,
+    required this.authRepository,
   });
 
   final MatchesRepository matchesRepository;
+  final AuthRepository authRepository;
+
+  Future<void> joinMatch(String matchId) async {
+    final AuthModel? auth = await authRepository.auth;
+    if (auth == null) throw AuthNoSessionException();
+
+    final String userId = auth.id;
+
+    final MatchJoinArgs matchJoinArgs = MatchJoinArgs(
+      userId: userId,
+      matchId: matchId,
+    );
+
+
+    await matchesRepository.
+
+    // get auth
+    // if not auth, send no auth error // in bloc listener, react to auth error - whcih could be field on failure and
+  }
 
   // TODO not sure if these should be divided - todays matches, and all matches - this would mean we would have two blocs? but maybe we could have some different stats and such - lets play with it
 

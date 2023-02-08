@@ -5,6 +5,11 @@ import 'package:five_on_4_flutter/src/domain/use_cases/app_use_cases.dart';
 import 'package:five_on_4_flutter/src/libraries/libraries.dart';
 import 'package:flutter/material.dart';
 
+final rootNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
+final shellNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'shellNavigatorKey');
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

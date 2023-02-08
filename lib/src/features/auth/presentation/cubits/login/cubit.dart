@@ -18,8 +18,11 @@ class LoginCubit extends Cubit<LoginCubitState> with ValidationMixin {
 
   final AuthUseCases authUseCases;
 
-  final BehaviorSubject<String> _emailSubject = BehaviorSubject();
-  final BehaviorSubject<String> _passwordSubject = BehaviorSubject();
+// TODO temp seeded
+  final BehaviorSubject<String> _emailSubject =
+      BehaviorSubject.seeded('karlo@karlo.net');
+  final BehaviorSubject<String> _passwordSubject =
+      BehaviorSubject.seeded('123456789k');
 
   StreamSink<String> get _emailSink => _emailSubject.sink;
   StreamSink<String> get _passwordSink => _passwordSubject.sink;
@@ -69,6 +72,7 @@ class LoginCubit extends Cubit<LoginCubitState> with ValidationMixin {
       await authUseCases.login(credentials);
       emit(LoginCubitStateSuccess());
     } catch (e) {
+      if (isClosed) return;
       // TODO we do or should have auth exceptions for better UI feedback
       log('Error -> ${e.toString()}');
       emit(LoginCubitStateFailure('There was an error logging you in'));

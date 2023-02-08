@@ -9,7 +9,7 @@ class AuthStatusProvider extends ChangeNotifier {
   bool get isLoggedIn => _auth != null;
   AuthModel? get auth => _auth;
 
-  void setAuth(AuthModel? auth) {
+  void set auth(AuthModel? auth) {
     _auth = auth;
     notifyListeners();
   }

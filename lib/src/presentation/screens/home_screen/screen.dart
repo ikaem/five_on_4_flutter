@@ -49,9 +49,12 @@ class _HomeView extends StatelessWidget {
       ],
       // TODO move this to view
       child: Scaffold(
-        appBar: AppBar(title: const Text('Home screen'), actions: [
-          AppBarMoreActions(),
-        ]),
+        appBar: AppBar(
+          title: const Text('Home screen'),
+          actions: [
+            AppBarMoreActions(),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => _onCreateMatch(context: context),
           child: const Icon(Icons.sports_soccer),

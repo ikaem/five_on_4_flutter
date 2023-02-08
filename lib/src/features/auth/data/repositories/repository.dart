@@ -7,4 +7,5 @@ abstract class AuthRepository {
   Future<void> register(AuthCredentialsArgs credentialsArgs);
   Future<void> logout();
   Future<void> checkAuth();
+  Future<AuthModel?> get auth;
 }

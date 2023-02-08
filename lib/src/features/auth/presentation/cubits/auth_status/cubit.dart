@@ -24,12 +24,11 @@ class AuthStatusCubit extends Cubit<AuthStatusCubitState> {
       onAuthEvent: _onAuthEvent,
       onAuthEventException: _onAuthEventException,
     );
-
     await authUseCases.checkAuth();
   }
 
   void _onAuthEvent(AuthModel? auth) {
-    _authStatusProvider.setAuth(auth);
+    _authStatusProvider.auth = auth;
   }
 
   void _onAuthEventException(Object exception) {

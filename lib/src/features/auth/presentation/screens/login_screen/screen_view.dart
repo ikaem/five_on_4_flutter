@@ -31,6 +31,7 @@ class LoginScreenView extends StatelessWidget {
       success: () {
         // TODO LATER, CALL context.goreplacement, or pushreplacement, or something
         log('Logged in successfully');
+        context.go(AppRoutes.homePath);
       },
     );
   }

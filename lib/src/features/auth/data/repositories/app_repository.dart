@@ -24,6 +24,9 @@ class AuthAppRepository implements AuthRepository {
   Stream<AuthModel?> get observeAuth => _authSubject.stream;
 
   @override
+  Future<AuthModel?> get auth => _authSubject.first;
+
+  @override
   Future<void> login(AuthCredentialsArgs credentialsArgs) async {
     final User user = await authRemoteDataSource.login(credentialsArgs);
 

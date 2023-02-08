@@ -11,15 +11,11 @@ import 'package:five_on_4_flutter/src/navigation/navigation.dart'
     show AppRoutes;
 import 'package:five_on_4_flutter/src/presentation/presentation.dart'
     show HomeScreen;
-import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
 // as per https://snehmehta.medium.com/dynamic-bottom-navigation-with-go-router-flutter-power-series-part-1-2437e2d72546
 // https://codewithandrea.com/articles/flutter-bottom-navigation-bar-nested-routes-gorouter-beamer/
 // https://www.kodeco.com/28987851-flutter-navigator-2-0-using-go_router
-
-final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 // TODO this should definitely nbe a class - and then provide it throughtout the app
 
@@ -32,7 +28,7 @@ class AppRouter {
   final AuthStatusProvider authStatusProvider;
 
   late final GoRouter router = GoRouter(
-    navigatorKey: _rootNavigatorKey,
+    // navigatorKey: rootNavigatorKey,
     // TODO not sure if this is needed at a ll
     initialLocation: AppRoutes.home.path,
     routes: [
@@ -44,6 +40,7 @@ class AppRouter {
     ],
     refreshListenable: authStatusProvider,
     redirect: (context, state) {
+      // TODO test
       if (!authStatusProvider.isLoggedIn) {
         switch (state.location) {
           case AppRoutes.registerPath:
@@ -53,12 +50,16 @@ class AppRouter {
         }
       }
 
-      return AppRoutes.homePath;
+      if (state.location == AppRoutes.loginPath) {
+        return AppRoutes.homePath;
+      }
+
+      return state.location;
     },
   );
 
   late final ShellRoute _shellRoute = ShellRoute(
-    navigatorKey: _shellNavigatorKey,
+    // navigatorKey: shellNavigatorKey,
     // TODO this child is what will be returned from each go route
     builder: (context, state, child) => AppRoutingScaffold(child: child),
     routes: [
