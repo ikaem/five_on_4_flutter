@@ -6,17 +6,16 @@ part of 'dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MatchRemoteDTO _$$_MatchRemoteDTOFromJson(Map<String, dynamic> json) =>
-    _$_MatchRemoteDTO(
+_$_PlayerRemoteDTO _$$_PlayerRemoteDTOFromJson(Map<String, dynamic> json) =>
+    _$_PlayerRemoteDTO(
       id: json['id'] as String,
+      userId: json['userId'] as String,
       name: json['name'] as String,
-      players:
-          (json['players'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$_MatchRemoteDTOToJson(_$_MatchRemoteDTO instance) =>
+Map<String, dynamic> _$$_PlayerRemoteDTOToJson(_$_PlayerRemoteDTO instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'userId': instance.userId,
       'name': instance.name,
-      'players': instance.players,
     };

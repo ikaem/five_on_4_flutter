@@ -14,7 +14,10 @@ class MatchesUseCases {
   final MatchesRepository matchesRepository;
   final AuthRepository authRepository;
 
-  Future<void> joinMatch(String matchId) async {
+  Future<void> participateInMatch({
+    required String matchId,
+    required bool shouldJoin,
+  }) async {
     final AuthModel? auth = await authRepository.auth;
     if (auth == null) throw AuthNoSessionException();
 
@@ -25,8 +28,9 @@ class MatchesUseCases {
       matchId: matchId,
     );
 
-
-    await matchesRepository.
+    shouldJoin
+        ? await matchesRepository.joinMatch(matchJoinArgs)
+        : await matchesRepository.unjoinMatch(matchJoinArgs);
 
     // get auth
     // if not auth, send no auth error // in bloc listener, react to auth error - whcih could be field on failure and

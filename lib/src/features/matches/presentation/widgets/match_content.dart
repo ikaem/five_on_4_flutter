@@ -40,15 +40,22 @@ class MatchContent extends StatelessWidget {
         const SizedBox(
           height: SpacingConstants.small,
         ),
+        // TOOD this should be its own widget
         const Text('Players:'),
         const SizedBox(
           height: SpacingConstants.small,
         ),
-        const Text('Some match player 1'),
-        const Text('Some match player 2'),
-        const Text('Some match player 3'),
-        const Text('Some match player 4'),
-        const Text('Some match player 5'),
+        Expanded(
+          child: ListView.builder(
+            itemCount: match.players.length,
+            itemBuilder: (context, index) {
+              final String playerId = match.players[index];
+              final String player = 'Player number $playerId';
+
+              return Text(player);
+            },
+          ),
+        )
       ],
     );
   }

@@ -6,4 +6,6 @@ abstract class MatchesRepository {
   // TODO - eventually, return pagianted matches, and also provide time span arguments, and all other arguments
   Future<List<MatchModel>> getMatches();
   Future<String> createMatch(NewMatchValue newMatch);
+  Future<void> joinMatch(MatchJoinArgs matchJoinArgs);
+  Future<void> unjoinMatch(MatchJoinArgs matchJoinArgs);
 }

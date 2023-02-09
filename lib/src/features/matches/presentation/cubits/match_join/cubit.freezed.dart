@@ -20,7 +20,7 @@ mixin _$MatchJoinCubitState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String matchId) success,
     required TResult Function(String message) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$MatchJoinCubitState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String matchId)? success,
     TResult? Function(String message)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$MatchJoinCubitState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String matchId)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) =>
@@ -130,7 +130,7 @@ class _$MatchJoinCubitStateInitial implements MatchJoinCubitStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String matchId) success,
     required TResult Function(String message) failure,
   }) {
     return initial();
@@ -141,7 +141,7 @@ class _$MatchJoinCubitStateInitial implements MatchJoinCubitStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String matchId)? success,
     TResult? Function(String message)? failure,
   }) {
     return initial?.call();
@@ -152,7 +152,7 @@ class _$MatchJoinCubitStateInitial implements MatchJoinCubitStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String matchId)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -248,7 +248,7 @@ class _$MatchJoinCubitStateLoading implements MatchJoinCubitStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String matchId) success,
     required TResult Function(String message) failure,
   }) {
     return loading();
@@ -259,7 +259,7 @@ class _$MatchJoinCubitStateLoading implements MatchJoinCubitStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String matchId)? success,
     TResult? Function(String message)? failure,
   }) {
     return loading?.call();
@@ -270,7 +270,7 @@ class _$MatchJoinCubitStateLoading implements MatchJoinCubitStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String matchId)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -328,6 +328,8 @@ abstract class _$$MatchJoinCubitStateSuccessCopyWith<$Res> {
           _$MatchJoinCubitStateSuccess value,
           $Res Function(_$MatchJoinCubitStateSuccess) then) =
       __$$MatchJoinCubitStateSuccessCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String matchId});
 }
 
 /// @nodoc
@@ -339,37 +341,61 @@ class __$$MatchJoinCubitStateSuccessCopyWithImpl<$Res>
       _$MatchJoinCubitStateSuccess _value,
       $Res Function(_$MatchJoinCubitStateSuccess) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? matchId = null,
+  }) {
+    return _then(_$MatchJoinCubitStateSuccess(
+      null == matchId
+          ? _value.matchId
+          : matchId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$MatchJoinCubitStateSuccess implements MatchJoinCubitStateSuccess {
-  _$MatchJoinCubitStateSuccess();
+  _$MatchJoinCubitStateSuccess(this.matchId);
+
+  @override
+  final String matchId;
 
   @override
   String toString() {
-    return 'MatchJoinCubitState.success()';
+    return 'MatchJoinCubitState.success(matchId: $matchId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchJoinCubitStateSuccess);
+            other is _$MatchJoinCubitStateSuccess &&
+            (identical(other.matchId, matchId) || other.matchId == matchId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, matchId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MatchJoinCubitStateSuccessCopyWith<_$MatchJoinCubitStateSuccess>
+      get copyWith => __$$MatchJoinCubitStateSuccessCopyWithImpl<
+          _$MatchJoinCubitStateSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String matchId) success,
     required TResult Function(String message) failure,
   }) {
-    return success();
+    return success(matchId);
   }
 
   @override
@@ -377,10 +403,10 @@ class _$MatchJoinCubitStateSuccess implements MatchJoinCubitStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String matchId)? success,
     TResult? Function(String message)? failure,
   }) {
-    return success?.call();
+    return success?.call(matchId);
   }
 
   @override
@@ -388,12 +414,12 @@ class _$MatchJoinCubitStateSuccess implements MatchJoinCubitStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String matchId)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(matchId);
     }
     return orElse();
   }
@@ -437,7 +463,13 @@ class _$MatchJoinCubitStateSuccess implements MatchJoinCubitStateSuccess {
 }
 
 abstract class MatchJoinCubitStateSuccess implements MatchJoinCubitState {
-  factory MatchJoinCubitStateSuccess() = _$MatchJoinCubitStateSuccess;
+  factory MatchJoinCubitStateSuccess(final String matchId) =
+      _$MatchJoinCubitStateSuccess;
+
+  String get matchId;
+  @JsonKey(ignore: true)
+  _$$MatchJoinCubitStateSuccessCopyWith<_$MatchJoinCubitStateSuccess>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -510,7 +542,7 @@ class _$MatchJoinCubitStateFailure implements MatchJoinCubitStateFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(String matchId) success,
     required TResult Function(String message) failure,
   }) {
     return failure(message);
@@ -521,7 +553,7 @@ class _$MatchJoinCubitStateFailure implements MatchJoinCubitStateFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(String matchId)? success,
     TResult? Function(String message)? failure,
   }) {
     return failure?.call(message);
@@ -532,7 +564,7 @@ class _$MatchJoinCubitStateFailure implements MatchJoinCubitStateFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(String matchId)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {

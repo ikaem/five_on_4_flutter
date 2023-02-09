@@ -17,6 +17,8 @@ class AuthStatusCubit extends Cubit<AuthStatusCubitState> {
   final AuthUseCases authUseCases;
 
   final AuthStatusProvider _authStatusProvider = AuthStatusProvider();
+
+  AuthModel? get auth => _authStatusProvider.auth;
   AuthStatusProvider get authStatusProvider => _authStatusProvider;
 
   Future<void> _onInitializeCubit() async {

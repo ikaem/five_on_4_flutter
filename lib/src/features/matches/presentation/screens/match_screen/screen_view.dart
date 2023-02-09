@@ -1,17 +1,46 @@
+import 'dart:developer';
+
+import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/auth_status/cubit.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/extensions/extensions.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/match_get/cubit.dart';
+import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/match_join/cubit.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/widgets/match_content.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/layout/app_bar_more_actions.dart';
 import 'package:five_on_4_flutter/src/utils/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MatchScreenView extends StatelessWidget {
+class MatchScreenView extends StatefulWidget {
   const MatchScreenView({
     super.key,
   });
 
   @override
+  State<MatchScreenView> createState() => _MatchScreenViewState();
+}
+
+class _MatchScreenViewState extends State<MatchScreenView> {
+  late final MatchJoinCubit _matchJoinCubit = context.read<MatchJoinCubit>();
+  late final MatchGetCubit _matchGetCubit = context.read<MatchGetCubit>();
+  late final AuthStatusCubit _authStatusCubit = context.read<AuthStatusCubit>();
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeView();
+  }
+
+  @override
+  void dispose() {
+    _disposeView();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    log('${_authStatusCubit.auth?.email}');
+
     return BlocConsumer<MatchGetCubit, MatchGetCubitState>(
       listener: _matchGetCubitListener,
       builder: _matchGetCubitBuilder,
@@ -53,18 +82,65 @@ class MatchScreenView extends StatelessWidget {
         appBar: AppBar(),
         body: Center(child: Text(message)),
       ),
-      success: (match) => Scaffold(
-        appBar: AppBar(
-          title: Text('Match details'),
-          actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.person_add)),
-            AppBarMoreActions(),
-          ],
-        ),
-        body: MatchContent(
-          match: match,
-        ),
+      success: _matchGetCubitSuccessBuilder,
+    );
+  }
+
+  Scaffold _matchGetCubitSuccessBuilder(MatchModel match) {
+    final bool hasUserJoinedMatch =
+        match.checkHasUserJoinedMatch(_authStatusCubit.auth?.id);
+
+    final IconData joinIcon =
+        !hasUserJoinedMatch ? Icons.person_add : Icons.person_remove;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Match details'),
+        actions: [
+          BlocSelector<MatchJoinCubit, MatchJoinCubitState, bool>(
+            selector: (state) {
+              return state is MatchJoinCubitStateLoading;
+            },
+            builder: (context, isLoading) {
+              return IconButton(
+                onPressed: isLoading
+                    ? null
+                    : () => _matchJoinCubit.participateInMatch(
+                          matchId: match.id,
+                          shouldJoin: !hasUserJoinedMatch,
+                        ),
+                icon: Icon(joinIcon),
+              );
+            },
+          ),
+          AppBarMoreActions(),
+        ],
+      ),
+      body: MatchContent(
+        match: match,
       ),
     );
+  }
+
+  void _initializeView() {
+    _matchJoinCubit.stream.listen(
+      (state) {
+        state.when(
+          initial: () => null,
+          loading: () => null,
+          success: (matchId) {
+            _matchGetCubit.loadMatch(matchId);
+            context.showSnackBarMessage('Match joined successfully');
+          },
+          failure: (message) =>
+              context.showSnackBarMessage(message, SnackBarVariant.error),
+        );
+      },
+    );
+  }
+
+  void _disposeView() {
+    // bloc is closed automatically with bloc provider from the bloc screen
+    // _matchJoinCubit.close();
   }
 }

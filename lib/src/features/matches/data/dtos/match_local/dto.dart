@@ -13,11 +13,15 @@ class MatchLocalDTO {
   const MatchLocalDTO({
     required this.id,
     required this.name,
+    required this.players,
   });
 
   factory MatchLocalDTO.fromRemoteDto(MatchRemoteDTO remoteDto) {
-    final MatchLocalDTO localDto =
-        MatchLocalDTO(id: remoteDto.id, name: remoteDto.name);
+    final MatchLocalDTO localDto = MatchLocalDTO(
+      id: remoteDto.id,
+      name: remoteDto.name,
+      players: remoteDto.players,
+    );
 
     return localDto;
   }
@@ -26,4 +30,6 @@ class MatchLocalDTO {
 
   final String id;
   final String name;
+  // TODO this will need to be objects - but how to store this - should this be stored separately into its own table, or set it as a list into tghis collection
+  final List<String> players;
 }

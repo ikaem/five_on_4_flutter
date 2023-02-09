@@ -1,6 +1,7 @@
 import 'package:five_on_4_flutter/src/features/matches/data/data.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_sources.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/args/match_join/match_join.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/models/match/model.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 
@@ -59,5 +60,15 @@ class MatchesAppRepository implements MatchesRepository {
     // TODO we probably dont want to refetch it again, just to be able to cache it - we will cache it when we get to the page
 
     return remoteMatchId;
+  }
+
+  @override
+  Future<void> joinMatch(MatchJoinArgs matchJoinArgs) async {
+    await matchesRemoteDataSource.joinMatch(matchJoinArgs);
+  }
+
+  @override
+  Future<void> unjoinMatch(MatchJoinArgs matchJoinArgs) async {
+    await matchesRemoteDataSource.unjoinMatch(matchJoinArgs);
   }
 }

@@ -1,11 +1,11 @@
-cl:
+clean:
 	flutter clean
 
-gt:
+get:
 	flutter pub get
 
-br: 
+generate: 
 	flutter pub run build_runner build --delete-conflicting-outputs
 
-devs: 
+run-devices: 
 	flutter run --flavor dozuki lib/main.dart -d all

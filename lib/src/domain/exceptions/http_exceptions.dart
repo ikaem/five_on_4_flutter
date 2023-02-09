@@ -28,6 +28,16 @@ class HttpUnknownException extends HttpException {
 }
 
 @immutable
+class HttpBadRequestException extends HttpException {
+  const HttpBadRequestException({
+    required super.message,
+  }) : super(statusCode: HttpStatus.badRequest);
+
+  @override
+  String toString() => 'HttpBadRequestException - message: $message';
+}
+
+@immutable
 class HttpInternalServerException extends HttpException {
   const HttpInternalServerException({
     required super.message,

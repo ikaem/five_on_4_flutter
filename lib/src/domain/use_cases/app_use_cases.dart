@@ -16,6 +16,7 @@ class AppUseCases {
   );
   late final MatchesUseCases matchesUseCases = MatchesUseCases(
     matchesRepository: appRepositories.matchesRepository,
+    authRepository: appRepositories.authRepository,
   );
   late final AuthUseCases authUseCases = AuthUseCases(
     authRepository: appRepositories.authRepository,
