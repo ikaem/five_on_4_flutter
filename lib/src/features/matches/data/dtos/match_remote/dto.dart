@@ -1,3 +1,4 @@
+import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_participant_remote/dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'dto.freezed.dart';
@@ -10,7 +11,7 @@ class MatchRemoteDTO with _$MatchRemoteDTO {
     required String id,
     required String name,
     // TODO in the future, we will have to make this something like status of player joined - so again some reference or something - or just keep it in the database
-    required List<String> players,
+    required List<MatchParticipantRemoteDTO> participants,
   }) = _MatchRemoteDTO;
 
   factory MatchRemoteDTO.fromJson(Map<String, dynamic> map) =>

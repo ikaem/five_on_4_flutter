@@ -23,7 +23,8 @@ mixin _$MatchRemoteDTO {
   String get id => throw _privateConstructorUsedError;
   String get name =>
       throw _privateConstructorUsedError; // TODO in the future, we will have to make this something like status of player joined - so again some reference or something - or just keep it in the database
-  List<String> get players => throw _privateConstructorUsedError;
+  List<MatchParticipantRemoteDTO> get participants =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,8 @@ abstract class $MatchRemoteDTOCopyWith<$Res> {
           MatchRemoteDTO value, $Res Function(MatchRemoteDTO) then) =
       _$MatchRemoteDTOCopyWithImpl<$Res, MatchRemoteDTO>;
   @useResult
-  $Res call({String id, String name, List<String> players});
+  $Res call(
+      {String id, String name, List<MatchParticipantRemoteDTO> participants});
 }
 
 /// @nodoc
@@ -55,7 +57,7 @@ class _$MatchRemoteDTOCopyWithImpl<$Res, $Val extends MatchRemoteDTO>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? players = null,
+    Object? participants = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -66,10 +68,10 @@ class _$MatchRemoteDTOCopyWithImpl<$Res, $Val extends MatchRemoteDTO>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      players: null == players
-          ? _value.players
-          : players // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      participants: null == participants
+          ? _value.participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as List<MatchParticipantRemoteDTO>,
     ) as $Val);
   }
 }
@@ -82,7 +84,8 @@ abstract class _$$_MatchRemoteDTOCopyWith<$Res>
       __$$_MatchRemoteDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, List<String> players});
+  $Res call(
+      {String id, String name, List<MatchParticipantRemoteDTO> participants});
 }
 
 /// @nodoc
@@ -98,7 +101,7 @@ class __$$_MatchRemoteDTOCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? players = null,
+    Object? participants = null,
   }) {
     return _then(_$_MatchRemoteDTO(
       id: null == id
@@ -109,10 +112,10 @@ class __$$_MatchRemoteDTOCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      players: null == players
-          ? _value._players
-          : players // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      participants: null == participants
+          ? _value._participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as List<MatchParticipantRemoteDTO>,
     ));
   }
 }
@@ -123,8 +126,8 @@ class _$_MatchRemoteDTO implements _MatchRemoteDTO {
   const _$_MatchRemoteDTO(
       {required this.id,
       required this.name,
-      required final List<String> players})
-      : _players = players;
+      required final List<MatchParticipantRemoteDTO> participants})
+      : _participants = participants;
 
   factory _$_MatchRemoteDTO.fromJson(Map<String, dynamic> json) =>
       _$$_MatchRemoteDTOFromJson(json);
@@ -134,18 +137,18 @@ class _$_MatchRemoteDTO implements _MatchRemoteDTO {
   @override
   final String name;
 // TODO in the future, we will have to make this something like status of player joined - so again some reference or something - or just keep it in the database
-  final List<String> _players;
+  final List<MatchParticipantRemoteDTO> _participants;
 // TODO in the future, we will have to make this something like status of player joined - so again some reference or something - or just keep it in the database
   @override
-  List<String> get players {
-    if (_players is EqualUnmodifiableListView) return _players;
+  List<MatchParticipantRemoteDTO> get participants {
+    if (_participants is EqualUnmodifiableListView) return _participants;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_players);
+    return EqualUnmodifiableListView(_participants);
   }
 
   @override
   String toString() {
-    return 'MatchRemoteDTO(id: $id, name: $name, players: $players)';
+    return 'MatchRemoteDTO(id: $id, name: $name, participants: $participants)';
   }
 
   @override
@@ -155,13 +158,14 @@ class _$_MatchRemoteDTO implements _MatchRemoteDTO {
             other is _$_MatchRemoteDTO &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other._players, _players));
+            const DeepCollectionEquality()
+                .equals(other._participants, _participants));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, const DeepCollectionEquality().hash(_players));
+  int get hashCode => Object.hash(runtimeType, id, name,
+      const DeepCollectionEquality().hash(_participants));
 
   @JsonKey(ignore: true)
   @override
@@ -179,9 +183,10 @@ class _$_MatchRemoteDTO implements _MatchRemoteDTO {
 
 abstract class _MatchRemoteDTO implements MatchRemoteDTO {
   const factory _MatchRemoteDTO(
-      {required final String id,
-      required final String name,
-      required final List<String> players}) = _$_MatchRemoteDTO;
+          {required final String id,
+          required final String name,
+          required final List<MatchParticipantRemoteDTO> participants}) =
+      _$_MatchRemoteDTO;
 
   factory _MatchRemoteDTO.fromJson(Map<String, dynamic> json) =
       _$_MatchRemoteDTO.fromJson;
@@ -191,7 +196,7 @@ abstract class _MatchRemoteDTO implements MatchRemoteDTO {
   @override
   String get name;
   @override // TODO in the future, we will have to make this something like status of player joined - so again some reference or something - or just keep it in the database
-  List<String> get players;
+  List<MatchParticipantRemoteDTO> get participants;
   @override
   @JsonKey(ignore: true)
   _$$_MatchRemoteDTOCopyWith<_$_MatchRemoteDTO> get copyWith =>

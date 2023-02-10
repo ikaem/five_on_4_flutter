@@ -27,10 +27,11 @@ const MatchLocalDTOSchema = CollectionSchema(
       name: r'name',
       type: IsarType.string,
     ),
-    r'players': PropertySchema(
+    r'participants': PropertySchema(
       id: 2,
-      name: r'players',
-      type: IsarType.stringList,
+      name: r'participants',
+      type: IsarType.objectList,
+      target: r'MatchParticipantLocalDTO',
     )
   },
   estimateSize: _matchLocalDTOEstimateSize,
@@ -40,7 +41,9 @@ const MatchLocalDTOSchema = CollectionSchema(
   idName: r'isarId',
   indexes: {},
   links: {},
-  embeddedSchemas: {},
+  embeddedSchemas: {
+    r'MatchParticipantLocalDTO': MatchParticipantLocalDTOSchema
+  },
   getId: _matchLocalDTOGetId,
   getLinks: _matchLocalDTOGetLinks,
   attach: _matchLocalDTOAttach,
@@ -55,11 +58,13 @@ int _matchLocalDTOEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.name.length * 3;
-  bytesCount += 3 + object.players.length * 3;
+  bytesCount += 3 + object.participants.length * 3;
   {
-    for (var i = 0; i < object.players.length; i++) {
-      final value = object.players[i];
-      bytesCount += value.length * 3;
+    final offsets = allOffsets[MatchParticipantLocalDTO]!;
+    for (var i = 0; i < object.participants.length; i++) {
+      final value = object.participants[i];
+      bytesCount += MatchParticipantLocalDTOSchema.estimateSize(
+          value, offsets, allOffsets);
     }
   }
   return bytesCount;
@@ -73,7 +78,12 @@ void _matchLocalDTOSerialize(
 ) {
   writer.writeString(offsets[0], object.id);
   writer.writeString(offsets[1], object.name);
-  writer.writeStringList(offsets[2], object.players);
+  writer.writeObjectList<MatchParticipantLocalDTO>(
+    offsets[2],
+    allOffsets,
+    MatchParticipantLocalDTOSchema.serialize,
+    object.participants,
+  );
 }
 
 MatchLocalDTO _matchLocalDTODeserialize(
@@ -85,7 +95,13 @@ MatchLocalDTO _matchLocalDTODeserialize(
   final object = MatchLocalDTO(
     id: reader.readString(offsets[0]),
     name: reader.readString(offsets[1]),
-    players: reader.readStringList(offsets[2]) ?? [],
+    participants: reader.readObjectList<MatchParticipantLocalDTO>(
+          offsets[2],
+          MatchParticipantLocalDTOSchema.deserialize,
+          allOffsets,
+          MatchParticipantLocalDTO(),
+        ) ??
+        [],
   );
   return object;
 }
@@ -102,7 +118,13 @@ P _matchLocalDTODeserializeProp<P>(
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
-      return (reader.readStringList(offset) ?? []) as P;
+      return (reader.readObjectList<MatchParticipantLocalDTO>(
+            offset,
+            MatchParticipantLocalDTOSchema.deserialize,
+            allOffsets,
+            MatchParticipantLocalDTO(),
+          ) ??
+          []) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -527,146 +549,10 @@ extension MatchLocalDTOQueryFilter
   }
 
   QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersElementEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'players',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersElementGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'players',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersElementLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'players',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersElementBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'players',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersElementStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'players',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersElementEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'players',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersElementContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'players',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersElementMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'players',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersElementIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'players',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersElementIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'players',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersLengthEqualTo(int length) {
+      participantsLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'players',
+        r'participants',
         length,
         true,
         length,
@@ -676,10 +562,10 @@ extension MatchLocalDTOQueryFilter
   }
 
   QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersIsEmpty() {
+      participantsIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'players',
+        r'participants',
         0,
         true,
         0,
@@ -689,10 +575,10 @@ extension MatchLocalDTOQueryFilter
   }
 
   QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersIsNotEmpty() {
+      participantsIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'players',
+        r'participants',
         0,
         false,
         999999,
@@ -702,13 +588,13 @@ extension MatchLocalDTOQueryFilter
   }
 
   QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersLengthLessThan(
+      participantsLengthLessThan(
     int length, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'players',
+        r'participants',
         0,
         true,
         length,
@@ -718,13 +604,13 @@ extension MatchLocalDTOQueryFilter
   }
 
   QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersLengthGreaterThan(
+      participantsLengthGreaterThan(
     int length, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'players',
+        r'participants',
         length,
         include,
         999999,
@@ -734,7 +620,7 @@ extension MatchLocalDTOQueryFilter
   }
 
   QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
-      playersLengthBetween(
+      participantsLengthBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -742,7 +628,7 @@ extension MatchLocalDTOQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
-        r'players',
+        r'participants',
         lower,
         includeLower,
         upper,
@@ -753,7 +639,14 @@ extension MatchLocalDTOQueryFilter
 }
 
 extension MatchLocalDTOQueryObject
-    on QueryBuilder<MatchLocalDTO, MatchLocalDTO, QFilterCondition> {}
+    on QueryBuilder<MatchLocalDTO, MatchLocalDTO, QFilterCondition> {
+  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QAfterFilterCondition>
+      participantsElement(FilterQuery<MatchParticipantLocalDTO> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'participants');
+    });
+  }
+}
 
 extension MatchLocalDTOQueryLinks
     on QueryBuilder<MatchLocalDTO, MatchLocalDTO, QFilterCondition> {}
@@ -839,12 +732,6 @@ extension MatchLocalDTOQueryWhereDistinct
       return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
     });
   }
-
-  QueryBuilder<MatchLocalDTO, MatchLocalDTO, QDistinct> distinctByPlayers() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'players');
-    });
-  }
 }
 
 extension MatchLocalDTOQueryProperty
@@ -867,10 +754,10 @@ extension MatchLocalDTOQueryProperty
     });
   }
 
-  QueryBuilder<MatchLocalDTO, List<String>, QQueryOperations>
-      playersProperty() {
+  QueryBuilder<MatchLocalDTO, List<MatchParticipantLocalDTO>, QQueryOperations>
+      participantsProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'players');
+      return query.addPropertyName(r'participants');
     });
   }
 }

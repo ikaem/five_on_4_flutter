@@ -15,30 +15,30 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$PlayerModel {
+mixin _$MatchParticipantModel {
   String get id => throw _privateConstructorUsedError;
-  String get authId => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PlayerModelCopyWith<PlayerModel> get copyWith =>
+  $MatchParticipantModelCopyWith<MatchParticipantModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PlayerModelCopyWith<$Res> {
-  factory $PlayerModelCopyWith(
-          PlayerModel value, $Res Function(PlayerModel) then) =
-      _$PlayerModelCopyWithImpl<$Res, PlayerModel>;
+abstract class $MatchParticipantModelCopyWith<$Res> {
+  factory $MatchParticipantModelCopyWith(MatchParticipantModel value,
+          $Res Function(MatchParticipantModel) then) =
+      _$MatchParticipantModelCopyWithImpl<$Res, MatchParticipantModel>;
   @useResult
-  $Res call({String id, String authId, String nickname, String email});
+  $Res call({String id, String userId, String nickname});
 }
 
 /// @nodoc
-class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
-    implements $PlayerModelCopyWith<$Res> {
-  _$PlayerModelCopyWithImpl(this._value, this._then);
+class _$MatchParticipantModelCopyWithImpl<$Res,
+        $Val extends MatchParticipantModel>
+    implements $MatchParticipantModelCopyWith<$Res> {
+  _$MatchParticipantModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -49,74 +49,64 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
   @override
   $Res call({
     Object? id = null,
-    Object? authId = null,
+    Object? userId = null,
     Object? nickname = null,
-    Object? email = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      authId: null == authId
-          ? _value.authId
-          : authId // ignore: cast_nullable_to_non_nullable
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PlayerModelCopyWith<$Res>
-    implements $PlayerModelCopyWith<$Res> {
-  factory _$$_PlayerModelCopyWith(
-          _$_PlayerModel value, $Res Function(_$_PlayerModel) then) =
-      __$$_PlayerModelCopyWithImpl<$Res>;
+abstract class _$$_MatchParticipantModelCopyWith<$Res>
+    implements $MatchParticipantModelCopyWith<$Res> {
+  factory _$$_MatchParticipantModelCopyWith(_$_MatchParticipantModel value,
+          $Res Function(_$_MatchParticipantModel) then) =
+      __$$_MatchParticipantModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String authId, String nickname, String email});
+  $Res call({String id, String userId, String nickname});
 }
 
 /// @nodoc
-class __$$_PlayerModelCopyWithImpl<$Res>
-    extends _$PlayerModelCopyWithImpl<$Res, _$_PlayerModel>
-    implements _$$_PlayerModelCopyWith<$Res> {
-  __$$_PlayerModelCopyWithImpl(
-      _$_PlayerModel _value, $Res Function(_$_PlayerModel) _then)
+class __$$_MatchParticipantModelCopyWithImpl<$Res>
+    extends _$MatchParticipantModelCopyWithImpl<$Res, _$_MatchParticipantModel>
+    implements _$$_MatchParticipantModelCopyWith<$Res> {
+  __$$_MatchParticipantModelCopyWithImpl(_$_MatchParticipantModel _value,
+      $Res Function(_$_MatchParticipantModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
-    Object? authId = null,
+    Object? userId = null,
     Object? nickname = null,
-    Object? email = null,
   }) {
-    return _then(_$_PlayerModel(
+    return _then(_$_MatchParticipantModel(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      authId: null == authId
-          ? _value.authId
-          : authId // ignore: cast_nullable_to_non_nullable
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -124,66 +114,58 @@ class __$$_PlayerModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PlayerModel implements _PlayerModel {
-  const _$_PlayerModel(
-      {required this.id,
-      required this.authId,
-      required this.nickname,
-      required this.email});
+class _$_MatchParticipantModel implements _MatchParticipantModel {
+  const _$_MatchParticipantModel(
+      {required this.id, required this.userId, required this.nickname});
 
   @override
   final String id;
   @override
-  final String authId;
+  final String userId;
   @override
   final String nickname;
-  @override
-  final String email;
 
   @override
   String toString() {
-    return 'PlayerModel(id: $id, authId: $authId, nickname: $nickname, email: $email)';
+    return 'MatchParticipantModel(id: $id, userId: $userId, nickname: $nickname)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PlayerModel &&
+            other is _$_MatchParticipantModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.authId, authId) || other.authId == authId) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.nickname, nickname) ||
-                other.nickname == nickname) &&
-            (identical(other.email, email) || other.email == email));
+                other.nickname == nickname));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, authId, nickname, email);
+  int get hashCode => Object.hash(runtimeType, id, userId, nickname);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PlayerModelCopyWith<_$_PlayerModel> get copyWith =>
-      __$$_PlayerModelCopyWithImpl<_$_PlayerModel>(this, _$identity);
+  _$$_MatchParticipantModelCopyWith<_$_MatchParticipantModel> get copyWith =>
+      __$$_MatchParticipantModelCopyWithImpl<_$_MatchParticipantModel>(
+          this, _$identity);
 }
 
-abstract class _PlayerModel implements PlayerModel {
-  const factory _PlayerModel(
+abstract class _MatchParticipantModel implements MatchParticipantModel {
+  const factory _MatchParticipantModel(
       {required final String id,
-      required final String authId,
-      required final String nickname,
-      required final String email}) = _$_PlayerModel;
+      required final String userId,
+      required final String nickname}) = _$_MatchParticipantModel;
 
   @override
   String get id;
   @override
-  String get authId;
+  String get userId;
   @override
   String get nickname;
   @override
-  String get email;
-  @override
   @JsonKey(ignore: true)
-  _$$_PlayerModelCopyWith<_$_PlayerModel> get copyWith =>
+  _$$_MatchParticipantModelCopyWith<_$_MatchParticipantModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

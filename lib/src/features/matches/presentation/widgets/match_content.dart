@@ -1,4 +1,5 @@
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/models/match_participant/model.dart';
 import 'package:five_on_4_flutter/src/theme/constants/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -47,12 +48,13 @@ class MatchContent extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: match.players.length,
+            itemCount: match.participants.length,
             itemBuilder: (context, index) {
-              final String playerId = match.players[index];
-              final String player = 'Player number $playerId';
+              final MatchParticipantModel participant =
+                  match.participants[index];
+              final String nickname = participant.nickname;
 
-              return Text(player);
+              return Text(nickname);
             },
           ),
         )

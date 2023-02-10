@@ -1,4 +1,5 @@
 import 'package:five_on_4_flutter/src/features/matches/data/data.dart';
+import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_participant_local/dto.dart';
 import 'package:five_on_4_flutter/src/utils/helpers/fast_hash.dart';
 import 'package:isar/isar.dart';
 
@@ -13,15 +14,16 @@ class MatchLocalDTO {
   const MatchLocalDTO({
     required this.id,
     required this.name,
-    required this.players,
+    required this.participants,
   });
 
   factory MatchLocalDTO.fromRemoteDto(MatchRemoteDTO remoteDto) {
+    final List<MatchParticipantLocalDTO> participants = remoteDto.participants
+        .map((p) => MatchParticipantLocalDTO.fromRemoteDTO(p))
+        .toList();
+
     final MatchLocalDTO localDto = MatchLocalDTO(
-      id: remoteDto.id,
-      name: remoteDto.name,
-      players: remoteDto.players,
-    );
+        id: remoteDto.id, name: remoteDto.name, participants: participants);
 
     return localDto;
   }
@@ -31,5 +33,5 @@ class MatchLocalDTO {
   final String id;
   final String name;
   // TODO this will need to be objects - but how to store this - should this be stored separately into its own table, or set it as a list into tghis collection
-  final List<String> players;
+  final List<MatchParticipantLocalDTO> participants;
 }

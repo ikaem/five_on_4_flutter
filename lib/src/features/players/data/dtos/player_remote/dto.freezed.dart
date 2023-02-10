@@ -21,8 +21,9 @@ PlayerRemoteDTO _$PlayerRemoteDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PlayerRemoteDTO {
   String get id => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get authId => throw _privateConstructorUsedError;
+  String get nickname => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $PlayerRemoteDTOCopyWith<$Res> {
           PlayerRemoteDTO value, $Res Function(PlayerRemoteDTO) then) =
       _$PlayerRemoteDTOCopyWithImpl<$Res, PlayerRemoteDTO>;
   @useResult
-  $Res call({String id, String userId, String name});
+  $Res call({String id, String authId, String nickname, String email});
 }
 
 /// @nodoc
@@ -53,21 +54,26 @@ class _$PlayerRemoteDTOCopyWithImpl<$Res, $Val extends PlayerRemoteDTO>
   @override
   $Res call({
     Object? id = null,
-    Object? userId = null,
-    Object? name = null,
+    Object? authId = null,
+    Object? nickname = null,
+    Object? email = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      authId: null == authId
+          ? _value.authId
+          : authId // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      nickname: null == nickname
+          ? _value.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -81,7 +87,7 @@ abstract class _$$_PlayerRemoteDTOCopyWith<$Res>
       __$$_PlayerRemoteDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String userId, String name});
+  $Res call({String id, String authId, String nickname, String email});
 }
 
 /// @nodoc
@@ -96,21 +102,26 @@ class __$$_PlayerRemoteDTOCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? userId = null,
-    Object? name = null,
+    Object? authId = null,
+    Object? nickname = null,
+    Object? email = null,
   }) {
     return _then(_$_PlayerRemoteDTO(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      authId: null == authId
+          ? _value.authId
+          : authId // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      nickname: null == nickname
+          ? _value.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -120,7 +131,10 @@ class __$$_PlayerRemoteDTOCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PlayerRemoteDTO implements _PlayerRemoteDTO {
   const _$_PlayerRemoteDTO(
-      {required this.id, required this.userId, required this.name});
+      {required this.id,
+      required this.authId,
+      required this.nickname,
+      required this.email});
 
   factory _$_PlayerRemoteDTO.fromJson(Map<String, dynamic> json) =>
       _$$_PlayerRemoteDTOFromJson(json);
@@ -128,13 +142,15 @@ class _$_PlayerRemoteDTO implements _PlayerRemoteDTO {
   @override
   final String id;
   @override
-  final String userId;
+  final String authId;
   @override
-  final String name;
+  final String nickname;
+  @override
+  final String email;
 
   @override
   String toString() {
-    return 'PlayerRemoteDTO(id: $id, userId: $userId, name: $name)';
+    return 'PlayerRemoteDTO(id: $id, authId: $authId, nickname: $nickname, email: $email)';
   }
 
   @override
@@ -143,13 +159,15 @@ class _$_PlayerRemoteDTO implements _PlayerRemoteDTO {
         (other.runtimeType == runtimeType &&
             other is _$_PlayerRemoteDTO &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.authId, authId) || other.authId == authId) &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname) &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, name);
+  int get hashCode => Object.hash(runtimeType, id, authId, nickname, email);
 
   @JsonKey(ignore: true)
   @override
@@ -168,8 +186,9 @@ class _$_PlayerRemoteDTO implements _PlayerRemoteDTO {
 abstract class _PlayerRemoteDTO implements PlayerRemoteDTO {
   const factory _PlayerRemoteDTO(
       {required final String id,
-      required final String userId,
-      required final String name}) = _$_PlayerRemoteDTO;
+      required final String authId,
+      required final String nickname,
+      required final String email}) = _$_PlayerRemoteDTO;
 
   factory _PlayerRemoteDTO.fromJson(Map<String, dynamic> json) =
       _$_PlayerRemoteDTO.fromJson;
@@ -177,9 +196,11 @@ abstract class _PlayerRemoteDTO implements PlayerRemoteDTO {
   @override
   String get id;
   @override
-  String get userId;
+  String get authId;
   @override
-  String get name;
+  String get nickname;
+  @override
+  String get email;
   @override
   @JsonKey(ignore: true)
   _$$_PlayerRemoteDTOCopyWith<_$_PlayerRemoteDTO> get copyWith =>

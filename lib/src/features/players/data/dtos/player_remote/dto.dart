@@ -7,8 +7,9 @@ part 'dto.g.dart';
 class PlayerRemoteDTO with _$PlayerRemoteDTO {
   const factory PlayerRemoteDTO({
     required String id,
-    required String userId,
-    required String name,
+    required String authId,
+    required String nickname,
+    required String email,
   }) = _PlayerRemoteDTO;
 
   factory PlayerRemoteDTO.fromJson(Map<String, dynamic> map) =>
