@@ -9,28 +9,32 @@ part 'cubit.freezed.dart';
 
 class AuthStatusCubit extends Cubit<AuthStatusCubitState> {
   AuthStatusCubit({
-    required this.authUseCases,
-  }) : super(AuthStatusCubitStateInitial()) {
+    required AuthUseCases authUseCases,
+    required AuthStatusProvider authStatusProvider,
+  })  : _authUseCases = authUseCases,
+        _authStatusProvider = authStatusProvider,
+        super(AuthStatusCubitStateInitial()) {
     _onInitializeCubit();
   }
 
-  final AuthUseCases authUseCases;
+  final AuthUseCases _authUseCases;
+  final AuthStatusProvider _authStatusProvider;
 
-  final AuthStatusProvider _authStatusProvider = AuthStatusProvider();
+  // final AuthStatusProvider _authStatusProvider = AuthStatusProvider();
 
-  AuthModel? get auth => _authStatusProvider.auth;
-  AuthStatusProvider get authStatusProvider => _authStatusProvider;
+  AuthStatusProvider get authStatus => _authStatusProvider;
+  AuthModel? get auth => authStatus.auth;
 
   Future<void> _onInitializeCubit() async {
-    authUseCases.handleAuthSubscription(
+    _authUseCases.handleAuthSubscription(
       onAuthEvent: _onAuthEvent,
       onAuthEventException: _onAuthEventException,
     );
-    await authUseCases.checkAuth();
+    await _authUseCases.checkAuth();
   }
 
   void _onAuthEvent(AuthModel? auth) {
-    _authStatusProvider.auth = auth;
+    authStatus.auth = auth;
   }
 
   void _onAuthEventException(Object exception) {
@@ -43,7 +47,7 @@ class AuthStatusCubit extends Cubit<AuthStatusCubitState> {
 
   @override
   Future<void> close() async {
-    authUseCases.cancelAuthSubscription();
+    _authUseCases.cancelAuthSubscription();
     await super.close();
   }
 }

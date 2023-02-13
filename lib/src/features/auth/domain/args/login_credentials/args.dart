@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class AuthCredentialsArgs {
-  const AuthCredentialsArgs({
+class LoginCredentialsArgs {
+  const LoginCredentialsArgs({
     required this.email,
     required this.password,
   });

@@ -13,7 +13,7 @@ class FirebaseAuthWrapper {
   }
 
   Future<User?> registerWithUsernameAndPassword(
-    AuthCredentialsArgs credentialsArgs,
+    RegisterCredentialsArgs credentialsArgs,
   ) async {
     final UserCredential userCredential =
         await _auth.createUserWithEmailAndPassword(
@@ -27,7 +27,7 @@ class FirebaseAuthWrapper {
   }
 
   Future<User?> loginWithUsernameAndPassword(
-    AuthCredentialsArgs credentialsArgs,
+    LoginCredentialsArgs credentialsArgs,
   ) async {
     final UserCredential userCredential =
         await _auth.signInWithEmailAndPassword(

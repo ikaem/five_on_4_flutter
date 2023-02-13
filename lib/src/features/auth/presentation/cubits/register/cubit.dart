@@ -21,18 +21,24 @@ class RegisterCubit extends Cubit<RegisterCubitState> with ValidationMixin {
 
   final BehaviorSubject<String> _emailSubject = BehaviorSubject();
   final BehaviorSubject<String> _passwordSubject = BehaviorSubject();
+  final BehaviorSubject<String> _nicknameSubject = BehaviorSubject();
 
   StreamSink<String> get _emailSink => _emailSubject.sink;
   StreamSink<String> get _passwordSink => _passwordSubject.sink;
+  StreamSink<String> get _nicknameSink => _nicknameSubject.sink;
 
   Stream<String> get emailStream =>
       _emailSubject.stream.transform(_emailValidationTransformer);
   Stream<String> get passwordStream =>
       _passwordSubject.stream.transform(_passwordValidationTransformer);
-  Stream<bool> get inputsValidationStream => Rx.combineLatest2(
+  Stream<String> get nicknameStream =>
+      _nicknameSubject.stream.transform(_nicknameValidationTransformer);
+
+  Stream<bool> get inputsValidationStream => Rx.combineLatest3(
         emailStream,
         passwordStream,
-        (a, b) => true,
+        nicknameStream,
+        (a, b, c) => true,
       );
 
   void onEmailChange(String value) {
@@ -43,19 +49,28 @@ class RegisterCubit extends Cubit<RegisterCubitState> with ValidationMixin {
     _passwordSink.add(value);
   }
 
+  void onNicknameChange(String value) {
+    _nicknameSink.add(value);
+  }
+
   Future<void> onSubmit() async {
     final bool isValid = await authUseCases.handleAuthInputsValidation(
       emailSubject: _emailSubject,
       passwordSubject: _passwordSubject,
+      nicknameSubject: _nicknameSubject,
     );
 
     if (!isValid) return;
 
     final String email = await _emailSubject.first;
     final String password = await _passwordSubject.first;
+    final String nickname = await _nicknameSubject.first;
 
-    final AuthCredentialsArgs credentials =
-        AuthCredentialsArgs(email: email, password: password);
+    final RegisterCredentialsArgs credentials = RegisterCredentialsArgs(
+      email: email,
+      password: password,
+      nickname: nickname,
+    );
 
     emit(RegisterCubitStateLoading());
 
@@ -89,6 +104,20 @@ class RegisterCubit extends Cubit<RegisterCubitState> with ValidationMixin {
       StreamTransformer<String, String>.fromHandlers(
     handleData: (data, sink) {
       final FormFieldError? error = authUseCases.validatePassword(data);
+
+      if (error != null) {
+        sink.addError(error);
+        return;
+      }
+
+      sink.add(data);
+    },
+  );
+
+  late final StreamTransformer<String, String> _nicknameValidationTransformer =
+      StreamTransformer<String, String>.fromHandlers(
+    handleData: (data, sink) {
+      final FormFieldError? error = authUseCases.validateNickname(data);
 
       if (error != null) {
         sink.addError(error);

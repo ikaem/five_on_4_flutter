@@ -1,7 +1,7 @@
 // TODO - later, create functions to create rotues later
 
 import 'package:five_on_4_flutter/src/features/auth/presentation/presentation.dart';
-import 'package:five_on_4_flutter/src/features/auth/presentation/screens/register_screen/login_screen.dart';
+import 'package:five_on_4_flutter/src/features/auth/presentation/screens/register_screen/register_screen.dart';
 import 'package:five_on_4_flutter/src/features/matches/matches.dart'
     show MatchCreateScreen, MatchScreen, MatchesScreen;
 import 'package:five_on_4_flutter/src/features/players/players.dart'

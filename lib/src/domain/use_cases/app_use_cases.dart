@@ -20,5 +20,6 @@ class AppUseCases {
   );
   late final AuthUseCases authUseCases = AuthUseCases(
     authRepository: appRepositories.authRepository,
+    playersRepository: appRepositories.playersRepository,
   );
 }

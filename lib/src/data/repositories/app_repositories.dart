@@ -3,6 +3,8 @@ import 'package:five_on_4_flutter/src/data/repositories/location_repository/loca
 import 'package:five_on_4_flutter/src/features/auth/auth.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/app_repository.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
+import 'package:five_on_4_flutter/src/features/players/data/repositories/app_repository.dart';
+import 'package:five_on_4_flutter/src/features/players/data/repositories/repository.dart';
 import 'package:five_on_4_flutter/src/features/weather/data/repositories/repositories.dart';
 
 class AppRepositories {
@@ -28,5 +30,9 @@ class AppRepositories {
   late final AuthRepository authRepository = AuthAppRepository(
     authLocalDataSource: appDataSources.authLocalDataSource,
     authRemoteDataSource: appDataSources.authRemoteDataSource,
+  );
+
+  late final PlayersRepository playersRepository = PlayersAppRepository(
+    playersRemoteDataSource: appDataSources.playersRemoteDataSource,
   );
 }

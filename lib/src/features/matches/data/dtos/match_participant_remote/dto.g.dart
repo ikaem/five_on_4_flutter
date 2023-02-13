@@ -11,6 +11,7 @@ _$_MatchParticipantRemoteDTO _$$_MatchParticipantRemoteDTOFromJson(
     _$_MatchParticipantRemoteDTO(
       id: json['id'] as String,
       userId: json['userId'] as String,
+      matchId: json['matchId'] as String,
       nickname: json['nickname'] as String,
     );
 
@@ -19,5 +20,6 @@ Map<String, dynamic> _$$_MatchParticipantRemoteDTOToJson(
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
+      'matchId': instance.matchId,
       'nickname': instance.nickname,
     };

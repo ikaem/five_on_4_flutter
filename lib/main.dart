@@ -1,4 +1,4 @@
-import 'package:five_on_4_flutter/src/app.dart';
+import 'package:five_on_4_flutter/src/app/boostrap_app.dart';
 import 'package:five_on_4_flutter/src/data/data_sources/app_data_sources.dart';
 import 'package:five_on_4_flutter/src/data/repositories/app_repositories.dart';
 import 'package:five_on_4_flutter/src/domain/use_cases/app_use_cases.dart';
@@ -26,7 +26,7 @@ void main() async {
       _getInitializedAppUseCases(appDatabase: appDatabase);
 
   runApp(
-    FiveOn4App(
+    BootstrapFiveOn4App(
       appUseCases: appUseCases,
     ),
   );

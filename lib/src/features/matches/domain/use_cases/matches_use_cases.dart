@@ -21,10 +21,10 @@ class MatchesUseCases {
     final AuthModel? auth = await authRepository.auth;
     if (auth == null) throw AuthNoSessionException();
 
-    final String userId = auth.id;
+    final String authId = auth.id;
 
     final MatchJoinArgs matchJoinArgs = MatchJoinArgs(
-      userId: userId,
+      authId: authId,
       matchId: matchId,
     );
 

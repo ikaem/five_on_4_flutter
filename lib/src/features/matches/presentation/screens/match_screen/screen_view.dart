@@ -87,8 +87,7 @@ class _MatchScreenViewState extends State<MatchScreenView> {
   }
 
   Scaffold _matchGetCubitSuccessBuilder(MatchModel match) {
-    final bool hasUserJoinedMatch =
-        match.checkHasUserJoinedMatch(_authStatusCubit.auth?.id);
+    final bool hasUserJoinedMatch = match.checkHasUserJoinedMatch(playerId: '');
 
     final IconData joinIcon =
         !hasUserJoinedMatch ? Icons.person_add : Icons.person_remove;
@@ -105,10 +104,13 @@ class _MatchScreenViewState extends State<MatchScreenView> {
               return IconButton(
                 onPressed: isLoading
                     ? null
-                    : () => _matchJoinCubit.participateInMatch(
+                    : () async {
+                        // TODO test
+                        await _matchJoinCubit.participateInMatch(
                           matchId: match.id,
                           shouldJoin: !hasUserJoinedMatch,
-                        ),
+                        );
+                      },
                 icon: Icon(joinIcon),
               );
             },

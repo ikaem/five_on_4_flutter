@@ -30,7 +30,8 @@ class RegisterScreenView extends StatelessWidget {
           context.showSnackBarMessage(message, SnackBarVariant.error),
       success: () {
         // TODO LATER, CALL context.goreplacement, or pushreplacement, or something
-        log('Logged in successfully');
+        log('Registered successfully');
+        context.go(AppRoutes.homePath);
       },
     );
   }
@@ -59,6 +60,13 @@ class RegisterScreenView extends StatelessWidget {
           StreamBuilder(
             stream: registerCubit.passwordStream,
             builder: _passwordInputStreamBuilder,
+          ),
+          const SizedBox(
+            height: SpacingConstants.small,
+          ),
+          StreamBuilder(
+            stream: registerCubit.nicknameStream,
+            builder: _nicknameInputStreamBuilder,
           ),
           const SizedBox(
             height: SpacingConstants.small,
@@ -108,6 +116,23 @@ class RegisterScreenView extends StatelessWidget {
       decoration: InputDecoration(
         hintText: '*',
         labelText: 'Password',
+        labelStyle: TextStyle(
+          color: isError ? Colors.red : Colors.green,
+        ),
+      ),
+    );
+  }
+
+  Widget _nicknameInputStreamBuilder(
+      BuildContext context, AsyncSnapshot<String> nicknameData) {
+    final bool isError = nicknameData.hasError;
+
+    return TextField(
+      // obscureText: true,
+      onChanged: context.read<RegisterCubit>().onNicknameChange,
+      decoration: InputDecoration(
+        hintText: 'Choose your nickname',
+        labelText: 'Nickname',
         labelStyle: TextStyle(
           color: isError ? Colors.red : Colors.green,
         ),

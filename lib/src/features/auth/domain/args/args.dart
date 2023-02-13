@@ -1,1 +1,2 @@
-export 'auth_credentials/auth_credentials.dart';
+export 'login_credentials/login_credentials.dart';
+export 'register_credentials/register_credentials.dart';

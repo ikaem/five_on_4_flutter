@@ -30,7 +30,7 @@ class AuthRemoteAppDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<User> login(AuthCredentialsArgs credentialsArgs) async {
+  Future<User> login(LoginCredentialsArgs credentialsArgs) async {
     try {
       final User? user = await firebaseAuthWrapper
           .loginWithUsernameAndPassword(credentialsArgs);
@@ -51,7 +51,7 @@ class AuthRemoteAppDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<User> register(AuthCredentialsArgs credentialsArgs) async {
+  Future<User> register(RegisterCredentialsArgs credentialsArgs) async {
     try {
       final User? user = await firebaseAuthWrapper
           .registerWithUsernameAndPassword(credentialsArgs);

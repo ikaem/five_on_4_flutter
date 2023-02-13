@@ -23,6 +23,7 @@ MatchParticipantRemoteDTO _$MatchParticipantRemoteDTOFromJson(
 mixin _$MatchParticipantRemoteDTO {
   String get id => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
+  String get matchId => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +38,7 @@ abstract class $MatchParticipantRemoteDTOCopyWith<$Res> {
           $Res Function(MatchParticipantRemoteDTO) then) =
       _$MatchParticipantRemoteDTOCopyWithImpl<$Res, MatchParticipantRemoteDTO>;
   @useResult
-  $Res call({String id, String userId, String nickname});
+  $Res call({String id, String userId, String matchId, String nickname});
 }
 
 /// @nodoc
@@ -56,6 +57,7 @@ class _$MatchParticipantRemoteDTOCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? userId = null,
+    Object? matchId = null,
     Object? nickname = null,
   }) {
     return _then(_value.copyWith(
@@ -66,6 +68,10 @@ class _$MatchParticipantRemoteDTOCopyWithImpl<$Res,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      matchId: null == matchId
+          ? _value.matchId
+          : matchId // ignore: cast_nullable_to_non_nullable
               as String,
       nickname: null == nickname
           ? _value.nickname
@@ -84,7 +90,7 @@ abstract class _$$_MatchParticipantRemoteDTOCopyWith<$Res>
       __$$_MatchParticipantRemoteDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String userId, String nickname});
+  $Res call({String id, String userId, String matchId, String nickname});
 }
 
 /// @nodoc
@@ -102,6 +108,7 @@ class __$$_MatchParticipantRemoteDTOCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? userId = null,
+    Object? matchId = null,
     Object? nickname = null,
   }) {
     return _then(_$_MatchParticipantRemoteDTO(
@@ -112,6 +119,10 @@ class __$$_MatchParticipantRemoteDTOCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      matchId: null == matchId
+          ? _value.matchId
+          : matchId // ignore: cast_nullable_to_non_nullable
               as String,
       nickname: null == nickname
           ? _value.nickname
@@ -125,7 +136,10 @@ class __$$_MatchParticipantRemoteDTOCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MatchParticipantRemoteDTO implements _MatchParticipantRemoteDTO {
   const _$_MatchParticipantRemoteDTO(
-      {required this.id, required this.userId, required this.nickname});
+      {required this.id,
+      required this.userId,
+      required this.matchId,
+      required this.nickname});
 
   factory _$_MatchParticipantRemoteDTO.fromJson(Map<String, dynamic> json) =>
       _$$_MatchParticipantRemoteDTOFromJson(json);
@@ -135,11 +149,13 @@ class _$_MatchParticipantRemoteDTO implements _MatchParticipantRemoteDTO {
   @override
   final String userId;
   @override
+  final String matchId;
+  @override
   final String nickname;
 
   @override
   String toString() {
-    return 'MatchParticipantRemoteDTO(id: $id, userId: $userId, nickname: $nickname)';
+    return 'MatchParticipantRemoteDTO(id: $id, userId: $userId, matchId: $matchId, nickname: $nickname)';
   }
 
   @override
@@ -149,13 +165,14 @@ class _$_MatchParticipantRemoteDTO implements _MatchParticipantRemoteDTO {
             other is _$_MatchParticipantRemoteDTO &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.matchId, matchId) || other.matchId == matchId) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, nickname);
+  int get hashCode => Object.hash(runtimeType, id, userId, matchId, nickname);
 
   @JsonKey(ignore: true)
   @override
@@ -176,6 +193,7 @@ abstract class _MatchParticipantRemoteDTO implements MatchParticipantRemoteDTO {
   const factory _MatchParticipantRemoteDTO(
       {required final String id,
       required final String userId,
+      required final String matchId,
       required final String nickname}) = _$_MatchParticipantRemoteDTO;
 
   factory _MatchParticipantRemoteDTO.fromJson(Map<String, dynamic> json) =
@@ -185,6 +203,8 @@ abstract class _MatchParticipantRemoteDTO implements MatchParticipantRemoteDTO {
   String get id;
   @override
   String get userId;
+  @override
+  String get matchId;
   @override
   String get nickname;
   @override

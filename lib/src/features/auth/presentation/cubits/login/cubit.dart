@@ -20,7 +20,7 @@ class LoginCubit extends Cubit<LoginCubitState> with ValidationMixin {
 
 // TODO temp seeded
   final BehaviorSubject<String> _emailSubject =
-      BehaviorSubject.seeded('karlo@karlo.net');
+      BehaviorSubject.seeded('karlo@net.hr');
   final BehaviorSubject<String> _passwordSubject =
       BehaviorSubject.seeded('123456789k');
 
@@ -63,8 +63,8 @@ class LoginCubit extends Cubit<LoginCubitState> with ValidationMixin {
       return;
     }
 
-    final AuthCredentialsArgs credentials =
-        AuthCredentialsArgs(email: email, password: password);
+    final LoginCredentialsArgs credentials =
+        LoginCredentialsArgs(email: email, password: password);
 
     emit(LoginCubitStateLoading());
 

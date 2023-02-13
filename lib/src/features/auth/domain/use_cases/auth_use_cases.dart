@@ -4,6 +4,8 @@ import 'package:five_on_4_flutter/src/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/auth/data/data.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/models/auth/auth.dart';
+import 'package:five_on_4_flutter/src/features/players/data/repositories/repository.dart';
+import 'package:five_on_4_flutter/src/features/players/domain/args/player_args.dart';
 import 'package:five_on_4_flutter/src/utils/mixins/validation_mixin.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -13,14 +15,16 @@ typedef OnAuthEventException = void Function(Object e);
 class AuthUseCases with ValidationMixin {
   AuthUseCases({
     required this.authRepository,
+    required this.playersRepository,
   });
 
   final AuthRepository authRepository;
+  final PlayersRepository playersRepository;
 
   late final StreamSubscription<AuthModel?> _authSubscription =
       authRepository.observeAuth.listen((auth) => auth);
 
-  Future<void> login(AuthCredentialsArgs credentialsArgs) async {
+  Future<void> login(LoginCredentialsArgs credentialsArgs) async {
     await authRepository.login(credentialsArgs);
   }
 
@@ -32,8 +36,16 @@ class AuthUseCases with ValidationMixin {
     await authRepository.checkAuth();
   }
 
-  Future<void> register(AuthCredentialsArgs credentialsArgs) async {
-    await authRepository.register(credentialsArgs);
+  Future<void> register(RegisterCredentialsArgs credentialsArgs) async {
+    final String authId = await authRepository.register(credentialsArgs);
+
+    final PlayerArgs newPlayerArgs = PlayerArgs(
+      authId: authId,
+      nickname: credentialsArgs.nickname,
+      email: credentialsArgs.email,
+    );
+
+    await playersRepository.createPlayer(newPlayerArgs);
   }
 
   void handleAuthSubscription({
@@ -49,19 +61,24 @@ class AuthUseCases with ValidationMixin {
   Future<bool> handleAuthInputsValidation({
     required BehaviorSubject<String> emailSubject,
     required BehaviorSubject<String> passwordSubject,
+    required BehaviorSubject<String> nicknameSubject,
   }) async {
     final String email = await emailSubject.first;
     final String password = await passwordSubject.first;
+    final String nickname = await nicknameSubject.first;
 
     final FormFieldError? emailError = validateEmail(email);
     final FormFieldError? passwordError = validatePassword(password);
+    final FormFieldError? nicknameError = validateNickname(nickname);
 
-    final bool isValid = emailError == null && passwordError == null;
+    final bool isValid =
+        emailError == null && passwordError == null && nicknameError == null;
 
     if (isValid) return true;
 
     if (emailError != null) emailSubject.sink.addError(emailError);
     if (passwordError != null) passwordSubject.sink.addError(passwordError);
+    if (nicknameError != null) nicknameSubject.sink.addError(nicknameError);
 
     return false;
   }
@@ -92,6 +109,23 @@ class AuthUseCases with ValidationMixin {
     } else if (!isValid) {
       error = FormFieldError.invalid;
     }
+
+    return error;
+  }
+
+  FormFieldError? validateNickname(String value) {
+    final bool isEmpty = isFieldEmpty(value);
+    final bool isValid = isFieldValid(value, (value) => value.length > 6);
+
+    FormFieldError? error;
+
+    if (isEmpty) {
+      error = FormFieldError.empty;
+    }
+
+    // else if (!isValid) {
+    //   error = FormFieldError.invalid;
+    // }
 
     return error;
   }

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:five_on_4_flutter/src/features/auth/data/data.dart';
-import 'package:five_on_4_flutter/src/features/auth/domain/args/auth_credentials/args.dart';
+import 'package:five_on_4_flutter/src/features/auth/domain/args/args.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/models/auth/model.dart';
 import 'package:five_on_4_flutter/src/libraries/firebase/firebase.dart';
 import 'package:rxdart/subjects.dart';
@@ -27,7 +27,7 @@ class AuthAppRepository implements AuthRepository {
   Future<AuthModel?> get auth => _authSubject.first;
 
   @override
-  Future<void> login(AuthCredentialsArgs credentialsArgs) async {
+  Future<void> login(LoginCredentialsArgs credentialsArgs) async {
     final User user = await authRemoteDataSource.login(credentialsArgs);
 
     final AuthLocalDTO localDTO = AuthLocalDTO.fromFirebaseUser(user);
@@ -46,7 +46,7 @@ class AuthAppRepository implements AuthRepository {
   }
 
   @override
-  Future<void> register(AuthCredentialsArgs credentialsArgs) async {
+  Future<String> register(RegisterCredentialsArgs credentialsArgs) async {
     final User user = await authRemoteDataSource.register(credentialsArgs);
 
     final AuthLocalDTO localDTO = AuthLocalDTO.fromFirebaseUser(user);
@@ -54,6 +54,8 @@ class AuthAppRepository implements AuthRepository {
 
     final AuthModel authModel = AuthModel.fromFirebaseUser(user);
     _authSink.add(authModel);
+
+    return authModel.id;
   }
 
   @override

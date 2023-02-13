@@ -7,6 +7,8 @@ import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_remote/dt
 import 'package:five_on_4_flutter/src/features/matches/domain/args/match_join/match_join.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/exceptions/exceptions.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
+import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/fake_data_source.dart';
+import 'package:five_on_4_flutter/src/features/players/data/dtos/dtos.dart';
 
 class MatchesRemoteFakeDataSource implements MatchesRemoteDataSource {
   @override
@@ -51,21 +53,35 @@ class MatchesRemoteFakeDataSource implements MatchesRemoteDataSource {
     // TODO this check will be done on backend later
 
     final MatchRemoteDTO? matchRemoteDTO =
-        _matches.firstWhereOrNull((element) => element.id == args.matchId);
+        _matches.firstWhereOrNull((match) => match.id == args.matchId);
 
     if (matchRemoteDTO == null)
       throw HttpNotFoundException(message: 'No such match');
 
+    final PlayerRemoteDTO? playerRemoteDTO =
+        players.firstWhereOrNull((player) => player.authId == args.authId);
+
+    if (playerRemoteDTO == null) {
+      throw HttpBadRequestException(message: 'Player does not exist');
+    }
+
     final bool isUserAlreadyJoined =
-        matchRemoteDTO.participants.any((p) => p == args.userId);
+        matchRemoteDTO.participants.any((p) => p.id == playerRemoteDTO.id);
 
     if (isUserAlreadyJoined) {
-      throw HttpBadRequestException(message: 'User is already joined');
+      throw HttpBadRequestException(message: 'Player has already joined');
     }
+
+    final MatchParticipantRemoteDTO matchParticipantRemoteDTO =
+        MatchParticipantRemoteDTO.fromPlayerRemoteDTO(
+      id: matchRemoteDTO.participants.length.toString(),
+      matchId: args.matchId,
+      playerRemoteDTO: playerRemoteDTO,
+    );
 
     final List<MatchParticipantRemoteDTO> updatedParticipants = [
       ...matchRemoteDTO.participants,
-      args.userId
+      matchParticipantRemoteDTO,
     ];
 
     final MatchRemoteDTO updatedMatch =
@@ -92,7 +108,7 @@ class MatchesRemoteFakeDataSource implements MatchesRemoteDataSource {
     ];
 
     final MatchParticipantRemoteDTO? player =
-        updatedParticipants.firstWhereOrNull((p) => p == args.userId);
+        updatedParticipants.firstWhereOrNull((p) => p == args.authId);
 
     if (player == null) {
       throw HttpBadRequestException(message: 'User is already unjoined');
