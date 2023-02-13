@@ -1,5 +1,4 @@
 import 'package:five_on_4_flutter/src/domain/domain.dart';
-import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/logout/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,20 +8,29 @@ class AppBarMoreActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthUseCases authUseCases = context.read<AuthUseCases>();
-
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<LogoutCubit>(
-            create: (context) => LogoutCubit(authUseCases: authUseCases)),
-      ],
-      child: Builder(builder: (context) {
-        return PopupMenuButton<AppBarMoreAction>(
-          onSelected: _onSelected(context),
-          itemBuilder: _itemBuilder,
-        );
-      }),
+    return PopupMenuButton<AppBarMoreAction>(
+      onSelected: _onSelected(context),
+      itemBuilder: _itemBuilder,
     );
+
+    // final AuthUseCases authUseCases = context.read<AuthUseCases>();
+
+    // return MultiBlocProvider(
+    //   providers: [
+    //     // TODO testing this
+    //     // BlocProvider<LogoutCubit>(
+    //     //   create: (context) => LogoutCubit(authUseCases: authUseCases),
+    //     // ),
+    //   ],
+    //   child: Builder(
+    //     builder: (context) {
+    //       return PopupMenuButton<AppBarMoreAction>(
+    //         onSelected: _onSelected(context),
+    //         itemBuilder: _itemBuilder,
+    //       );
+    //     },
+    //   ),
+    // );
   }
 
   Future<void> Function(AppBarMoreAction) _onSelected(BuildContext context) =>

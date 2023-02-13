@@ -1,11 +1,20 @@
 import 'dart:developer';
 
 import 'package:five_on_4_flutter/src/features/auth/presentation/presentation.dart';
+import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'cubit_state.dart';
 part 'cubit.freezed.dart';
+
+// TODO test only
+final PlayerModel _tempPlayer = PlayerModel(
+  id: '2',
+  authId: '1',
+  nickname: 'zidane',
+  email: 's@s.hr',
+);
 
 class PlayerCurrentGetCubit extends Cubit<PlayerCurrentGetCubitState> {
   PlayerCurrentGetCubit({
@@ -18,19 +27,42 @@ class PlayerCurrentGetCubit extends Cubit<PlayerCurrentGetCubitState> {
 
     // TODO have to react to logged in data
 
-    authStatusProvider.addListener(() {
+    authStatusProvider.addListener(() async {
       if (authStatusProvider.isLoggedIn) {
+        await _onLoggedIn();
 // this should call some function load current user, start loading and such
-        log('we are logged in');
         return;
       }
 
-      log('we are not logged in');
+      await _onLoggedOut();
     });
   }
 
   // final PlayersUseCases _playersUseCases;
   final AuthStatusProvider _authStatusProvider;
+  PlayerModel? _currentPlayer;
 
-  Future<void> _onLoggedIn() {}
+  PlayerModel? get currentPlayer => _currentPlayer;
+
+  Future<void> _onLoggedIn() async {
+    log('we are logged in');
+    log('fetching starting...');
+    emit(PlayerCurrentGetCubitStateLoading());
+    await Future.delayed(Duration(milliseconds: 2000));
+    _currentPlayer = _tempPlayer;
+    emit(PlayerCurrentGetCubitStateSuccess());
+
+    // emit(PlayerCurrentGetCubitStateNotFound());
+    log('fetching ended');
+  }
+
+  Future<void> _onLoggedOut() async {
+    log('we are logged out');
+    log('removing logged user');
+    _currentPlayer = null;
+
+    // emit(PlayerCurrentGetCubitStateSuccess());
+    emit(PlayerCurrentGetCubitStateSuccess());
+    log('removed logged user');
+  }
 }

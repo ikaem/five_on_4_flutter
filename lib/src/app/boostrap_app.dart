@@ -1,6 +1,7 @@
 import 'package:five_on_4_flutter/src/app/app.dart';
 import 'package:five_on_4_flutter/src/domain/use_cases/app_use_cases.dart';
 import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/auth_status/cubit.dart';
+import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/logout/cubit.dart';
 import 'package:five_on_4_flutter/src/features/auth/presentation/presentation.dart';
 import 'package:five_on_4_flutter/src/features/players/presentation/cubits/player_current_get/cubit.dart';
 import 'package:five_on_4_flutter/src/libraries/libraries.dart';
@@ -34,6 +35,11 @@ class BootstrapFiveOn4App extends StatelessWidget {
             create: (context) => PlayerCurrentGetCubit(
               authStatusProvider: authStatusProvider,
             ),
+          ),
+          // TODO testing this here
+          BlocProvider<LogoutCubit>(
+            create: (context) =>
+                LogoutCubit(authUseCases: appUseCases.authUseCases),
           ),
         ],
         child: FiveOn4App(),
