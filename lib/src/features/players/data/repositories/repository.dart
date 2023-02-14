@@ -5,4 +5,7 @@ abstract class PlayersRepository {
   Future<String> createPlayer(PlayerArgs args);
   Future<PlayerModel> getPlayer(String id);
   Future<List<PlayerModel>> getPlayers();
+  Future<void> loadPlayerbyAuthId(String authId);
+  Future<void> clearCurrentPlayer();
+  Stream<PlayerModel?> get observeCurrentPlayer;
 }

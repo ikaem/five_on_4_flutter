@@ -21,11 +21,21 @@ class AuthUseCases with ValidationMixin {
   final AuthRepository authRepository;
   final PlayersRepository playersRepository;
 
+// TODO probably should not initialize it like this
   late final StreamSubscription<AuthModel?> _authSubscription =
       authRepository.observeAuth.listen((auth) => auth);
 
   Future<void> login(LoginCredentialsArgs credentialsArgs) async {
-    await authRepository.login(credentialsArgs);
+    try {
+      final String authId = await authRepository.login(credentialsArgs);
+
+      await playersRepository.loadPlayerbyAuthId(authId);
+    } catch (e) {
+      await authRepository.logout();
+      await playersRepository.clearCurrentPlayer();
+
+      rethrow;
+    }
   }
 
   Future<void> logout() async {
@@ -33,7 +43,18 @@ class AuthUseCases with ValidationMixin {
   }
 
   Future<void> checkAuth() async {
-    await authRepository.checkAuth();
+    try {
+      final String? authId = await authRepository.checkAuth();
+      if (authId == null)
+        throw HttpUnathorizedException(message: 'No such user');
+
+      await playersRepository.loadPlayerbyAuthId(authId);
+    } catch (e) {
+      await authRepository.logout();
+      await playersRepository.clearCurrentPlayer();
+
+      rethrow;
+    }
   }
 
   Future<void> register(RegisterCredentialsArgs credentialsArgs) async {

@@ -27,7 +27,7 @@ class AuthAppRepository implements AuthRepository {
   Future<AuthModel?> get auth => _authSubject.first;
 
   @override
-  Future<void> login(LoginCredentialsArgs credentialsArgs) async {
+  Future<String> login(LoginCredentialsArgs credentialsArgs) async {
     final User user = await authRemoteDataSource.login(credentialsArgs);
 
     final AuthLocalDTO localDTO = AuthLocalDTO.fromFirebaseUser(user);
@@ -35,6 +35,8 @@ class AuthAppRepository implements AuthRepository {
 
     final AuthModel authModel = AuthModel.fromFirebaseUser(user);
     _authSink.add(authModel);
+
+    return authModel.id;
   }
 
   @override
@@ -59,16 +61,17 @@ class AuthAppRepository implements AuthRepository {
   }
 
   @override
-  Future<void> checkAuth() async {
+  Future<String?> checkAuth() async {
 // TODO not checking firebase auth local storage for now
     final AuthLocalDTO? localDTO = await authLocalDataSource.getAuth();
 
     if (localDTO == null) {
       _authSink.add(null);
-      return;
+      return null;
     }
 
     final AuthModel authModel = AuthModel.fromLocalDTO(localDTO);
     _authSink.add(authModel);
+    return authModel.id;
   }
 }

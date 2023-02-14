@@ -41,6 +41,18 @@ class PlayersFakeDataSource implements PlayersRemoteDataSource {
 
     return id;
   }
+
+  @override
+  Future<PlayerRemoteDTO> getPlayerByAuthId(String authId) async {
+    await Future.delayed(Duration(milliseconds: 500));
+
+    final PlayerRemoteDTO? dto = players.firstWhere((p) => p.authId == authId);
+
+    if (dto == null)
+      throw HttpNotFoundException(message: 'Player by authId not found');
+
+    return dto;
+  }
 }
 
 final List<PlayerRemoteDTO> players = [];

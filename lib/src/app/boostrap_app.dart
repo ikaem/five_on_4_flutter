@@ -32,8 +32,8 @@ class BootstrapFiveOn4App extends StatelessWidget {
             ),
           ),
           BlocProvider(
-            create: (context) => PlayerCurrentGetCubit(
-              authStatusProvider: authStatusProvider,
+            create: (context) => PlayerCurrentCubit(
+              playersUseCases: appUseCases.playersUseCases,
             ),
           ),
           // TODO testing this here

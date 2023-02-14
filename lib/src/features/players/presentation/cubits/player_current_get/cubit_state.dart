@@ -1,15 +1,12 @@
 part of 'cubit.dart';
 
 @freezed
-class PlayerCurrentGetCubitState with _$PlayerCurrentGetCubitState {
-  factory PlayerCurrentGetCubitState.initial() =
-      PlayerCurrentGetCubitStateInitial;
-  factory PlayerCurrentGetCubitState.loading() =
-      PlayerCurrentGetCubitStateLoading;
-  factory PlayerCurrentGetCubitState.success() =
-      PlayerCurrentGetCubitStateSuccess;
-  factory PlayerCurrentGetCubitState.notFound() =
+class PlayerCurrentCubitState with _$PlayerCurrentGetCubitState {
+  factory PlayerCurrentCubitState.initial() = PlayerCurrentGetCubitStateInitial;
+  factory PlayerCurrentCubitState.loading() = PlayerCurrentGetCubitStateLoading;
+  factory PlayerCurrentCubitState.success() = PlayerCurrentGetCubitStateSuccess;
+  factory PlayerCurrentCubitState.notFound() =
       PlayerCurrentGetCubitStateNotFound;
-  factory PlayerCurrentGetCubitState.failure(String message) =
+  factory PlayerCurrentCubitState.failure(String message) =
       PlayerCurrentGetCubitStateFailure;
 }

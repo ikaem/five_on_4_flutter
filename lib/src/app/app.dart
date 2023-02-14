@@ -15,8 +15,8 @@ class FiveOn4App extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthStatusCubit authStatusCubit = context.read<AuthStatusCubit>();
     final LogoutCubit logoutCubit = context.read<LogoutCubit>();
-    final PlayerCurrentGetCubit playerCurrentGetCubit =
-        context.read<PlayerCurrentGetCubit>();
+    final PlayerCurrentCubit playerCurrentGetCubit =
+        context.read<PlayerCurrentCubit>();
 
 // potentually make some utils multirepository provider in future
     final AppRouter appRouter = AppRouter(
@@ -42,41 +42,41 @@ class FiveOn4App extends StatelessWidget {
       routeInformationProvider: appRouter.router.routeInformationProvider,
       routeInformationParser: appRouter.router.routeInformationParser,
       routerDelegate: appRouter.router.routerDelegate,
-      builder: (context, child) {
-        return BlocConsumer<PlayerCurrentGetCubit, PlayerCurrentGetCubitState>(
-          listener: (context, state) async {
-            // TODO: implement listener
-            if (state is! PlayerCurrentGetCubitStateNotFound) return;
+      // builder: (context, child) {
+      //   return BlocConsumer<PlayerCurrentGetCubit, PlayerCurrentGetCubitState>(
+      //     listener: (context, state) async {
+      //       // TODO: implement listener
+      //       if (state is! PlayerCurrentGetCubitStateNotFound) return;
 
-            await logoutCubit.onSubmit();
-          },
-          builder: (context, state) {
-            final Size size = MediaQuery.of(context).size;
-            final Widget? content = child;
+      //       await logoutCubit.onSubmit();
+      //     },
+      //     builder: (context, state) {
+      //       final Size size = MediaQuery.of(context).size;
+      //       final Widget? content = child;
 
-            if (content == null) return SizedBox.shrink();
+      //       if (content == null) return SizedBox.shrink();
 
-            return state.when(
-              initial: () => content,
-              loading: () => Container(
-                color: Colors.white,
-                width: size.width,
-                height: size.height,
-                child: Center(child: CircularProgressIndicator()),
-              ),
-              success: () => content,
-              notFound: () => content,
-              failure: (message) => content,
-            );
+      //       return state.when(
+      //         initial: () => content,
+      //         loading: () => Container(
+      //           color: Colors.white,
+      //           width: size.width,
+      //           height: size.height,
+      //           child: Center(child: CircularProgressIndicator()),
+      //         ),
+      //         success: () => content,
+      //         notFound: () => content,
+      //         failure: (message) => content,
+      //       );
 
-            // if (state is PlayerCurrentGetCubitStateLoading)
-            //   return Center(
-            //     child: CircularProgressIndicator(),
-            //   );
-            // return child!;
-          },
-        );
-      },
+      //       // if (state is PlayerCurrentGetCubitStateLoading)
+      //       //   return Center(
+      //       //     child: CircularProgressIndicator(),
+      //       //   );
+      //       // return child!;
+      //     },
+      //   );
+      // },
     );
   }
 }

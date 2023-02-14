@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:five_on_4_flutter/src/features/auth/presentation/presentation.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,53 +13,55 @@ final PlayerModel _tempPlayer = PlayerModel(
   email: 's@s.hr',
 );
 
-class PlayerCurrentGetCubit extends Cubit<PlayerCurrentGetCubitState> {
-  PlayerCurrentGetCubit({
-    required AuthStatusProvider authStatusProvider,
-    // required PlayersUseCases playersUseCases,
-  })  : _authStatusProvider = authStatusProvider,
-        super(PlayerCurrentGetCubitStateInitial()) {
-    // this could be a function triggered by a call from backend
-    // also, on closing this, we want to clear the data - well, it will be closed anyhow
+class PlayerCurrentCubit extends Cubit<PlayerCurrentCubitState> {
+// TODO old
 
-    // TODO have to react to logged in data
+//   PlayerCurrentGetCubit({
+//     required AuthStatusProvider authStatusProvider,
+//     // required PlayersUseCases playersUseCases,
+//   })  : _authStatusProvider = authStatusProvider,
+//         super(PlayerCurrentGetCubitStateInitial()) {
+//     // this could be a function triggered by a call from backend
+//     // also, on closing this, we want to clear the data - well, it will be closed anyhow
 
-    authStatusProvider.addListener(() async {
-      if (authStatusProvider.isLoggedIn) {
-        await _onLoggedIn();
-// this should call some function load current user, start loading and such
-        return;
-      }
+//     // TODO have to react to logged in data
 
-      await _onLoggedOut();
-    });
-  }
+//     authStatusProvider.addListener(() async {
+//       if (authStatusProvider.isLoggedIn) {
+//         await _onLoggedIn();
+// // this should call some function load current user, start loading and such
+//         return;
+//       }
 
-  // final PlayersUseCases _playersUseCases;
-  final AuthStatusProvider _authStatusProvider;
-  PlayerModel? _currentPlayer;
+//       await _onLoggedOut();
+//     });
+//   }
 
-  PlayerModel? get currentPlayer => _currentPlayer;
+//   // final PlayersUseCases _playersUseCases;
+//   final AuthStatusProvider _authStatusProvider;
+//   PlayerModel? _currentPlayer;
 
-  Future<void> _onLoggedIn() async {
-    log('we are logged in');
-    log('fetching starting...');
-    emit(PlayerCurrentGetCubitStateLoading());
-    await Future.delayed(Duration(milliseconds: 2000));
-    _currentPlayer = _tempPlayer;
-    emit(PlayerCurrentGetCubitStateSuccess());
+//   PlayerModel? get currentPlayer => _currentPlayer;
 
-    // emit(PlayerCurrentGetCubitStateNotFound());
-    log('fetching ended');
-  }
+//   Future<void> _onLoggedIn() async {
+//     log('we are logged in');
+//     log('fetching starting...');
+//     emit(PlayerCurrentGetCubitStateLoading());
+//     await Future.delayed(Duration(milliseconds: 2000));
+//     _currentPlayer = _tempPlayer;
+//     emit(PlayerCurrentGetCubitStateSuccess());
 
-  Future<void> _onLoggedOut() async {
-    log('we are logged out');
-    log('removing logged user');
-    _currentPlayer = null;
+//     // emit(PlayerCurrentGetCubitStateNotFound());
+//     log('fetching ended');
+//   }
 
-    // emit(PlayerCurrentGetCubitStateSuccess());
-    emit(PlayerCurrentGetCubitStateSuccess());
-    log('removed logged user');
-  }
+//   Future<void> _onLoggedOut() async {
+//     log('we are logged out');
+//     log('removing logged user');
+//     _currentPlayer = null;
+
+//     // emit(PlayerCurrentGetCubitStateSuccess());
+//     emit(PlayerCurrentGetCubitStateSuccess());
+//     log('removed logged user');
+//   }
 }
