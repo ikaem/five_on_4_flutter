@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/auth_status/cubit.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/extensions/extensions.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/match_get/cubit.dart';
@@ -23,7 +20,7 @@ class MatchScreenView extends StatefulWidget {
 class _MatchScreenViewState extends State<MatchScreenView> {
   late final MatchJoinCubit _matchJoinCubit = context.read<MatchJoinCubit>();
   late final MatchGetCubit _matchGetCubit = context.read<MatchGetCubit>();
-  late final AuthStatusCubit _authStatusCubit = context.read<AuthStatusCubit>();
+  // late final AuthStatusCubit _authStatusCubit = context.read<AuthStatusCubit>();
 
   @override
   void initState() {
@@ -39,7 +36,7 @@ class _MatchScreenViewState extends State<MatchScreenView> {
 
   @override
   Widget build(BuildContext context) {
-    log('${_authStatusCubit.auth?.email}');
+    // log('${_authStatusCubit.auth?.email}');
 
     return BlocConsumer<MatchGetCubit, MatchGetCubitState>(
       listener: _matchGetCubitListener,

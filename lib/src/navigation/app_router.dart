@@ -11,6 +11,7 @@ import 'package:five_on_4_flutter/src/navigation/navigation.dart'
     show AppRoutes;
 import 'package:five_on_4_flutter/src/presentation/presentation.dart'
     show HomeScreen;
+import 'package:five_on_4_flutter/src/presentation/providers/providers.dart';
 import 'package:go_router/go_router.dart';
 
 // as per https://snehmehta.medium.com/dynamic-bottom-navigation-with-go-router-flutter-power-series-part-1-2437e2d72546
@@ -22,10 +23,10 @@ import 'package:go_router/go_router.dart';
 // TODO test
 class AppRouter {
   AppRouter({
-    required this.authStatusProvider,
-  });
+    required InitialDataProvider initialDataProvider,
+  }) : _initialDataProvider = initialDataProvider;
 
-  final AuthStatusProvider authStatusProvider;
+  final InitialDataProvider _initialDataProvider;
 
   late final GoRouter router = GoRouter(
     // navigatorKey: rootNavigatorKey,
@@ -38,10 +39,10 @@ class AppRouter {
       _matchRoute,
       _matchCreateRoute,
     ],
-    refreshListenable: authStatusProvider,
+    refreshListenable: _initialDataProvider,
     redirect: (context, state) {
       // TODO test
-      if (!authStatusProvider.isLoggedIn) {
+      if (!_initialDataProvider.isInitialDataLoadedSuccessfully) {
         switch (state.location) {
           case AppRoutes.registerPath:
             return AppRoutes.registerPath;

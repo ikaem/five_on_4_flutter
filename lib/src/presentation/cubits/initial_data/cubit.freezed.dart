@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$AuthStatusCubitState {
+mixin _$InitialDataCubitState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -37,37 +37,37 @@ mixin _$AuthStatusCubitState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthStatusCubitStateInitial value) initial,
-    required TResult Function(AuthStatusCubitStateFailure value) failure,
+    required TResult Function(InitialDataCubitStateInitial value) initial,
+    required TResult Function(InitialDataCubitStateFailure value) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthStatusCubitStateInitial value)? initial,
-    TResult? Function(AuthStatusCubitStateFailure value)? failure,
+    TResult? Function(InitialDataCubitStateInitial value)? initial,
+    TResult? Function(InitialDataCubitStateFailure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthStatusCubitStateInitial value)? initial,
-    TResult Function(AuthStatusCubitStateFailure value)? failure,
+    TResult Function(InitialDataCubitStateInitial value)? initial,
+    TResult Function(InitialDataCubitStateFailure value)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AuthStatusCubitStateCopyWith<$Res> {
-  factory $AuthStatusCubitStateCopyWith(AuthStatusCubitState value,
-          $Res Function(AuthStatusCubitState) then) =
-      _$AuthStatusCubitStateCopyWithImpl<$Res, AuthStatusCubitState>;
+abstract class $InitialDataCubitStateCopyWith<$Res> {
+  factory $InitialDataCubitStateCopyWith(InitialDataCubitState value,
+          $Res Function(InitialDataCubitState) then) =
+      _$InitialDataCubitStateCopyWithImpl<$Res, InitialDataCubitState>;
 }
 
 /// @nodoc
-class _$AuthStatusCubitStateCopyWithImpl<$Res,
-        $Val extends AuthStatusCubitState>
-    implements $AuthStatusCubitStateCopyWith<$Res> {
-  _$AuthStatusCubitStateCopyWithImpl(this._value, this._then);
+class _$InitialDataCubitStateCopyWithImpl<$Res,
+        $Val extends InitialDataCubitState>
+    implements $InitialDataCubitStateCopyWith<$Res> {
+  _$InitialDataCubitStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -76,39 +76,39 @@ class _$AuthStatusCubitStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$AuthStatusCubitStateInitialCopyWith<$Res> {
-  factory _$$AuthStatusCubitStateInitialCopyWith(
-          _$AuthStatusCubitStateInitial value,
-          $Res Function(_$AuthStatusCubitStateInitial) then) =
-      __$$AuthStatusCubitStateInitialCopyWithImpl<$Res>;
+abstract class _$$InitialDataCubitStateInitialCopyWith<$Res> {
+  factory _$$InitialDataCubitStateInitialCopyWith(
+          _$InitialDataCubitStateInitial value,
+          $Res Function(_$InitialDataCubitStateInitial) then) =
+      __$$InitialDataCubitStateInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthStatusCubitStateInitialCopyWithImpl<$Res>
-    extends _$AuthStatusCubitStateCopyWithImpl<$Res,
-        _$AuthStatusCubitStateInitial>
-    implements _$$AuthStatusCubitStateInitialCopyWith<$Res> {
-  __$$AuthStatusCubitStateInitialCopyWithImpl(
-      _$AuthStatusCubitStateInitial _value,
-      $Res Function(_$AuthStatusCubitStateInitial) _then)
+class __$$InitialDataCubitStateInitialCopyWithImpl<$Res>
+    extends _$InitialDataCubitStateCopyWithImpl<$Res,
+        _$InitialDataCubitStateInitial>
+    implements _$$InitialDataCubitStateInitialCopyWith<$Res> {
+  __$$InitialDataCubitStateInitialCopyWithImpl(
+      _$InitialDataCubitStateInitial _value,
+      $Res Function(_$InitialDataCubitStateInitial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AuthStatusCubitStateInitial implements AuthStatusCubitStateInitial {
-  _$AuthStatusCubitStateInitial();
+class _$InitialDataCubitStateInitial implements InitialDataCubitStateInitial {
+  _$InitialDataCubitStateInitial();
 
   @override
   String toString() {
-    return 'AuthStatusCubitState.initial()';
+    return 'InitialDataCubitState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthStatusCubitStateInitial);
+            other is _$InitialDataCubitStateInitial);
   }
 
   @override
@@ -148,8 +148,8 @@ class _$AuthStatusCubitStateInitial implements AuthStatusCubitStateInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthStatusCubitStateInitial value) initial,
-    required TResult Function(AuthStatusCubitStateFailure value) failure,
+    required TResult Function(InitialDataCubitStateInitial value) initial,
+    required TResult Function(InitialDataCubitStateFailure value) failure,
   }) {
     return initial(this);
   }
@@ -157,8 +157,8 @@ class _$AuthStatusCubitStateInitial implements AuthStatusCubitStateInitial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthStatusCubitStateInitial value)? initial,
-    TResult? Function(AuthStatusCubitStateFailure value)? failure,
+    TResult? Function(InitialDataCubitStateInitial value)? initial,
+    TResult? Function(InitialDataCubitStateFailure value)? failure,
   }) {
     return initial?.call(this);
   }
@@ -166,8 +166,8 @@ class _$AuthStatusCubitStateInitial implements AuthStatusCubitStateInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthStatusCubitStateInitial value)? initial,
-    TResult Function(AuthStatusCubitStateFailure value)? failure,
+    TResult Function(InitialDataCubitStateInitial value)? initial,
+    TResult Function(InitialDataCubitStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -177,28 +177,28 @@ class _$AuthStatusCubitStateInitial implements AuthStatusCubitStateInitial {
   }
 }
 
-abstract class AuthStatusCubitStateInitial implements AuthStatusCubitState {
-  factory AuthStatusCubitStateInitial() = _$AuthStatusCubitStateInitial;
+abstract class InitialDataCubitStateInitial implements InitialDataCubitState {
+  factory InitialDataCubitStateInitial() = _$InitialDataCubitStateInitial;
 }
 
 /// @nodoc
-abstract class _$$AuthStatusCubitStateFailureCopyWith<$Res> {
-  factory _$$AuthStatusCubitStateFailureCopyWith(
-          _$AuthStatusCubitStateFailure value,
-          $Res Function(_$AuthStatusCubitStateFailure) then) =
-      __$$AuthStatusCubitStateFailureCopyWithImpl<$Res>;
+abstract class _$$InitialDataCubitStateFailureCopyWith<$Res> {
+  factory _$$InitialDataCubitStateFailureCopyWith(
+          _$InitialDataCubitStateFailure value,
+          $Res Function(_$InitialDataCubitStateFailure) then) =
+      __$$InitialDataCubitStateFailureCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$AuthStatusCubitStateFailureCopyWithImpl<$Res>
-    extends _$AuthStatusCubitStateCopyWithImpl<$Res,
-        _$AuthStatusCubitStateFailure>
-    implements _$$AuthStatusCubitStateFailureCopyWith<$Res> {
-  __$$AuthStatusCubitStateFailureCopyWithImpl(
-      _$AuthStatusCubitStateFailure _value,
-      $Res Function(_$AuthStatusCubitStateFailure) _then)
+class __$$InitialDataCubitStateFailureCopyWithImpl<$Res>
+    extends _$InitialDataCubitStateCopyWithImpl<$Res,
+        _$InitialDataCubitStateFailure>
+    implements _$$InitialDataCubitStateFailureCopyWith<$Res> {
+  __$$InitialDataCubitStateFailureCopyWithImpl(
+      _$InitialDataCubitStateFailure _value,
+      $Res Function(_$InitialDataCubitStateFailure) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -206,7 +206,7 @@ class __$$AuthStatusCubitStateFailureCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$AuthStatusCubitStateFailure(
+    return _then(_$InitialDataCubitStateFailure(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -217,22 +217,22 @@ class __$$AuthStatusCubitStateFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthStatusCubitStateFailure implements AuthStatusCubitStateFailure {
-  _$AuthStatusCubitStateFailure(this.message);
+class _$InitialDataCubitStateFailure implements InitialDataCubitStateFailure {
+  _$InitialDataCubitStateFailure(this.message);
 
   @override
   final String message;
 
   @override
   String toString() {
-    return 'AuthStatusCubitState.failure(message: $message)';
+    return 'InitialDataCubitState.failure(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthStatusCubitStateFailure &&
+            other is _$InitialDataCubitStateFailure &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -242,9 +242,9 @@ class _$AuthStatusCubitStateFailure implements AuthStatusCubitStateFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AuthStatusCubitStateFailureCopyWith<_$AuthStatusCubitStateFailure>
-      get copyWith => __$$AuthStatusCubitStateFailureCopyWithImpl<
-          _$AuthStatusCubitStateFailure>(this, _$identity);
+  _$$InitialDataCubitStateFailureCopyWith<_$InitialDataCubitStateFailure>
+      get copyWith => __$$InitialDataCubitStateFailureCopyWithImpl<
+          _$InitialDataCubitStateFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -280,8 +280,8 @@ class _$AuthStatusCubitStateFailure implements AuthStatusCubitStateFailure {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthStatusCubitStateInitial value) initial,
-    required TResult Function(AuthStatusCubitStateFailure value) failure,
+    required TResult Function(InitialDataCubitStateInitial value) initial,
+    required TResult Function(InitialDataCubitStateFailure value) failure,
   }) {
     return failure(this);
   }
@@ -289,8 +289,8 @@ class _$AuthStatusCubitStateFailure implements AuthStatusCubitStateFailure {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(AuthStatusCubitStateInitial value)? initial,
-    TResult? Function(AuthStatusCubitStateFailure value)? failure,
+    TResult? Function(InitialDataCubitStateInitial value)? initial,
+    TResult? Function(InitialDataCubitStateFailure value)? failure,
   }) {
     return failure?.call(this);
   }
@@ -298,8 +298,8 @@ class _$AuthStatusCubitStateFailure implements AuthStatusCubitStateFailure {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthStatusCubitStateInitial value)? initial,
-    TResult Function(AuthStatusCubitStateFailure value)? failure,
+    TResult Function(InitialDataCubitStateInitial value)? initial,
+    TResult Function(InitialDataCubitStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -309,12 +309,12 @@ class _$AuthStatusCubitStateFailure implements AuthStatusCubitStateFailure {
   }
 }
 
-abstract class AuthStatusCubitStateFailure implements AuthStatusCubitState {
-  factory AuthStatusCubitStateFailure(final String message) =
-      _$AuthStatusCubitStateFailure;
+abstract class InitialDataCubitStateFailure implements InitialDataCubitState {
+  factory InitialDataCubitStateFailure(final String message) =
+      _$InitialDataCubitStateFailure;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$AuthStatusCubitStateFailureCopyWith<_$AuthStatusCubitStateFailure>
+  _$$InitialDataCubitStateFailureCopyWith<_$InitialDataCubitStateFailure>
       get copyWith => throw _privateConstructorUsedError;
 }

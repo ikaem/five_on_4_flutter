@@ -58,6 +58,7 @@ class PlayersAppRepository implements PlayersRepository {
 
   @override
   // TODO no need for this to be async
+  // TODO this needs to be called on logout as well as part of clear initial data
   Future<void> clearCurrentPlayer() async {
     _currentPlayerSink.add(null);
   }

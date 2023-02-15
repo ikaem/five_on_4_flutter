@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/auth_status/cubit.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_all/bloc.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_todays/bloc.dart';
@@ -33,10 +30,10 @@ class _HomeView extends StatelessWidget {
     final WeatherUseCases weatherUseCases = context.read<WeatherUseCases>();
     final MatchesUseCases matchesUseCases = context.read<MatchesUseCases>();
 
-    late final AuthStatusCubit _authStatusCubit =
-        context.read<AuthStatusCubit>();
+    // late final AuthStatusCubit _authStatusCubit =
+    //     context.read<AuthStatusCubit>();
 
-    log('${_authStatusCubit.auth?.email}');
+    // log('${_authStatusCubit.auth?.email}');
 
     return MultiBlocProvider(
       providers: [

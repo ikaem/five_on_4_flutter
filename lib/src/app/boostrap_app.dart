@@ -1,10 +1,8 @@
 import 'package:five_on_4_flutter/src/app/app.dart';
 import 'package:five_on_4_flutter/src/domain/use_cases/app_use_cases.dart';
-import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/auth_status/cubit.dart';
 import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/logout/cubit.dart';
-import 'package:five_on_4_flutter/src/features/auth/presentation/presentation.dart';
-import 'package:five_on_4_flutter/src/features/players/presentation/cubits/player_current_get/cubit.dart';
 import 'package:five_on_4_flutter/src/libraries/libraries.dart';
+import 'package:five_on_4_flutter/src/presentation/cubits/initial_data/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +16,7 @@ class BootstrapFiveOn4App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthStatusProvider authStatusProvider = AuthStatusProvider();
+    // final AuthStatusProvider authStatusProvider = AuthStatusProvider();
 
     return AppUseCasesProvider(
       appUseCases: appUseCases,
@@ -26,16 +24,21 @@ class BootstrapFiveOn4App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => AuthStatusCubit(
-              authUseCases: appUseCases.authUseCases,
-              authStatusProvider: authStatusProvider,
+            create: (context) => InitialDataCubit(
+              initialDataUseCases: appUseCases.initialDataUseCases,
             ),
           ),
-          BlocProvider(
-            create: (context) => PlayerCurrentCubit(
-              playersUseCases: appUseCases.playersUseCases,
-            ),
-          ),
+          // BlocProvider(
+          //   create: (context) => AuthStatusCubit(
+          //     authUseCases: appUseCases.authUseCases,
+          //     authStatusProvider: authStatusProvider,
+          //   ),
+          // ),
+          // BlocProvider(
+          //   create: (context) => PlayerCurrentCubit(
+          //     playersUseCases: appUseCases.playersUseCases,
+          //   ),
+          // ),
           // TODO testing this here
           BlocProvider<LogoutCubit>(
             create: (context) =>
