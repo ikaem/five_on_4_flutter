@@ -72,6 +72,7 @@ class AuthAppRepository implements AuthRepository {
 
     final AuthModel authModel = AuthModel.fromLocalDTO(localDTO);
     _authSink.add(authModel);
+
     return authModel.id;
   }
 }

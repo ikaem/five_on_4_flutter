@@ -1,6 +1,7 @@
 import 'package:five_on_4_flutter/src/domain/use_cases/initial_data/use_cases.dart';
 import 'package:five_on_4_flutter/src/domain/values/initial_data/value.dart';
 import 'package:five_on_4_flutter/src/features/auth/auth.dart';
+import 'package:five_on_4_flutter/src/features/auth/domain/models/auth/auth.dart';
 import 'package:five_on_4_flutter/src/features/players/data/repositories/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -19,14 +20,19 @@ class InitialDataAppUseCases implements InitialDataUseCases {
     final Stream<InitialDataValue> stream = Rx.combineLatest2(
       _authRepository.observeAuth,
       _playersRepository.observeCurrentPlayer,
-      (a, b) => InitialDataValue(
-        auth: a,
-        currentPlayer: b,
-      ),
+      (a, b) {
+        return InitialDataValue(
+          auth: a,
+          currentPlayer: b,
+        );
+      },
     );
 
     return stream;
   }
+
+  @override
+  Stream<AuthModel?> get authStream => _authRepository.observeAuth;
 
   @override
   Future<void> onAuthCheckOnAppStart() async {

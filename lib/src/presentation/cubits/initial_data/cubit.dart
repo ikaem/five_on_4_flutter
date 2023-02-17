@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:five_on_4_flutter/src/domain/use_cases/initial_data/use_cases.dart';
 import 'package:five_on_4_flutter/src/domain/values/initial_data/value.dart';
@@ -41,19 +42,28 @@ class InitialDataCubit extends Cubit<InitialDataCubitState> {
   }
 
   Future<void> _onInitializeCubit() async {
+    _initialDataUseCases.authStream.listen((event) {
+      log('any stgream here');
+    });
+
     try {
       _initialDataProvider.isLoading = true;
       _initialDataSubscription = _initialDataUseCases.initialDataStream.listen(
-        _handleInitialDataEvent,
-        // TODO not sure if error will propagate to catch bloc
-        // if no propagation, maybe use await for to handle this - or create an error handler to handle it, - but then on auth check on app start can fail
-        // onError: (Object e) {
-        //   emit(
-        //     InitialDataCubitState.failure(
-        //         'There was an error retrieving initial data'),
-        //   );
-        // },
-      );
+          (event) {
+        // TODO test
+
+        log(event.toString());
+      }
+          // _handleInitialDataEvent,
+          // TODO not sure if error will propagate to catch bloc
+          // if no propagation, maybe use await for to handle this - or create an error handler to handle it, - but then on auth check on app start can fail
+          // onError: (Object e) {
+          //   emit(
+          //     InitialDataCubitState.failure(
+          //         'There was an error retrieving initial data'),
+          //   );
+          // },
+          );
 
       await _initialDataUseCases.onAuthCheckOnAppStart();
     } catch (e) {
