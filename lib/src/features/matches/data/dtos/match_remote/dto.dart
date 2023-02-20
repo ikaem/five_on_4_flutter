@@ -14,6 +14,18 @@ class MatchRemoteDTO with _$MatchRemoteDTO {
     required List<MatchParticipantRemoteDTO> participants,
   }) = _MatchRemoteDTO;
 
+  factory MatchRemoteDTO.fromFirestore(Map<String, dynamic> map) {
+// TODO this could all potentiually be handled though json by json serializer
+    final List<MatchParticipantRemoteDTO> matchParticipantDTOs =
+        map['participants'];
+
+    final MatchRemoteDTO dto = MatchRemoteDTO(
+      id: map['id'] as String,
+      name: map['name'] as String,
+      participants: participants,
+    );
+  }
+
   factory MatchRemoteDTO.fromJson(Map<String, dynamic> map) =>
       _$MatchRemoteDTOFromJson(map);
 }

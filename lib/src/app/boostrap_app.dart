@@ -1,6 +1,5 @@
 import 'package:five_on_4_flutter/src/app/app.dart';
 import 'package:five_on_4_flutter/src/domain/use_cases/app_use_cases.dart';
-import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/logout/cubit.dart';
 import 'package:five_on_4_flutter/src/libraries/libraries.dart';
 import 'package:five_on_4_flutter/src/presentation/cubits/initial_data/cubit.dart';
 import 'package:flutter/material.dart';
@@ -40,10 +39,11 @@ class BootstrapFiveOn4App extends StatelessWidget {
           //   ),
           // ),
           // TODO testing this here
-          BlocProvider<LogoutCubit>(
-            create: (context) =>
-                LogoutCubit(authUseCases: appUseCases.authUseCases),
-          ),
+          // TODO this is not needed because that initial will be used to logout and clear initial data
+          // BlocProvider<LogoutCubit>(
+          //   create: (context) =>
+          //       LogoutCubit(authUseCases: appUseCases.authUseCases),
+          // ),
         ],
         child: FiveOn4App(),
         // child: Builder(builder: (context) {

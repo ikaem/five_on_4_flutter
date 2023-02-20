@@ -3,6 +3,7 @@ import 'package:five_on_4_flutter/src/domain/values/initial_data/value.dart';
 import 'package:five_on_4_flutter/src/features/auth/auth.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/models/auth/auth.dart';
 import 'package:five_on_4_flutter/src/features/players/data/repositories/repository.dart';
+import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:rxdart/rxdart.dart';
 
 class InitialDataAppUseCases implements InitialDataUseCases {
@@ -16,6 +17,8 @@ class InitialDataAppUseCases implements InitialDataUseCases {
   final PlayersRepository _playersRepository;
 
   @override
+  // Stream<InitialDataValue> get initialDataStream => _playersRepository.ob
+
   Stream<InitialDataValue> get initialDataStream {
     final Stream<InitialDataValue> stream = Rx.combineLatest2(
       _authRepository.observeAuth,
@@ -33,6 +36,9 @@ class InitialDataAppUseCases implements InitialDataUseCases {
 
   @override
   Stream<AuthModel?> get authStream => _authRepository.observeAuth;
+  @override
+  Stream<PlayerModel?> get currentPlayerStream =>
+      _playersRepository.observeCurrentPlayer;
 
   @override
   Future<void> onAuthCheckOnAppStart() async {
@@ -40,11 +46,12 @@ class InitialDataAppUseCases implements InitialDataUseCases {
 //     if (authId == null) return;
 
 // // careful here for double fetch - if we
-//     await _playersRepository.loadPlayerbyAuthId(authId);
+    // await _playersRepository.loadPlayerbyAuthId(authId);
   }
 
   @override
   Future<void> initialDataClear() async {
+    // TODO this should be used instead of logout
     await _authRepository.logout();
     await _playersRepository.clearCurrentPlayer();
     // this needs to

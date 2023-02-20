@@ -1,30 +1,35 @@
 import 'package:five_on_4_flutter/src/features/auth/data/repositories/repositories.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
-import 'package:five_on_4_flutter/src/features/auth/domain/models/auth/auth.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
+import 'package:five_on_4_flutter/src/features/players/data/repositories/repository.dart';
+import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 
 class MatchesUseCases {
   const MatchesUseCases({
     required this.matchesRepository,
     required this.authRepository,
+    required this.playersRepository,
   });
 
   final MatchesRepository matchesRepository;
   final AuthRepository authRepository;
+  final PlayersRepository playersRepository;
 
   Future<void> participateInMatch({
     required String matchId,
     required bool shouldJoin,
   }) async {
-    final AuthModel? auth = await authRepository.auth;
-    if (auth == null) throw AuthNoSessionException();
+    // final AuthModel? auth = await authRepository.auth;
+    final PlayerModel? currentPlayer = await playersRepository.currentPlayer;
+    // TODO not sure if this should be error to throw
+    if (currentPlayer == null) throw AuthNoSessionException();
 
-    final String authId = auth.id;
+    final String playerId = currentPlayer.id;
 
     final MatchJoinArgs matchJoinArgs = MatchJoinArgs(
-      authId: authId,
+      playerId: playerId,
       matchId: matchId,
     );
 

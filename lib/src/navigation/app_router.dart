@@ -12,6 +12,7 @@ import 'package:five_on_4_flutter/src/navigation/navigation.dart'
 import 'package:five_on_4_flutter/src/presentation/presentation.dart'
     show HomeScreen;
 import 'package:five_on_4_flutter/src/presentation/providers/providers.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 // as per https://snehmehta.medium.com/dynamic-bottom-navigation-with-go-router-flutter-power-series-part-1-2437e2d72546
@@ -38,9 +39,14 @@ class AppRouter {
       _registerRoute,
       _matchRoute,
       _matchCreateRoute,
+      _splashRoute,
     ],
     refreshListenable: _initialDataProvider,
     redirect: (context, state) {
+      if (_initialDataProvider.isLoading) {
+        return AppRoutes.splashPath;
+      }
+
       // TODO test
       if (!_initialDataProvider.isInitialDataLoadedSuccessfully) {
         switch (state.location) {
@@ -121,6 +127,16 @@ class AppRouter {
     name: AppRoutes.matchCreate.name,
     builder: (context, state) {
       return const MatchCreateScreen();
+    },
+  );
+
+  final GoRoute _splashRoute = GoRoute(
+    path: AppRoutes.splash.path,
+    name: AppRoutes.splash.name,
+    builder: (context, state) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
     },
   );
 }

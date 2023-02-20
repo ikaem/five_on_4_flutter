@@ -1,5 +1,5 @@
 import 'package:five_on_4_flutter/src/domain/domain.dart';
-import 'package:five_on_4_flutter/src/features/auth/presentation/cubits/logout/cubit.dart';
+import 'package:five_on_4_flutter/src/presentation/cubits/initial_data/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,11 +35,13 @@ class AppBarMoreActions extends StatelessWidget {
 
   Future<void> Function(AppBarMoreAction) _onSelected(BuildContext context) =>
       (AppBarMoreAction action) async {
-        final LogoutCubit logoutCubit = context.read<LogoutCubit>();
+        // final LogoutCubit logoutCubit = context.read<LogoutCubit>();
+        final InitialDataCubit initialDataCubit =
+            context.read<InitialDataCubit>();
 
         switch (action) {
           case AppBarMoreAction.logout:
-            await logoutCubit.onSubmit();
+            await initialDataCubit.clearInitialData();
             return;
 
           default:

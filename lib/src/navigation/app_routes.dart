@@ -9,6 +9,7 @@ abstract class AppRoutes {
   static const matchesPath = '/matches';
   static const playersPath = '/players';
   static const matchCreatePath = '/match-create';
+  static const splashPath = '/splash';
 
   static AppRouteModel get home => const AppRouteModel(
         path: '$homePath',
@@ -38,6 +39,11 @@ abstract class AppRoutes {
   static AppRouteModel get matchCreate => const AppRouteModel(
         path: '$matchCreatePath',
         name: 'MatchCreate',
+      );
+
+  static AppRouteModel get splash => const AppRouteModel(
+        path: '$splashPath',
+        name: 'Splash',
       );
 
   static AppRouteModel match([String? id]) {

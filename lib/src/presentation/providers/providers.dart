@@ -11,6 +11,8 @@ class InitialDataProvider extends ChangeNotifier {
 
   bool _isLoading = false;
 
+  bool get isEmpty => _auth == null && _currentPlayer == null;
+  bool get isComplete => _auth != null && _currentPlayer != null;
   bool get isInitialDataLoadedSuccessfully =>
       auth != null && currentPlayer != null;
   bool get isLoading => _isLoading;

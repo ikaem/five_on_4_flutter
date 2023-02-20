@@ -55,4 +55,11 @@ class PlayersFakeDataSource implements PlayersRemoteDataSource {
   }
 }
 
-final List<PlayerRemoteDTO> players = [];
+final List<PlayerRemoteDTO> players = [
+  PlayerRemoteDTO(
+    id: '1',
+    authId: 'D8txq2Tr0tho5Immp6wHoPN4c0l2',
+    nickname: 'Zidane',
+    email: 'karlo@net.hr',
+  )
+];

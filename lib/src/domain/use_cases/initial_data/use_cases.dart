@@ -1,5 +1,6 @@
 import 'package:five_on_4_flutter/src/domain/values/initial_data/value.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/models/auth/auth.dart';
+import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 
 abstract class InitialDataUseCases {
   // TODO possibly create a value to transfer this data
@@ -10,4 +11,5 @@ abstract class InitialDataUseCases {
   Future<void> initialDataClear();
   // TODO test only
   Stream<AuthModel?> get authStream;
+  Stream<PlayerModel?> get currentPlayerStream;
 }

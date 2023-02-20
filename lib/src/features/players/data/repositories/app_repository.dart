@@ -15,11 +15,14 @@ class PlayersAppRepository implements PlayersRepository {
   final PlayersRemoteDataSource playersRemoteDataSource;
 
   final BehaviorSubject<PlayerModel?> _currentPlayerSubject =
-      BehaviorSubject<PlayerModel?>();
+      BehaviorSubject.seeded(null);
 
   StreamSink<PlayerModel?> get _currentPlayerSink => _currentPlayerSubject.sink;
+
   @override
   Stream<PlayerModel?> get observeCurrentPlayer => _currentPlayerSubject.stream;
+  @override
+  Future<PlayerModel?> get currentPlayer => _currentPlayerSubject.first;
 
   Future<String> createPlayer(PlayerArgs args) async {
     final String id = await playersRemoteDataSource.createPlayer(args);

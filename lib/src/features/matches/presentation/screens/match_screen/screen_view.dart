@@ -3,6 +3,7 @@ import 'package:five_on_4_flutter/src/features/matches/domain/extensions/extensi
 import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/match_get/cubit.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/match_join/cubit.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/widgets/match_content.dart';
+import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/layout/app_bar_more_actions.dart';
 import 'package:five_on_4_flutter/src/utils/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +65,7 @@ class _MatchScreenViewState extends State<MatchScreenView> {
     MatchGetCubitState state,
   ) {
     final Size size = MediaQuery.of(context).size;
+    final PlayerModel? currentPlayer = context.currentPlayer;
 
     return state.when(
       initial: () => ColoredBox(
@@ -79,12 +81,14 @@ class _MatchScreenViewState extends State<MatchScreenView> {
         appBar: AppBar(),
         body: Center(child: Text(message)),
       ),
-      success: _matchGetCubitSuccessBuilder,
+      success: (match) => _matchGetCubitSuccessBuilder(match, currentPlayer),
     );
   }
 
-  Scaffold _matchGetCubitSuccessBuilder(MatchModel match) {
-    final bool hasUserJoinedMatch = match.checkHasUserJoinedMatch(playerId: '');
+  Scaffold _matchGetCubitSuccessBuilder(
+      MatchModel match, PlayerModel? currentPlayer) {
+    final bool hasUserJoinedMatch =
+        match.checkHasUserJoinedMatch(playerId: currentPlayer?.id);
 
     final IconData joinIcon =
         !hasUserJoinedMatch ? Icons.person_add : Icons.person_remove;

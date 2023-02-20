@@ -11,4 +11,10 @@ class InitialDataValue {
 
   final AuthModel? auth;
   final PlayerModel? currentPlayer;
+
+  bool get isEmpty => auth == null && currentPlayer == null;
+  bool get isComplete => auth != null && currentPlayer != null;
+
+  bool get isLoggedIn => auth != null;
+  bool get isCurrentPlayerLoaded => currentPlayer != null;
 }

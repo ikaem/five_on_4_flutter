@@ -8,6 +8,7 @@ part 'dto.g.dart';
 class MatchParticipantRemoteDTO with _$MatchParticipantRemoteDTO {
   const factory MatchParticipantRemoteDTO({
     required String id,
+    // TODO this should be renamed to player id
     required String userId,
     required String matchId,
     required String nickname,

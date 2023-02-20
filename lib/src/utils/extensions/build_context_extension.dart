@@ -1,4 +1,7 @@
+import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
+import 'package:five_on_4_flutter/src/presentation/cubits/initial_data/cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum SnackBarVariant { info, error }
 
@@ -27,4 +30,6 @@ extension BuildContextExtension on BuildContext {
         ),
       );
   }
+
+  PlayerModel? get currentPlayer => read<InitialDataCubit>().currentPlayer;
 }

@@ -8,4 +8,5 @@ abstract class PlayersRepository {
   Future<void> loadPlayerbyAuthId(String authId);
   Future<void> clearCurrentPlayer();
   Stream<PlayerModel?> get observeCurrentPlayer;
+  Future<PlayerModel?> get currentPlayer;
 }

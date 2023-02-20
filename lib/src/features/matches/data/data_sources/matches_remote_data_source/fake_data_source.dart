@@ -59,14 +59,15 @@ class MatchesRemoteFakeDataSource implements MatchesRemoteDataSource {
       throw HttpNotFoundException(message: 'No such match');
 
     final PlayerRemoteDTO? playerRemoteDTO =
-        players.firstWhereOrNull((player) => player.authId == args.authId);
+        players.firstWhereOrNull((player) => player.id == args.playerId);
 
     if (playerRemoteDTO == null) {
       throw HttpBadRequestException(message: 'Player does not exist');
     }
 
+// TODO remplčace userId on participant to player id
     final bool isUserAlreadyJoined =
-        matchRemoteDTO.participants.any((p) => p.id == playerRemoteDTO.id);
+        matchRemoteDTO.participants.any((p) => p.userId == playerRemoteDTO.id);
 
     if (isUserAlreadyJoined) {
       throw HttpBadRequestException(message: 'Player has already joined');
@@ -108,12 +109,13 @@ class MatchesRemoteFakeDataSource implements MatchesRemoteDataSource {
     ];
 
     final MatchParticipantRemoteDTO? player =
-        updatedParticipants.firstWhereOrNull((p) => p == args.authId);
+        updatedParticipants.firstWhereOrNull((p) => p.userId == args.playerId);
 
     if (player == null) {
       throw HttpBadRequestException(message: 'User is already unjoined');
     }
 
+// TODO not sure if this would work
     updatedParticipants.remove(player);
 
     final MatchRemoteDTO updatedMatch =
