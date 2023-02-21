@@ -1,6 +1,5 @@
 import 'package:five_on_4_flutter/src/features/auth/auth.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_sources.dart';
-import 'package:five_on_4_flutter/src/features/matches/data/data_sources/matches_remote_data_source/fake_data_source.dart';
 import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/data_source.dart';
 import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/fake_data_source.dart';
 import 'package:five_on_4_flutter/src/features/weather/data/data.dart';
@@ -13,6 +12,7 @@ class AppDataSources {
     required this.appDatabase,
     required this.secureStorageWrapper,
     required this.firebaseAuthWrapper,
+    required this.firestoreWrapper,
     // TODO eventually, we will provide database here as well
   });
 
@@ -21,6 +21,7 @@ class AppDataSources {
   final AppDatabase appDatabase;
   final SecureStorageWrapper secureStorageWrapper;
   final FirebaseAuthWrapper firebaseAuthWrapper;
+  final FirestoreWrapper firestoreWrapper;
 
   late final WeatherRemoteDataSource weatherRemoteDataSource =
       WeatherRemoteAppDataSource(
@@ -29,7 +30,8 @@ class AppDataSources {
 
 // TODO fake is tempo
   late final MatchesRemoteDataSource matchesRemoteDataSource =
-      MatchesRemoteFakeDataSource();
+      MatchesRemoteAppDataSource(firestoreWrapper: firestoreWrapper);
+  // MatchesRemoteFakeDataSource();
 
   late final MatchesLocalDataSource matchesLocalDataSource =
       MatchesLocalAppDataSource(

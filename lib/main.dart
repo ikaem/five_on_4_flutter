@@ -39,6 +39,7 @@ AppUseCases _getInitializedAppUseCases({
   final LocationWrapper locationWrapper = LocationWrapper();
   final SecureStorageWrapper secureStorageWrapper = SecureStorageWrapper();
   final FirebaseAuthWrapper firebaseAuthWrapper = FirebaseAuthWrapper();
+  final FirestoreWrapper firestoreWrapper = FirestoreWrapper();
 
   final AppDataSources appDataSources = AppDataSources(
     httpWrapper: httpWrapper,
@@ -46,6 +47,7 @@ AppUseCases _getInitializedAppUseCases({
     appDatabase: appDatabase,
     secureStorageWrapper: secureStorageWrapper,
     firebaseAuthWrapper: firebaseAuthWrapper,
+    firestoreWrapper: firestoreWrapper,
   );
 
   final AppRepositories appRepositories = AppRepositories(
