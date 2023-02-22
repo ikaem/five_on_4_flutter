@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_on_4_flutter/src/features/players/data/data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -28,6 +29,26 @@ class MatchParticipantRemoteDTO with _$MatchParticipantRemoteDTO {
     );
 
     return participantRemoteDTO;
+  }
+
+  factory MatchParticipantRemoteDTO.fromFirestoreSnapshot({
+    required String matchId,
+    required QueryDocumentSnapshot<Map<String, dynamic>> snapshot,
+  }) {
+    final Map<String, dynamic> participantData = snapshot.data();
+
+    final String participantId = snapshot.id;
+    final String userId = participantData['playerId'] as String;
+    final String nickname = participantData['nickname'] as String;
+
+    final MatchParticipantRemoteDTO remoteDTO = MatchParticipantRemoteDTO(
+      id: participantId,
+      userId: userId,
+      matchId: matchId,
+      nickname: nickname,
+    );
+
+    return remoteDTO;
   }
 
   factory MatchParticipantRemoteDTO.fromJson(Map<String, dynamic> map) =>

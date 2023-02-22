@@ -19,6 +19,51 @@ class FirestoreWrapper {
     return queryDocumentSnapshots;
   }
 
+  Future<DocumentSnapshot<Map<String, dynamic>>> getCollectionItem(
+      {required String collectionName, required String itemId}) async {
+    final DocumentSnapshot<Map<String, dynamic>> item =
+        await _db.collection(collectionName).doc(itemId).get();
+
+    return item;
+  }
+
+  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
+      getSubcollectionItems({
+    required String collectionName,
+    required String itemId,
+    required String subcollectionName,
+  }) async {
+    final QuerySnapshot<Map<String, dynamic>> subcollectionQuerySnapshot =
+        await _db
+            .collection(collectionName)
+            .doc(itemId)
+            .collection(subcollectionName)
+            .get();
+
+    final List<QueryDocumentSnapshot<Map<String, dynamic>>> subcollectionItems =
+        subcollectionQuerySnapshot.docs;
+
+    return subcollectionItems;
+  }
+
+  Future<String> insertSubcollectionItem({
+    required String collectionName,
+    required String parentItemId,
+    required String subcollectionName,
+    required Map<String, dynamic> subcollectionItem,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> parentItemReference =
+        _db.collection(collectionName).doc();
+
+    final CollectionReference<Map<String, dynamic>> subcollectionReference =
+        parentItemReference.collection(subcollectionName);
+
+    final DocumentReference<Map<String, dynamic>> insertReference =
+        await subcollectionReference.add(subcollectionItem);
+
+    return insertReference.id;
+  }
+
   List<Map<String, dynamic>> _queryDocumentSnapshotMapsToNormalizedData(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> maps) {
     final List<Map<String, dynamic>> normalizedDataMaps = maps.map((e) {
