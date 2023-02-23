@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PlayerModel {
-  String get id => throw _privateConstructorUsedError;
-  String get authId => throw _privateConstructorUsedError;
+  String get id =>
+      throw _privateConstructorUsedError; // required String authId,
   String get nickname => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
 
@@ -32,7 +32,7 @@ abstract class $PlayerModelCopyWith<$Res> {
           PlayerModel value, $Res Function(PlayerModel) then) =
       _$PlayerModelCopyWithImpl<$Res, PlayerModel>;
   @useResult
-  $Res call({String id, String authId, String nickname, String email});
+  $Res call({String id, String nickname, String email});
 }
 
 /// @nodoc
@@ -49,7 +49,6 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
   @override
   $Res call({
     Object? id = null,
-    Object? authId = null,
     Object? nickname = null,
     Object? email = null,
   }) {
@@ -57,10 +56,6 @@ class _$PlayerModelCopyWithImpl<$Res, $Val extends PlayerModel>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      authId: null == authId
-          ? _value.authId
-          : authId // ignore: cast_nullable_to_non_nullable
               as String,
       nickname: null == nickname
           ? _value.nickname
@@ -82,7 +77,7 @@ abstract class _$$_PlayerModelCopyWith<$Res>
       __$$_PlayerModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String authId, String nickname, String email});
+  $Res call({String id, String nickname, String email});
 }
 
 /// @nodoc
@@ -97,7 +92,6 @@ class __$$_PlayerModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? authId = null,
     Object? nickname = null,
     Object? email = null,
   }) {
@@ -105,10 +99,6 @@ class __$$_PlayerModelCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      authId: null == authId
-          ? _value.authId
-          : authId // ignore: cast_nullable_to_non_nullable
               as String,
       nickname: null == nickname
           ? _value.nickname
@@ -126,15 +116,11 @@ class __$$_PlayerModelCopyWithImpl<$Res>
 
 class _$_PlayerModel implements _PlayerModel {
   const _$_PlayerModel(
-      {required this.id,
-      required this.authId,
-      required this.nickname,
-      required this.email});
+      {required this.id, required this.nickname, required this.email});
 
   @override
   final String id;
-  @override
-  final String authId;
+// required String authId,
   @override
   final String nickname;
   @override
@@ -142,7 +128,7 @@ class _$_PlayerModel implements _PlayerModel {
 
   @override
   String toString() {
-    return 'PlayerModel(id: $id, authId: $authId, nickname: $nickname, email: $email)';
+    return 'PlayerModel(id: $id, nickname: $nickname, email: $email)';
   }
 
   @override
@@ -151,14 +137,13 @@ class _$_PlayerModel implements _PlayerModel {
         (other.runtimeType == runtimeType &&
             other is _$_PlayerModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.authId, authId) || other.authId == authId) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, authId, nickname, email);
+  int get hashCode => Object.hash(runtimeType, id, nickname, email);
 
   @JsonKey(ignore: true)
   @override
@@ -170,15 +155,12 @@ class _$_PlayerModel implements _PlayerModel {
 abstract class _PlayerModel implements PlayerModel {
   const factory _PlayerModel(
       {required final String id,
-      required final String authId,
       required final String nickname,
       required final String email}) = _$_PlayerModel;
 
   @override
   String get id;
-  @override
-  String get authId;
-  @override
+  @override // required String authId,
   String get nickname;
   @override
   String get email;

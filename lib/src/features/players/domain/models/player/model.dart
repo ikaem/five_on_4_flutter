@@ -7,7 +7,7 @@ part 'model.freezed.dart';
 class PlayerModel with _$PlayerModel {
   const factory PlayerModel({
     required String id,
-    required String authId,
+    // required String authId,
     required String nickname,
     required String email,
   }) = _PlayerModel;
@@ -15,7 +15,7 @@ class PlayerModel with _$PlayerModel {
   factory PlayerModel.fromRemoteDTO(PlayerRemoteDTO dto) {
     final PlayerModel player = PlayerModel(
       id: dto.id,
-      authId: dto.authId,
+      // authId: dto.authId,
       nickname: dto.nickname,
       email: dto.email,
     );

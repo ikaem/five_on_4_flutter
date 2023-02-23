@@ -1,8 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:five_on_4_flutter/src/utils/extensions/map_extensions.dart';
+import 'package:five_on_4_flutter/src/domain/domain.dart';
+
+typedef WriteBatchSet = void Function<T>(
+  DocumentReference<T> document,
+  T data, [
+  SetOptions? options,
+]);
 
 class FirestoreWrapper {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  DocumentReference<Map<String, dynamic>> getCollectionDocumentReference({
+    required String collectionName,
+    required String? documentId,
+  }) {
+    final DocumentReference<Map<String, dynamic>> reference =
+        _db.collection(collectionName).doc(documentId);
+
+    return reference;
+  }
 
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getCollectionItems({
     required String collectionPath,
@@ -25,6 +41,35 @@ class FirestoreWrapper {
         await _db.collection(collectionName).doc(itemId).get();
 
     return item;
+  }
+
+  // TODO move this down
+  void _validateSnapshot({
+    required DocumentSnapshot<Map<String, dynamic>> snapshot,
+  }) {
+    final Map<String, dynamic>? data = snapshot.data();
+
+    if (data == null) throw HttpNotFoundException(message: 'message');
+  }
+
+  Future<QueryDocumentSnapshot<Map<String, dynamic>>>
+      getCollectionItemByFieldValue({
+    required String collectionName,
+    required String fieldName,
+    required String fieldValue,
+  }) async {
+    final QuerySnapshot<Map<String, dynamic>> response = await _db
+        .collection(collectionName)
+        .where(fieldName, isEqualTo: fieldValue)
+        .limit(1)
+        .get();
+
+    if (response.docs.isEmpty)
+      throw HttpNotFoundException(
+          message:
+              'item with $fieldName of $fieldValue from $collectionName was not found');
+
+    return response.docs.first;
   }
 
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
@@ -64,18 +109,27 @@ class FirestoreWrapper {
     return insertReference.id;
   }
 
-  List<Map<String, dynamic>> _queryDocumentSnapshotMapsToNormalizedData(
-      List<QueryDocumentSnapshot<Map<String, dynamic>>> maps) {
-    final List<Map<String, dynamic>> normalizedDataMaps = maps.map((e) {
-      final Map<String, dynamic> data = e.data();
-      data.addKey('id', e.id);
+  Future<String> insertCollectionItem({
+    required String collectionName,
+    required Map<String, dynamic> collectionItem,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> insertReference =
+        await _db.collection(collectionName).add(collectionItem);
 
-      return data;
-    }).toList();
-
-// TODO remove this id thing
-    return normalizedDataMaps;
+    return insertReference.id;
   }
+
+  // List<Map<String, dynamic>> _queryDocumentSnapshotMapsToNormalizedData(
+  //     List<QueryDocumentSnapshot<Map<String, dynamic>>> maps) {
+  //   final List<Map<String, dynamic>> normalizedDataMaps = maps.map((e) {
+  //     final Map<String, dynamic> data = e.data();
+  //     data.addKey('id', e.id);
+
+  //     return data;
+  //   }).toList();
+
+  //   return normalizedDataMaps;
+  // }
 
   Future<String> postCollectionItem({
     required String collectionPath,
@@ -87,40 +141,18 @@ class FirestoreWrapper {
     return documentReference.id;
   }
 
-  Future<void> getOneMatch() async {
-    // final what =
-    //     await _db.collection('matches').doc('km8LV81md4b17ylucGOg').get();
+  Future<T> performingBatchWriteOperation<T>(
+      Future<T> Function(WriteBatchSet batchSet) operation) async {
+    final WriteBatch batch = _db.batch();
 
-// TODO this is also a possibility - but maybe not flexible
-    // await _db
-    //     .collection('participants')
-    //     .where('matchId', isEqualTo: 'km8LV81md4b17ylucGOg');
+    // try {
+    final T response = await operation(batch.set);
+    await batch.commit();
 
-    // final what = await _db
-    //     .collection('matches')
-    //     .doc('km8LV81md4b17ylucGOg')
-    //     .collection('match_participants')
-    //     .get();
-    // .get();
-
-    final what = await _db
-        .collection('participants')
-        .where('matchId', isEqualTo: 'km8LV81md4b17ylucGOg')
-        .get();
-
-    // final test = what.data();
-
-    final test = what.docs;
-
-    final no = test.map((t) {
-      final ready = t.data();
-
-      return ready;
-    }).toList();
-
-    // log('this is test: $test');
-    // log('this is docs - $test');
-
-    // TODO test
+    return response;
+    // } catch (e) {
+    //   log('There was an error performing batch write operation: $e');
+    //   rethrow;
+    // }
   }
 }

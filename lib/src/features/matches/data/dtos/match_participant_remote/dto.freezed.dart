@@ -21,7 +21,8 @@ MatchParticipantRemoteDTO _$MatchParticipantRemoteDTOFromJson(
 
 /// @nodoc
 mixin _$MatchParticipantRemoteDTO {
-  String get id => throw _privateConstructorUsedError;
+  String get id =>
+      throw _privateConstructorUsedError; // TODO this should be renamed to player id
   String get userId => throw _privateConstructorUsedError;
   String get matchId => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
@@ -146,6 +147,7 @@ class _$_MatchParticipantRemoteDTO implements _MatchParticipantRemoteDTO {
 
   @override
   final String id;
+// TODO this should be renamed to player id
   @override
   final String userId;
   @override
@@ -201,7 +203,7 @@ abstract class _MatchParticipantRemoteDTO implements MatchParticipantRemoteDTO {
 
   @override
   String get id;
-  @override
+  @override // TODO this should be renamed to player id
   String get userId;
   @override
   String get matchId;

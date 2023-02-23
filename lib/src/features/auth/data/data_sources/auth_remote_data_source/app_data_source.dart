@@ -1,14 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_on_4_flutter/src/features/auth/auth.dart'
     show AuthRemoteDataSource;
 import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/app_data_source.dart';
 import 'package:five_on_4_flutter/src/libraries/firebase/firebase.dart';
 
 class AuthRemoteAppDataSource implements AuthRemoteDataSource {
   const AuthRemoteAppDataSource({
     required this.firebaseAuthWrapper,
+    required this.firestoreWrapper,
   });
 
   final FirebaseAuthWrapper firebaseAuthWrapper;
+  final FirestoreWrapper firestoreWrapper;
 
   @override
   Future<User?> checkAuth() async {
@@ -53,18 +57,55 @@ class AuthRemoteAppDataSource implements AuthRemoteDataSource {
   @override
   Future<User> register(RegisterCredentialsArgs credentialsArgs) async {
     try {
-      final User? user = await firebaseAuthWrapper
-          .registerWithUsernameAndPassword(credentialsArgs);
+      final User user = await firestoreWrapper.performingBatchWriteOperation(
+        (batchSet) async {
+          final User? userResponse = await firebaseAuthWrapper
+              .registerWithUsernameAndPassword(credentialsArgs);
 
-// TODO not sure if this is correct
-// TODO also check why does this allow to be null?
-      if (user == null) {
-        throw const AuthRegistrationFailedException();
-      }
+          if (userResponse == null) {
+            throw const AuthRegistrationFailedException();
+          }
+
+          final String uid = userResponse.uid;
+          final Map<String, dynamic> newPlayerData = {
+            'email': credentialsArgs.email,
+            'nickname': credentialsArgs.nickname,
+          };
+
+// TODO we could have auth id passed in as player id as well - lets try that?
+          final DocumentReference<Map<String, dynamic>> newPlayerReference =
+              await firestoreWrapper.getCollectionDocumentReference(
+            collectionName:
+                PlayersRemoteAppDataSource.firestorePlayersCollection,
+            documentId: uid,
+          );
+
+          batchSet(
+            newPlayerReference,
+            newPlayerData,
+          );
+
+          return userResponse;
+        },
+      );
 
       return user;
+
+// TODO old
+
+//       final User? user = await firebaseAuthWrapper
+//           .registerWithUsernameAndPassword(credentialsArgs);
+
+// // TODO not sure if this is correct
+// // TODO also check why does this allow to be null?
+//       if (user == null) {
+//         throw const AuthRegistrationFailedException();
+//       }
+
+//       return user;
     } on FirebaseAuthException catch (e) {
       throw AuthException(message: e.message);
+      // TODO we could have firestore exceptions here as well
     } catch (e) {
       // TODO will need to check for different exception types
       throw const AuthException(

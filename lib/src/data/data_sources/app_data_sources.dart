@@ -1,7 +1,7 @@
 import 'package:five_on_4_flutter/src/features/auth/auth.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_sources.dart';
+import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/app_data_source.dart';
 import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/data_source.dart';
-import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/fake_data_source.dart';
 import 'package:five_on_4_flutter/src/features/weather/data/data.dart';
 import 'package:five_on_4_flutter/src/libraries/libraries.dart';
 
@@ -45,8 +45,10 @@ class AppDataSources {
   late final AuthRemoteDataSource authRemoteDataSource =
       AuthRemoteAppDataSource(
     firebaseAuthWrapper: firebaseAuthWrapper,
+    firestoreWrapper: firestoreWrapper,
   );
 
   late final PlayersRemoteDataSource playersRemoteDataSource =
-      PlayersFakeDataSource();
+      // PlayersFakeDataSource();
+      PlayersRemoteAppDataSource(firestoreWrapper: firestoreWrapper);
 }

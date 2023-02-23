@@ -6,7 +6,7 @@ import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/v
 import 'package:five_on_4_flutter/src/libraries/firebase/firebase.dart';
 
 class MatchesRemoteAppDataSource implements MatchesRemoteDataSource {
-  static const String firestoreMatchCollection = 'matches';
+  static const String firestoreMatchesCollection = 'matches';
   static const String firestoreMatchPartipantsSubcollection =
       'match_participants';
 
@@ -20,18 +20,19 @@ class MatchesRemoteAppDataSource implements MatchesRemoteDataSource {
   Future<MatchRemoteDTO> getMatch(String id) async {
     final DocumentSnapshot<Map<String, dynamic>> matchResponse =
         await _firestoreWrapper.getCollectionItem(
-      collectionName: firestoreMatchCollection,
+      collectionName: firestoreMatchesCollection,
       itemId: id,
     );
 
     final Map<String, dynamic>? matchData = matchResponse.data();
     // TODO create better exception for this
+    // TODO this should be thrown by firestroe - so when we get the data here, this should be correct 100%
     if (matchData == null) throw 'No such match exception';
 
     final List<QueryDocumentSnapshot<Map<String, dynamic>>>
         matchParticipantsResponse =
         await _firestoreWrapper.getSubcollectionItems(
-      collectionName: firestoreMatchCollection,
+      collectionName: firestoreMatchesCollection,
       itemId: id,
       subcollectionName: firestoreMatchPartipantsSubcollection,
     );
@@ -50,7 +51,7 @@ class MatchesRemoteAppDataSource implements MatchesRemoteDataSource {
     // TODO old - this actually works for all matches because we dont need exact participants there
     final List<QueryDocumentSnapshot<Map<String, dynamic>>> response =
         await _firestoreWrapper.getCollectionItems(
-            collectionPath: firestoreMatchCollection);
+            collectionPath: firestoreMatchesCollection);
 
     final List<MatchRemoteDTO> dtos =
         _generateMatchDTOsFromFirestoreResponse(response);

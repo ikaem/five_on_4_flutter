@@ -20,9 +20,11 @@ class LoginCubit extends Cubit<LoginCubitState> with ValidationMixin {
 
 // TODO temp seeded
   final BehaviorSubject<String> _emailSubject =
-      BehaviorSubject.seeded('karlo@net.hr');
+      // BehaviorSubject.seeded('karlo@net.hr');
+      BehaviorSubject();
   final BehaviorSubject<String> _passwordSubject =
-      BehaviorSubject.seeded('123456789k');
+      // BehaviorSubject.seeded('123456789k');
+      BehaviorSubject<String>();
 
   StreamSink<String> get _emailSink => _emailSubject.sink;
   StreamSink<String> get _passwordSink => _passwordSubject.sink;

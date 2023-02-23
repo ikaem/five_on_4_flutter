@@ -32,7 +32,7 @@ class PlayersFakeDataSource implements PlayersRemoteDataSource {
 
     final PlayerRemoteDTO playerRemoteDTO = PlayerRemoteDTO(
       id: id,
-      authId: args.authId,
+      // authId: args.authId,
       nickname: args.nickname,
       email: args.email,
     );
@@ -42,23 +42,23 @@ class PlayersFakeDataSource implements PlayersRemoteDataSource {
     return id;
   }
 
-  @override
-  Future<PlayerRemoteDTO> getPlayerByAuthId(String authId) async {
-    await Future.delayed(Duration(milliseconds: 500));
+  // @override
+  // Future<PlayerRemoteDTO> getPlayerByAuthId(String authId) async {
+  //   await Future.delayed(Duration(milliseconds: 500));
 
-    final PlayerRemoteDTO? dto = players.firstWhere((p) => p.authId == authId);
+  //   final PlayerRemoteDTO? dto = players.firstWhere((p) => p.id == authId);
 
-    if (dto == null)
-      throw HttpNotFoundException(message: 'Player by authId not found');
+  //   if (dto == null)
+  //     throw HttpNotFoundException(message: 'Player by authId not found');
 
-    return dto;
-  }
+  //   return dto;
+  // }
 }
 
 final List<PlayerRemoteDTO> players = [
   PlayerRemoteDTO(
     id: '1',
-    authId: 'D8txq2Tr0tho5Immp6wHoPN4c0l2',
+    // authId: 'D8txq2Tr0tho5Immp6wHoPN4c0l2',
     nickname: 'Zidane',
     email: 'karlo@net.hr',
   )

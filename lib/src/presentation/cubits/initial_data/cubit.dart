@@ -54,30 +54,7 @@ class InitialDataCubit extends Cubit<InitialDataCubitState> {
       _initialDataProvider.isLoading = true;
       _initialDataSubscription = _initialDataUseCases.initialDataStream.listen(
         _handleInitialDataEvent,
-        // TODO not sure about the error
-        // onError: (Object e) {
-        //   emit(
-        //     InitialDataCubitStateFailure(
-        //         'There was an error retrieving initial data'),
-        //   );
-        // },
       );
-      // _initialDataSubscription = _initialDataUseCases.initialDataStream.listen(
-      //     (event) {
-      //   // TODO test
-
-      //   log(event.toString());
-      // }
-      // _handleInitialDataEvent,
-      // TODO not sure if error will propagate to catch bloc
-      // if no propagation, maybe use await for to handle this - or create an error handler to handle it, - but then on auth check on app start can fail
-      // onError: (Object e) {
-      //   emit(
-      //     InitialDataCubitState.failure(
-      //         'There was an error retrieving initial data'),
-      //   );
-      // },
-      // );
 
       await _initialDataUseCases.onAuthCheckOnAppStart();
     } catch (e) {
@@ -95,15 +72,11 @@ class InitialDataCubit extends Cubit<InitialDataCubitState> {
     _initialDataProvider.setInitialData(
         auth: initialData.auth, player: initialData.currentPlayer);
 
-    // if auth is null, remove current player too
     if (_initialDataProvider.auth == null) {
       _initialDataProvider.currentPlayer = null;
       return;
     }
 
-    // now we know that the auth is not null
-
-    // if auth is not null and current player is null, go and fetch player
     if (initialDataProvider.currentPlayer == null) {
       await _initialDataUseCases.onLoadCurrentPlayer(initialData.auth!.id);
     }

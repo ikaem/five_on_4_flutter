@@ -21,8 +21,7 @@ MatchRemoteDTO _$MatchRemoteDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MatchRemoteDTO {
   String get id => throw _privateConstructorUsedError;
-  String get name =>
-      throw _privateConstructorUsedError; // TODO in the future, we will have to make this something like status of player joined - so again some reference or something - or just keep it in the database
+  String get name => throw _privateConstructorUsedError;
   List<MatchParticipantRemoteDTO> get participants =>
       throw _privateConstructorUsedError;
 
@@ -136,9 +135,7 @@ class _$_MatchRemoteDTO implements _MatchRemoteDTO {
   final String id;
   @override
   final String name;
-// TODO in the future, we will have to make this something like status of player joined - so again some reference or something - or just keep it in the database
   final List<MatchParticipantRemoteDTO> _participants;
-// TODO in the future, we will have to make this something like status of player joined - so again some reference or something - or just keep it in the database
   @override
   List<MatchParticipantRemoteDTO> get participants {
     if (_participants is EqualUnmodifiableListView) return _participants;
@@ -195,7 +192,7 @@ abstract class _MatchRemoteDTO implements MatchRemoteDTO {
   String get id;
   @override
   String get name;
-  @override // TODO in the future, we will have to make this something like status of player joined - so again some reference or something - or just keep it in the database
+  @override
   List<MatchParticipantRemoteDTO> get participants;
   @override
   @JsonKey(ignore: true)

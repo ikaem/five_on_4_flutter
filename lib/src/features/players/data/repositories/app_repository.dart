@@ -49,15 +49,15 @@ class PlayersAppRepository implements PlayersRepository {
     return players;
   }
 
-  @override
-  Future<void> loadPlayerbyAuthId(String authId) async {
-    final PlayerRemoteDTO playerRemoteDTO =
-        await playersRemoteDataSource.getPlayerByAuthId(authId);
+  // @override
+  // Future<void> loadPlayerbyAuthId(String authId) async {
+  //   final PlayerRemoteDTO playerRemoteDTO =
+  //       await playersRemoteDataSource.getPlayerByAuthId(authId);
 
-    final PlayerModel playerModel = PlayerModel.fromRemoteDTO(playerRemoteDTO);
+  //   final PlayerModel playerModel = PlayerModel.fromRemoteDTO(playerRemoteDTO);
 
-    _currentPlayerSink.add(playerModel);
-  }
+  //   _currentPlayerSink.add(playerModel);
+  // }
 
   @override
   // TODO no need for this to be async

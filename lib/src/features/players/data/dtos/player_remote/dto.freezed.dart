@@ -20,8 +20,8 @@ PlayerRemoteDTO _$PlayerRemoteDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PlayerRemoteDTO {
-  String get id => throw _privateConstructorUsedError;
-  String get authId => throw _privateConstructorUsedError;
+  String get id =>
+      throw _privateConstructorUsedError; // required String authId,
   String get nickname => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
 
@@ -37,7 +37,7 @@ abstract class $PlayerRemoteDTOCopyWith<$Res> {
           PlayerRemoteDTO value, $Res Function(PlayerRemoteDTO) then) =
       _$PlayerRemoteDTOCopyWithImpl<$Res, PlayerRemoteDTO>;
   @useResult
-  $Res call({String id, String authId, String nickname, String email});
+  $Res call({String id, String nickname, String email});
 }
 
 /// @nodoc
@@ -54,7 +54,6 @@ class _$PlayerRemoteDTOCopyWithImpl<$Res, $Val extends PlayerRemoteDTO>
   @override
   $Res call({
     Object? id = null,
-    Object? authId = null,
     Object? nickname = null,
     Object? email = null,
   }) {
@@ -62,10 +61,6 @@ class _$PlayerRemoteDTOCopyWithImpl<$Res, $Val extends PlayerRemoteDTO>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      authId: null == authId
-          ? _value.authId
-          : authId // ignore: cast_nullable_to_non_nullable
               as String,
       nickname: null == nickname
           ? _value.nickname
@@ -87,7 +82,7 @@ abstract class _$$_PlayerRemoteDTOCopyWith<$Res>
       __$$_PlayerRemoteDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String authId, String nickname, String email});
+  $Res call({String id, String nickname, String email});
 }
 
 /// @nodoc
@@ -102,7 +97,6 @@ class __$$_PlayerRemoteDTOCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? authId = null,
     Object? nickname = null,
     Object? email = null,
   }) {
@@ -110,10 +104,6 @@ class __$$_PlayerRemoteDTOCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      authId: null == authId
-          ? _value.authId
-          : authId // ignore: cast_nullable_to_non_nullable
               as String,
       nickname: null == nickname
           ? _value.nickname
@@ -131,18 +121,14 @@ class __$$_PlayerRemoteDTOCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PlayerRemoteDTO implements _PlayerRemoteDTO {
   const _$_PlayerRemoteDTO(
-      {required this.id,
-      required this.authId,
-      required this.nickname,
-      required this.email});
+      {required this.id, required this.nickname, required this.email});
 
   factory _$_PlayerRemoteDTO.fromJson(Map<String, dynamic> json) =>
       _$$_PlayerRemoteDTOFromJson(json);
 
   @override
   final String id;
-  @override
-  final String authId;
+// required String authId,
   @override
   final String nickname;
   @override
@@ -150,7 +136,7 @@ class _$_PlayerRemoteDTO implements _PlayerRemoteDTO {
 
   @override
   String toString() {
-    return 'PlayerRemoteDTO(id: $id, authId: $authId, nickname: $nickname, email: $email)';
+    return 'PlayerRemoteDTO(id: $id, nickname: $nickname, email: $email)';
   }
 
   @override
@@ -159,7 +145,6 @@ class _$_PlayerRemoteDTO implements _PlayerRemoteDTO {
         (other.runtimeType == runtimeType &&
             other is _$_PlayerRemoteDTO &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.authId, authId) || other.authId == authId) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.email, email) || other.email == email));
@@ -167,7 +152,7 @@ class _$_PlayerRemoteDTO implements _PlayerRemoteDTO {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, authId, nickname, email);
+  int get hashCode => Object.hash(runtimeType, id, nickname, email);
 
   @JsonKey(ignore: true)
   @override
@@ -186,7 +171,6 @@ class _$_PlayerRemoteDTO implements _PlayerRemoteDTO {
 abstract class _PlayerRemoteDTO implements PlayerRemoteDTO {
   const factory _PlayerRemoteDTO(
       {required final String id,
-      required final String authId,
       required final String nickname,
       required final String email}) = _$_PlayerRemoteDTO;
 
@@ -195,9 +179,7 @@ abstract class _PlayerRemoteDTO implements PlayerRemoteDTO {
 
   @override
   String get id;
-  @override
-  String get authId;
-  @override
+  @override // required String authId,
   String get nickname;
   @override
   String get email;
