@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:five_on_4_flutter/src/domain/use_cases/initial_data/use_cases.dart';
 import 'package:five_on_4_flutter/src/domain/values/initial_data/value.dart';
@@ -42,21 +41,39 @@ class InitialDataCubit extends Cubit<InitialDataCubitState> {
   }
 
   Future<void> _onInitializeCubit() async {
-    _initialDataUseCases.authStream.listen((event) {
-      log('any stgream here');
-    });
+    // _initialDataUseCases.authStream.listen((event) {
+    //   log('any stgream here');
+    // });
 
-    _initialDataUseCases.currentPlayerStream.listen((event) {
-      log('Current player stream: $event');
-    });
+    // _initialDataUseCases.currentPlayerStream.listen((event) {
+    //   log('Current player stream: $event');
+    // });
 
     try {
       _initialDataProvider.isLoading = true;
-      _initialDataSubscription = _initialDataUseCases.initialDataStream.listen(
-        _handleInitialDataEvent,
-      );
+      // _initialDataSubscription = _initialDataUseCases.initialDataStream.listen(
+      //   _handleInitialDataEvent,
+      //   onError: (e) async {
+      //     // TODO test
+      //     log('Todod: $e');
+      //     await _initialDataUseCases.initialDataClear();
+
+      //     // TODO test
+      //   },
+      // );
+      // TODO doing this to propagate errors
+      // await for (final InitialDataValue initialData
+      //     in _initialDataUseCases.initialDataStream) {
+      //   // TODO test
+      //   // _handleInitialDataEvent(initialData);
+      // }
+
+// TODO not sure about this - these are separate things
 
       await _initialDataUseCases.onAuthCheckOnAppStart();
+      await for (var something in _initialDataUseCases.initialDataStream) {
+        await _handleInitialDataEvent(something);
+      }
     } catch (e) {
       emit(
         InitialDataCubitStateFailure(
@@ -78,7 +95,12 @@ class InitialDataCubit extends Cubit<InitialDataCubitState> {
     }
 
     if (initialDataProvider.currentPlayer == null) {
-      await _initialDataUseCases.onLoadCurrentPlayer(initialData.auth!.id);
+      try {
+        await _initialDataUseCases.onLoadCurrentPlayer(initialData.auth!.id);
+      } catch (e) {
+        // TODO test
+        rethrow;
+      }
     }
 
     // TODO test

@@ -1,0 +1,1 @@
+class MatchParticipantException implements Exception {}

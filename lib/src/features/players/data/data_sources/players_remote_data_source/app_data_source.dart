@@ -20,6 +20,11 @@ class PlayersRemoteAppDataSource implements PlayersRemoteDataSource {
       collectionName: firestorePlayersCollection,
       itemId: id,
     );
+
+    final PlayerRemoteDTO playerRemoteDTO =
+        PlayerRemoteDTO.fromFirestoreSnapshot(response);
+
+    return playerRemoteDTO;
   }
 
   Future<List<PlayerRemoteDTO>> getPlayers() async {

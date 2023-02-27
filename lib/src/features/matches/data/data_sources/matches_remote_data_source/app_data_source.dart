@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_sources.dart';
+import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_participant_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/args/match_join/match_join.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
@@ -66,7 +67,36 @@ class MatchesRemoteAppDataSource implements MatchesRemoteDataSource {
 
   @override
   Future<void> joinMatch(MatchJoinArgs args) async {
-    throw 'something';
+    // get player
+
+    final List<QueryDocumentSnapshot<Map<String, dynamic>>>
+        matchParticipantsSnapshots =
+        await _firestoreWrapper.getSubcollectionItems(
+      collectionName: firestoreMatchesCollection,
+      itemId: args.matchId,
+      subcollectionName: firestoreMatchPartipantsSubcollection,
+    );
+
+    final List<MatchParticipantRemoteDTO> matchParticipantsDTOs =
+        matchParticipantsSnapshots
+            .map((p) => MatchParticipantRemoteDTO.fromFirestoreSnapshot(
+                matchId: args.matchId, snapshot: p))
+            .toList();
+
+    final bool isPlayerAlreadyJoined =
+        matchParticipantsDTOs.any((p) => p.userId == args.playerId);
+
+    if (isPlayerAlreadyJoined) throw MatchParticipantAlreadyJoinedException();
+
+    // check if this player has already joined
+
+    // final Map<String, dynamic> participantData = {
+    //   "nickname": args.
+    // }
+
+    // create data
+
+    // add value to participants subcollection
   }
 
   @override

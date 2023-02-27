@@ -40,6 +40,8 @@ class FirestoreWrapper {
     final DocumentSnapshot<Map<String, dynamic>> item =
         await _db.collection(collectionName).doc(itemId).get();
 
+    _validateSnapshot(snapshot: item);
+
     return item;
   }
 
@@ -49,7 +51,7 @@ class FirestoreWrapper {
   }) {
     final Map<String, dynamic>? data = snapshot.data();
 
-    if (data == null) throw HttpNotFoundException(message: 'message');
+    if (data == null) throw HttpNotFoundException(message: 'Item not found');
   }
 
   Future<QueryDocumentSnapshot<Map<String, dynamic>>>

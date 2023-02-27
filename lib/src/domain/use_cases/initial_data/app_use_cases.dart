@@ -63,6 +63,13 @@ class InitialDataAppUseCases implements InitialDataUseCases {
   @override
   Future<void> onLoadCurrentPlayer(String authId) async {
     // await _playersRepository.loadPlayerbyAuthId(authId);
-    await _playersRepository.getPlayer(authId);
+    try {
+      final PlayerModel player = await _playersRepository.getPlayer(authId);
+      _playersRepository.setCurrentPlayer(player);
+    } catch (e) {
+      _playersRepository.setCurrentPlayer(null);
+      // TODO test
+      rethrow;
+    }
   }
 }

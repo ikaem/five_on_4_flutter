@@ -15,7 +15,7 @@ class PlayerRemoteDTO with _$PlayerRemoteDTO {
 
   factory PlayerRemoteDTO.fromFirestoreSnapshot(
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final Map<String, dynamic> playerData = snapshot.data();
+    final Map<String, dynamic> playerData = snapshot.data()!;
 
     final String playerId = snapshot.id;
     // final String playerAuthId = snapshot['authId'] as String;

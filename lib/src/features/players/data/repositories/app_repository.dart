@@ -4,6 +4,7 @@ import 'package:five_on_4_flutter/src/features/players/data/data_sources/players
 import 'package:five_on_4_flutter/src/features/players/data/dtos/player_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/players/data/repositories/repository.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/args/player_args.dart';
+import 'package:five_on_4_flutter/src/features/players/domain/exceptions/exceptions.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -39,6 +40,19 @@ class PlayersAppRepository implements PlayersRepository {
     return player;
   }
 
+  // TODo TEST
+  @override
+  void setCurrentPlayer(PlayerModel? playerModel) {
+    // TODO not sure about this
+    if (playerModel == null) {
+      _currentPlayerSink.addError(
+          PlayerNotFoundException(message: 'Current player not found'));
+      return;
+    }
+
+    _currentPlayerSink.add(playerModel);
+  }
+
   Future<List<PlayerModel>> getPlayers() async {
     final List<PlayerRemoteDTO> playerRemoteDTOs =
         await playersRemoteDataSource.getPlayers();
@@ -63,6 +77,7 @@ class PlayersAppRepository implements PlayersRepository {
   // TODO no need for this to be async
   // TODO this needs to be called on logout as well as part of clear initial data
   Future<void> clearCurrentPlayer() async {
+    // TODO this will probably turn into loo
     _currentPlayerSink.add(null);
   }
 }

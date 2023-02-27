@@ -9,4 +9,5 @@ abstract class PlayersRepository {
   Future<void> clearCurrentPlayer();
   Stream<PlayerModel?> get observeCurrentPlayer;
   Future<PlayerModel?> get currentPlayer;
+  void setCurrentPlayer(PlayerModel? playerModel);
 }
