@@ -27,9 +27,11 @@ class MatchesUseCases {
     if (currentPlayer == null) throw AuthNoSessionException();
 
     final String playerId = currentPlayer.id;
+    final String playerNickname = currentPlayer.nickname;
 
     final MatchJoinArgs matchJoinArgs = MatchJoinArgs(
       playerId: playerId,
+      playerNickname: playerNickname,
       matchId: matchId,
     );
 

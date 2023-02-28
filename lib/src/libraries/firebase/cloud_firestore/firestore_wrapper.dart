@@ -100,7 +100,7 @@ class FirestoreWrapper {
     required Map<String, dynamic> subcollectionItem,
   }) async {
     final DocumentReference<Map<String, dynamic>> parentItemReference =
-        _db.collection(collectionName).doc();
+        _db.collection(collectionName).doc(parentItemId);
 
     final CollectionReference<Map<String, dynamic>> subcollectionReference =
         parentItemReference.collection(subcollectionName);
@@ -109,6 +109,28 @@ class FirestoreWrapper {
         await subcollectionReference.add(subcollectionItem);
 
     return insertReference.id;
+  }
+
+  Future<void> removeSubcollectionItemWhereEqual({
+    required String collectionName,
+    required String parentItemId,
+    required String subcollectionName,
+    required String whereField,
+    required Object value,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> parentItemReference =
+        _db.collection(collectionName).doc(parentItemId);
+
+    final CollectionReference<Map<String, dynamic>> subcollectionReference =
+        parentItemReference.collection(subcollectionName);
+
+    final QuerySnapshot<Map<String, dynamic>> itemsSnapshots =
+        await subcollectionReference.where(whereField, isEqualTo: value).get();
+
+    final DocumentReference<Map<String, dynamic>> itemReference =
+        itemsSnapshots.docs.first.reference;
+
+    await itemReference.delete();
   }
 
   Future<String> insertCollectionItem({
