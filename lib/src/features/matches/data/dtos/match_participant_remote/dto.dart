@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:five_on_4_flutter/src/features/players/data/data.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/enums/enums.dart';
+import 'package:five_on_4_flutter/src/features/players/data/dtos/dtos.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'dto.freezed.dart';
@@ -13,6 +14,9 @@ class MatchParticipantRemoteDTO with _$MatchParticipantRemoteDTO {
     required String userId,
     required String matchId,
     required String nickname,
+    required String status,
+    required int createdAt,
+    required int? expiresAt,
   }) = _MatchParticipantRemoteDTO;
 
   factory MatchParticipantRemoteDTO.fromPlayerRemoteDTO({
@@ -26,6 +30,9 @@ class MatchParticipantRemoteDTO with _$MatchParticipantRemoteDTO {
       userId: playerRemoteDTO.id,
       matchId: matchId,
       nickname: playerRemoteDTO.nickname,
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      expiresAt: null,
+      status: MatchParticipantStatus.joined.name,
     );
 
     return participantRemoteDTO;
@@ -37,15 +44,29 @@ class MatchParticipantRemoteDTO with _$MatchParticipantRemoteDTO {
   }) {
     final Map<String, dynamic> participantData = snapshot.data();
 
+    final Timestamp? participantDataExpiresAt =
+        participantData['expiresAt'] as Timestamp?;
+
     final String participantId = snapshot.id;
     final String userId = participantData['playerId'] as String;
     final String nickname = participantData['nickname'] as String;
+    final String status = participantData['status'] as String;
+    final int createdAt = (participantData['createdAt'] as Timestamp)
+        .toDate()
+        .millisecondsSinceEpoch;
+    final int? expiresAt = participantDataExpiresAt == null
+        ? null
+        : participantDataExpiresAt.toDate().millisecondsSinceEpoch;
+    ;
 
     final MatchParticipantRemoteDTO remoteDTO = MatchParticipantRemoteDTO(
       id: participantId,
       userId: userId,
       matchId: matchId,
       nickname: nickname,
+      status: status,
+      createdAt: createdAt,
+      expiresAt: expiresAt,
     );
 
     return remoteDTO;

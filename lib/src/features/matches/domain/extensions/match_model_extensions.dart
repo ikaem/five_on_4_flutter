@@ -4,6 +4,7 @@ extension MatchModelExtension on MatchModel {
   bool checkHasUserJoinedMatch({
     required String? playerId,
   }) {
-    return participants.any((participant) => participant.userId == playerId);
+    return joinedParticipants
+        .any((participant) => participant.userId == playerId);
   }
 }

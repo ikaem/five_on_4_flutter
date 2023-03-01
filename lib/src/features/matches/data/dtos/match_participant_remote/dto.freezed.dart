@@ -26,6 +26,9 @@ mixin _$MatchParticipantRemoteDTO {
   String get userId => throw _privateConstructorUsedError;
   String get matchId => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
+  int get createdAt => throw _privateConstructorUsedError;
+  int? get expiresAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +42,14 @@ abstract class $MatchParticipantRemoteDTOCopyWith<$Res> {
           $Res Function(MatchParticipantRemoteDTO) then) =
       _$MatchParticipantRemoteDTOCopyWithImpl<$Res, MatchParticipantRemoteDTO>;
   @useResult
-  $Res call({String id, String userId, String matchId, String nickname});
+  $Res call(
+      {String id,
+      String userId,
+      String matchId,
+      String nickname,
+      String status,
+      int createdAt,
+      int? expiresAt});
 }
 
 /// @nodoc
@@ -60,6 +70,9 @@ class _$MatchParticipantRemoteDTOCopyWithImpl<$Res,
     Object? userId = null,
     Object? matchId = null,
     Object? nickname = null,
+    Object? status = null,
+    Object? createdAt = null,
+    Object? expiresAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -78,6 +91,18 @@ class _$MatchParticipantRemoteDTOCopyWithImpl<$Res,
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as int,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -91,7 +116,14 @@ abstract class _$$_MatchParticipantRemoteDTOCopyWith<$Res>
       __$$_MatchParticipantRemoteDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String userId, String matchId, String nickname});
+  $Res call(
+      {String id,
+      String userId,
+      String matchId,
+      String nickname,
+      String status,
+      int createdAt,
+      int? expiresAt});
 }
 
 /// @nodoc
@@ -111,6 +143,9 @@ class __$$_MatchParticipantRemoteDTOCopyWithImpl<$Res>
     Object? userId = null,
     Object? matchId = null,
     Object? nickname = null,
+    Object? status = null,
+    Object? createdAt = null,
+    Object? expiresAt = freezed,
   }) {
     return _then(_$_MatchParticipantRemoteDTO(
       id: null == id
@@ -129,6 +164,18 @@ class __$$_MatchParticipantRemoteDTOCopyWithImpl<$Res>
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as int,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -140,7 +187,10 @@ class _$_MatchParticipantRemoteDTO implements _MatchParticipantRemoteDTO {
       {required this.id,
       required this.userId,
       required this.matchId,
-      required this.nickname});
+      required this.nickname,
+      required this.status,
+      required this.createdAt,
+      required this.expiresAt});
 
   factory _$_MatchParticipantRemoteDTO.fromJson(Map<String, dynamic> json) =>
       _$$_MatchParticipantRemoteDTOFromJson(json);
@@ -154,10 +204,16 @@ class _$_MatchParticipantRemoteDTO implements _MatchParticipantRemoteDTO {
   final String matchId;
   @override
   final String nickname;
+  @override
+  final String status;
+  @override
+  final int createdAt;
+  @override
+  final int? expiresAt;
 
   @override
   String toString() {
-    return 'MatchParticipantRemoteDTO(id: $id, userId: $userId, matchId: $matchId, nickname: $nickname)';
+    return 'MatchParticipantRemoteDTO(id: $id, userId: $userId, matchId: $matchId, nickname: $nickname, status: $status, createdAt: $createdAt, expiresAt: $expiresAt)';
   }
 
   @override
@@ -169,12 +225,18 @@ class _$_MatchParticipantRemoteDTO implements _MatchParticipantRemoteDTO {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.matchId, matchId) || other.matchId == matchId) &&
             (identical(other.nickname, nickname) ||
-                other.nickname == nickname));
+                other.nickname == nickname) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.expiresAt, expiresAt) ||
+                other.expiresAt == expiresAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, matchId, nickname);
+  int get hashCode => Object.hash(
+      runtimeType, id, userId, matchId, nickname, status, createdAt, expiresAt);
 
   @JsonKey(ignore: true)
   @override
@@ -196,7 +258,10 @@ abstract class _MatchParticipantRemoteDTO implements MatchParticipantRemoteDTO {
       {required final String id,
       required final String userId,
       required final String matchId,
-      required final String nickname}) = _$_MatchParticipantRemoteDTO;
+      required final String nickname,
+      required final String status,
+      required final int createdAt,
+      required final int? expiresAt}) = _$_MatchParticipantRemoteDTO;
 
   factory _MatchParticipantRemoteDTO.fromJson(Map<String, dynamic> json) =
       _$_MatchParticipantRemoteDTO.fromJson;
@@ -209,6 +274,12 @@ abstract class _MatchParticipantRemoteDTO implements MatchParticipantRemoteDTO {
   String get matchId;
   @override
   String get nickname;
+  @override
+  String get status;
+  @override
+  int get createdAt;
+  @override
+  int? get expiresAt;
   @override
   @JsonKey(ignore: true)
   _$$_MatchParticipantRemoteDTOCopyWith<_$_MatchParticipantRemoteDTO>

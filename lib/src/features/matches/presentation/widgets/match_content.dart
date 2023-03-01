@@ -42,16 +42,32 @@ class MatchContent extends StatelessWidget {
           height: SpacingConstants.small,
         ),
         // TOOD this should be its own widget
-        const Text('Players:'),
+        const Text('Confirmed players:'),
         const SizedBox(
           height: SpacingConstants.small,
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: match.participants.length,
+            itemCount: match.joinedParticipants.length,
             itemBuilder: (context, index) {
               final MatchParticipantModel participant =
-                  match.participants[index];
+                  match.joinedParticipants[index];
+              final String nickname = participant.nickname;
+
+              return Text(nickname);
+            },
+          ),
+        ),
+        const Text('Pending confirmation players:'),
+        const SizedBox(
+          height: SpacingConstants.small,
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: match.invitedParticipants.length,
+            itemBuilder: (context, index) {
+              final MatchParticipantModel participant =
+                  match.invitedParticipants[index];
               final String nickname = participant.nickname;
 
               return Text(nickname);

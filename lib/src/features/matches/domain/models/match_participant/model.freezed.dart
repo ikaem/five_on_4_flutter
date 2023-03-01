@@ -19,6 +19,9 @@ mixin _$MatchParticipantModel {
   String get id => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
+  MatchParticipantStatus get status => throw _privateConstructorUsedError;
+  int get createdAt => throw _privateConstructorUsedError;
+  int? get expiresAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MatchParticipantModelCopyWith<MatchParticipantModel> get copyWith =>
@@ -31,7 +34,13 @@ abstract class $MatchParticipantModelCopyWith<$Res> {
           $Res Function(MatchParticipantModel) then) =
       _$MatchParticipantModelCopyWithImpl<$Res, MatchParticipantModel>;
   @useResult
-  $Res call({String id, String userId, String nickname});
+  $Res call(
+      {String id,
+      String userId,
+      String nickname,
+      MatchParticipantStatus status,
+      int createdAt,
+      int? expiresAt});
 }
 
 /// @nodoc
@@ -51,6 +60,9 @@ class _$MatchParticipantModelCopyWithImpl<$Res,
     Object? id = null,
     Object? userId = null,
     Object? nickname = null,
+    Object? status = null,
+    Object? createdAt = null,
+    Object? expiresAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -65,6 +77,18 @@ class _$MatchParticipantModelCopyWithImpl<$Res,
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as MatchParticipantStatus,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as int,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -77,7 +101,13 @@ abstract class _$$_MatchParticipantModelCopyWith<$Res>
       __$$_MatchParticipantModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String userId, String nickname});
+  $Res call(
+      {String id,
+      String userId,
+      String nickname,
+      MatchParticipantStatus status,
+      int createdAt,
+      int? expiresAt});
 }
 
 /// @nodoc
@@ -94,6 +124,9 @@ class __$$_MatchParticipantModelCopyWithImpl<$Res>
     Object? id = null,
     Object? userId = null,
     Object? nickname = null,
+    Object? status = null,
+    Object? createdAt = null,
+    Object? expiresAt = freezed,
   }) {
     return _then(_$_MatchParticipantModel(
       id: null == id
@@ -108,6 +141,18 @@ class __$$_MatchParticipantModelCopyWithImpl<$Res>
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as MatchParticipantStatus,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as int,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -116,7 +161,12 @@ class __$$_MatchParticipantModelCopyWithImpl<$Res>
 
 class _$_MatchParticipantModel implements _MatchParticipantModel {
   const _$_MatchParticipantModel(
-      {required this.id, required this.userId, required this.nickname});
+      {required this.id,
+      required this.userId,
+      required this.nickname,
+      required this.status,
+      required this.createdAt,
+      required this.expiresAt});
 
   @override
   final String id;
@@ -124,10 +174,16 @@ class _$_MatchParticipantModel implements _MatchParticipantModel {
   final String userId;
   @override
   final String nickname;
+  @override
+  final MatchParticipantStatus status;
+  @override
+  final int createdAt;
+  @override
+  final int? expiresAt;
 
   @override
   String toString() {
-    return 'MatchParticipantModel(id: $id, userId: $userId, nickname: $nickname)';
+    return 'MatchParticipantModel(id: $id, userId: $userId, nickname: $nickname, status: $status, createdAt: $createdAt, expiresAt: $expiresAt)';
   }
 
   @override
@@ -138,11 +194,17 @@ class _$_MatchParticipantModel implements _MatchParticipantModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.nickname, nickname) ||
-                other.nickname == nickname));
+                other.nickname == nickname) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.expiresAt, expiresAt) ||
+                other.expiresAt == expiresAt));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, nickname);
+  int get hashCode => Object.hash(
+      runtimeType, id, userId, nickname, status, createdAt, expiresAt);
 
   @JsonKey(ignore: true)
   @override
@@ -156,7 +218,10 @@ abstract class _MatchParticipantModel implements MatchParticipantModel {
   const factory _MatchParticipantModel(
       {required final String id,
       required final String userId,
-      required final String nickname}) = _$_MatchParticipantModel;
+      required final String nickname,
+      required final MatchParticipantStatus status,
+      required final int createdAt,
+      required final int? expiresAt}) = _$_MatchParticipantModel;
 
   @override
   String get id;
@@ -164,6 +229,12 @@ abstract class _MatchParticipantModel implements MatchParticipantModel {
   String get userId;
   @override
   String get nickname;
+  @override
+  MatchParticipantStatus get status;
+  @override
+  int get createdAt;
+  @override
+  int? get expiresAt;
   @override
   @JsonKey(ignore: true)
   _$$_MatchParticipantModelCopyWith<_$_MatchParticipantModel> get copyWith =>
