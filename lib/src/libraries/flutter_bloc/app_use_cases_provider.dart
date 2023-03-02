@@ -1,6 +1,7 @@
 import 'package:five_on_4_flutter/src/domain/use_cases/app_use_cases.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/players/domain/use_cases/players_use_cases.dart';
 import 'package:five_on_4_flutter/src/features/weather/domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +28,9 @@ class AppUseCasesProvider extends StatelessWidget {
         ),
         RepositoryProvider<AuthUseCases>(
           create: (context) => appUseCases.authUseCases,
+        ),
+        RepositoryProvider<PlayersUseCases>(
+          create: (context) => appUseCases.playersUseCases,
         ),
       ],
       child: child,

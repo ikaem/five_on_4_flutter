@@ -4,6 +4,7 @@ typedef OnPlayerEvent = void Function(PlayerModel? event);
 typedef OnPlayerEventException = void Function(Object e);
 
 abstract class PlayersUseCases {
+  Stream<PlayerModel> onSearchPlayers(PlayersGetSearchFilters);
   void handleCurrentPlayerSubscription({
     required OnPlayerEvent onPlayerEvent,
     required OnPlayerEventException onPlayerEventException,

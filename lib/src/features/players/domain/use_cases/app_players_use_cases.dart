@@ -30,4 +30,7 @@ class PlayersAppUseCases implements PlayersUseCases {
     // _currentPlayerSubscription.onData(onAuthEvent);
     // _currentPlayerSubscription.onError(onAuthEventException);
   }
+
+  @override
+  Stream<PlayerModel> onSearchPlayers(PlayersGetSearchFilters) 
 }

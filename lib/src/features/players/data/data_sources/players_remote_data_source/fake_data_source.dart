@@ -2,6 +2,7 @@ import 'package:five_on_4_flutter/src/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/data_source.dart';
 import 'package:five_on_4_flutter/src/features/players/data/dtos/player_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/args/player_args.dart';
+import 'package:five_on_4_flutter/src/features/players/presentation/blocs/players_get/bloc.dart';
 
 class PlayersFakeDataSource implements PlayersRemoteDataSource {
   Future<PlayerRemoteDTO> getPlayer(String id) async {
@@ -40,6 +41,12 @@ class PlayersFakeDataSource implements PlayersRemoteDataSource {
     players.add(playerRemoteDTO);
 
     return id;
+  }
+
+  @override
+  Future<List<PlayerRemoteDTO>> searchPlayers(PlayersGetSearchFilters filters) {
+    // TODO: implement searchPlayers
+    throw UnimplementedError();
   }
 
   // @override

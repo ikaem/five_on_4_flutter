@@ -3,6 +3,8 @@ import 'package:five_on_4_flutter/src/domain/use_cases/initial_data/app_use_case
 import 'package:five_on_4_flutter/src/domain/use_cases/initial_data/use_cases.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/players/domain/use_cases/app_players_use_cases.dart';
+import 'package:five_on_4_flutter/src/features/players/domain/use_cases/players_use_cases.dart';
 import 'package:five_on_4_flutter/src/features/weather/domain/domain.dart';
 
 class AppUseCases {
@@ -25,6 +27,10 @@ class AppUseCases {
     authRepository: appRepositories.authRepository,
     // playersRepository: appRepositories.playersRepository,
   );
+
+  late final PlayersUseCases playersUseCases =
+      PlayersAppUseCases(playersRepository: appRepositories.playersRepository);
+
   late final InitialDataUseCases initialDataUseCases = InitialDataAppUseCases(
     authRepository: appRepositories.authRepository,
     playersRepository: appRepositories.playersRepository,

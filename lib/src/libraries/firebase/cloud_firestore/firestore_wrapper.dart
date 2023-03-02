@@ -7,8 +7,43 @@ typedef WriteBatchSet = void Function<T>(
   SetOptions? options,
 ]);
 
+typedef QueryFilter<T> = Query<T> Function(
+  Object field, {
+  Object? isEqualTo,
+  Object? isNotEqualTo,
+  Object? isLessThan,
+  Object? isLessThanOrEqualTo,
+  Object? isGreaterThan,
+  Object? isGreaterThanOrEqualTo,
+  Object? arrayContains,
+  Iterable<Object?>? arrayContainsAny,
+  Iterable<Object?>? whereIn,
+  Iterable<Object?>? whereNotIn,
+  bool? isNull,
+});
+
 class FirestoreWrapper {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+// TODO rename this possibley
+// also, we might actually expose the whole query
+  // Future<void> getSearchResults({
+  //   required String collectionName,
+  //   // required Query<Map<String, dynamic>> Function() queryFilter,
+  //   required List<QueryFilter> queryFilters,
+  // }) async {
+  //   final Query<Map<String, dynamic>> query = _db.collection(collectionName);
+  //   ;
+  // }
+
+  Query<Map<String, dynamic>> getCollectionQuery({
+    required String collectionName,
+  }) {
+    final Query<Map<String, dynamic>> reference =
+        _db.collection(collectionName);
+
+    return reference;
+  }
 
   DocumentReference<Map<String, dynamic>> getCollectionDocumentReference({
     required String collectionName,

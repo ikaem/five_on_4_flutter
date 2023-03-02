@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/data_source.dart';
 import 'package:five_on_4_flutter/src/features/players/data/dtos/player_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/args/player_args.dart';
+import 'package:five_on_4_flutter/src/features/players/presentation/blocs/players_get/bloc.dart';
 import 'package:five_on_4_flutter/src/libraries/libraries.dart';
 
 class PlayersRemoteAppDataSource implements PlayersRemoteDataSource {
@@ -44,6 +45,40 @@ class PlayersRemoteAppDataSource implements PlayersRemoteDataSource {
     );
 
     return playerId;
+  }
+
+  // TODO should override this
+  @override
+  Future<List<PlayerRemoteDTO>> searchPlayers(
+    PlayersGetSearchFilters filters,
+  ) async {
+    final String? searchTerm = filters.searchTerm;
+
+    Query<Map<String, dynamic>> playersCollectionQuery =
+        _firestoreWrapper.getCollectionQuery(
+      collectionName: firestorePlayersCollection,
+    );
+
+    final bool shouldSkipSearch = searchTerm == null || searchTerm.isEmpty;
+
+    if (shouldSkipSearch) return [];
+
+    playersCollectionQuery = playersCollectionQuery.where(
+      'nickname',
+      arrayContainsAny: [searchTerm],
+    ).where(
+      'email',
+      arrayContainsAny: [searchTerm],
+    );
+
+    final QuerySnapshot<Map<String, dynamic>> result =
+        await playersCollectionQuery.get();
+
+    final List<PlayerRemoteDTO> playerDTOs = result.docs
+        .map((e) => PlayerRemoteDTO.fromFirestoreSnapshot(e))
+        .toList();
+
+    return playerDTOs;
   }
 
   // @override
