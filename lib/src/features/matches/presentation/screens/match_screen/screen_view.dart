@@ -25,6 +25,8 @@ class _MatchScreenViewState extends State<MatchScreenView> {
   late final MatchGetCubit _matchGetCubit = context.read<MatchGetCubit>();
   // late final AuthStatusCubit _authStatusCubit = context.read<AuthStatusCubit>();
 
+  late final PlayersGetBloc _playersGetBloc = context.read<PlayersGetBloc>();
+
   @override
   void initState() {
     super.initState();
@@ -99,7 +101,23 @@ class _MatchScreenViewState extends State<MatchScreenView> {
       appBar: AppBar(
         title: Text('Match details'),
         actions: [
-          AppBarMatchParticipantsAction(),
+          // TODO note sure if bloc builder should be here
+          // it should probably be in app bar match participatns action, to be honest
+          BlocBuilder<PlayersGetBloc, PlayersGetBlocState>(
+            builder: (context, state) {
+              final bool isLoading = state is PlayersGetBlocStateLoading;
+              final List<PlayerModel> foundPlayers =
+                  state is PlayersGetBlocStateSuccess ? state.players : [];
+
+              return AppBarMatchParticipantsAction(
+                onPlayersSearch: (filters) => _playersGetBloc.add(
+                  PlayersGetBlocEventSearchMany(filters),
+                ),
+                foundPlayers: foundPlayers,
+                isLoading: isLoading,
+              );
+            },
+          ),
           // TODO test
           AppBarMatchJoinAction(
               // matchJoinCubit: _matchJoinCubit,
@@ -147,10 +165,18 @@ typedef OnPlayersSearch = void Function(PlayersGetSearchFilters filters);
 class AppBarMatchParticipantsAction extends StatelessWidget {
   const AppBarMatchParticipantsAction({
     super.key,
+    required this.onPlayersSearch,
+    required this.foundPlayers,
+    required this.isLoading,
   });
+
+  final OnPlayersSearch onPlayersSearch;
+  final List<PlayerModel> foundPlayers;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
+    // TODO test
     return IconButton(
       onPressed: _onParticipantsActionTap(context),
       icon: Icon(Icons.people_outline),
@@ -161,14 +187,21 @@ class AppBarMatchParticipantsAction extends StatelessWidget {
       () async {
         await showDialog(
           context: context,
-          builder: _participantsDialogBuilder,
+          builder: (context) => _participantsDialogBuilder(
+            context,
+            onPlayersSearch,
+          ),
           // builder: (context) {
           //   return Material(child: TextField());
           // },
         );
       };
 
-  Widget _participantsDialogBuilder(BuildContext context) {
+  Widget _participantsDialogBuilder(
+    BuildContext context,
+    Function(PlayersGetSearchFilters) onSearchInputChanged,
+    // TODO i dont get data here - i need to get data here, but this is already rendered when i open it
+  ) {
     return Material(
       child: Container(
         color: Colors.white,
@@ -178,17 +211,35 @@ class AppBarMatchParticipantsAction extends StatelessWidget {
           style: TextStyle(
             color: Colors.black,
           ),
-          child: Column(
+          child: ListView(
             children: [
               Text('Search player to invite to a match'),
               SizedBox(height: SpacingConstants.medium),
               TextField(
+                onChanged: (value) {
+                  final PlayersGetSearchFilters filters =
+                      PlayersGetSearchFilters(searchTerm: value);
+
+                  onSearchInputChanged(filters);
+
+                  // _playersGetBloc.add(PlayersGetBlocEventSearchMany(filters));
+                },
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black))),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                ),
               ),
               SizedBox(height: SpacingConstants.medium),
               TextButton(onPressed: () {}, child: Text('Search')),
+              SizedBox(height: SpacingConstants.medium),
+              if (isLoading)
+                Center(
+                  child: CircularProgressIndicator(),
+                ),
+
+              // TODO this needs to be better - maybe a separate widget as a sliver or somehting
+              for (final player in foundPlayers) Text(player.nickname)
             ],
           ),
         ),

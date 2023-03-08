@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/data_source.dart';
 import 'package:five_on_4_flutter/src/features/players/data/dtos/player_remote/dto.dart';
@@ -63,13 +65,23 @@ class PlayersRemoteAppDataSource implements PlayersRemoteDataSource {
 
     if (shouldSkipSearch) return [];
 
+    log('this is search term: ${filters.searchTerm}');
+
     playersCollectionQuery = playersCollectionQuery.where(
       'nickname',
-      arrayContainsAny: [searchTerm],
-    ).where(
-      'email',
-      arrayContainsAny: [searchTerm],
+      // arrayContainsAny: [searchTerm],
+      // TODO later, implement better search with fuzzy and so on
+      isEqualTo: searchTerm,
     );
+
+    // playersCollectionQuery = playersCollectionQuery.where(
+    //   'nickname',
+    //   arrayContainsAny: [searchTerm],
+    // );
+    // .where(
+    //   'email',
+    //   arrayContainsAny: [searchTerm],
+    // );
 
     final QuerySnapshot<Map<String, dynamic>> result =
         await playersCollectionQuery.get();

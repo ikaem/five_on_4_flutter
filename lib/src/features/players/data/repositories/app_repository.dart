@@ -6,6 +6,7 @@ import 'package:five_on_4_flutter/src/features/players/data/repositories/reposit
 import 'package:five_on_4_flutter/src/features/players/domain/args/player_args.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/exceptions/exceptions.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
+import 'package:five_on_4_flutter/src/features/players/presentation/blocs/players_get/bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PlayersAppRepository implements PlayersRepository {
@@ -79,5 +80,17 @@ class PlayersAppRepository implements PlayersRepository {
   Future<void> clearCurrentPlayer() async {
     // TODO this will probably turn into loo
     _currentPlayerSink.add(null);
+  }
+
+  @override
+  Stream<List<PlayerModel>> searchPlayersStream(
+      PlayersGetSearchFilters filters) async* {
+    final List<PlayerRemoteDTO> results =
+        await playersRemoteDataSource.searchPlayers(filters);
+
+    final List<PlayerModel> players =
+        results.map(PlayerModel.fromRemoteDTO).toList();
+
+    yield players;
   }
 }

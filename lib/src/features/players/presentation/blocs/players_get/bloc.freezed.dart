@@ -345,26 +345,26 @@ mixin _$PlayersGetBlocState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PlayerGetBlocStateInitial value) initial,
-    required TResult Function(PlayerGetBlocStateLoading value) loading,
-    required TResult Function(PlayerGetBlocStateFailure value) failure,
-    required TResult Function(PlayerGetBlocStateSuccess value) success,
+    required TResult Function(PlayersGetBlocStateInitial value) initial,
+    required TResult Function(PlayersGetBlocStateLoading value) loading,
+    required TResult Function(PlayersGetBlocStateFailure value) failure,
+    required TResult Function(PlayersGetBlocStateSuccess value) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(PlayerGetBlocStateInitial value)? initial,
-    TResult? Function(PlayerGetBlocStateLoading value)? loading,
-    TResult? Function(PlayerGetBlocStateFailure value)? failure,
-    TResult? Function(PlayerGetBlocStateSuccess value)? success,
+    TResult? Function(PlayersGetBlocStateInitial value)? initial,
+    TResult? Function(PlayersGetBlocStateLoading value)? loading,
+    TResult? Function(PlayersGetBlocStateFailure value)? failure,
+    TResult? Function(PlayersGetBlocStateSuccess value)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PlayerGetBlocStateInitial value)? initial,
-    TResult Function(PlayerGetBlocStateLoading value)? loading,
-    TResult Function(PlayerGetBlocStateFailure value)? failure,
-    TResult Function(PlayerGetBlocStateSuccess value)? success,
+    TResult Function(PlayersGetBlocStateInitial value)? initial,
+    TResult Function(PlayersGetBlocStateLoading value)? loading,
+    TResult Function(PlayersGetBlocStateFailure value)? failure,
+    TResult Function(PlayersGetBlocStateSuccess value)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -389,26 +389,28 @@ class _$PlayersGetBlocStateCopyWithImpl<$Res, $Val extends PlayersGetBlocState>
 }
 
 /// @nodoc
-abstract class _$$PlayerGetBlocStateInitialCopyWith<$Res> {
-  factory _$$PlayerGetBlocStateInitialCopyWith(
-          _$PlayerGetBlocStateInitial value,
-          $Res Function(_$PlayerGetBlocStateInitial) then) =
-      __$$PlayerGetBlocStateInitialCopyWithImpl<$Res>;
+abstract class _$$PlayersGetBlocStateInitialCopyWith<$Res> {
+  factory _$$PlayersGetBlocStateInitialCopyWith(
+          _$PlayersGetBlocStateInitial value,
+          $Res Function(_$PlayersGetBlocStateInitial) then) =
+      __$$PlayersGetBlocStateInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PlayerGetBlocStateInitialCopyWithImpl<$Res>
-    extends _$PlayersGetBlocStateCopyWithImpl<$Res, _$PlayerGetBlocStateInitial>
-    implements _$$PlayerGetBlocStateInitialCopyWith<$Res> {
-  __$$PlayerGetBlocStateInitialCopyWithImpl(_$PlayerGetBlocStateInitial _value,
-      $Res Function(_$PlayerGetBlocStateInitial) _then)
+class __$$PlayersGetBlocStateInitialCopyWithImpl<$Res>
+    extends _$PlayersGetBlocStateCopyWithImpl<$Res,
+        _$PlayersGetBlocStateInitial>
+    implements _$$PlayersGetBlocStateInitialCopyWith<$Res> {
+  __$$PlayersGetBlocStateInitialCopyWithImpl(
+      _$PlayersGetBlocStateInitial _value,
+      $Res Function(_$PlayersGetBlocStateInitial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$PlayerGetBlocStateInitial implements PlayerGetBlocStateInitial {
-  _$PlayerGetBlocStateInitial();
+class _$PlayersGetBlocStateInitial implements PlayersGetBlocStateInitial {
+  _$PlayersGetBlocStateInitial();
 
   @override
   String toString() {
@@ -419,7 +421,7 @@ class _$PlayerGetBlocStateInitial implements PlayerGetBlocStateInitial {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PlayerGetBlocStateInitial);
+            other is _$PlayersGetBlocStateInitial);
   }
 
   @override
@@ -465,10 +467,10 @@ class _$PlayerGetBlocStateInitial implements PlayerGetBlocStateInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PlayerGetBlocStateInitial value) initial,
-    required TResult Function(PlayerGetBlocStateLoading value) loading,
-    required TResult Function(PlayerGetBlocStateFailure value) failure,
-    required TResult Function(PlayerGetBlocStateSuccess value) success,
+    required TResult Function(PlayersGetBlocStateInitial value) initial,
+    required TResult Function(PlayersGetBlocStateLoading value) loading,
+    required TResult Function(PlayersGetBlocStateFailure value) failure,
+    required TResult Function(PlayersGetBlocStateSuccess value) success,
   }) {
     return initial(this);
   }
@@ -476,10 +478,10 @@ class _$PlayerGetBlocStateInitial implements PlayerGetBlocStateInitial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(PlayerGetBlocStateInitial value)? initial,
-    TResult? Function(PlayerGetBlocStateLoading value)? loading,
-    TResult? Function(PlayerGetBlocStateFailure value)? failure,
-    TResult? Function(PlayerGetBlocStateSuccess value)? success,
+    TResult? Function(PlayersGetBlocStateInitial value)? initial,
+    TResult? Function(PlayersGetBlocStateLoading value)? loading,
+    TResult? Function(PlayersGetBlocStateFailure value)? failure,
+    TResult? Function(PlayersGetBlocStateSuccess value)? success,
   }) {
     return initial?.call(this);
   }
@@ -487,10 +489,10 @@ class _$PlayerGetBlocStateInitial implements PlayerGetBlocStateInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PlayerGetBlocStateInitial value)? initial,
-    TResult Function(PlayerGetBlocStateLoading value)? loading,
-    TResult Function(PlayerGetBlocStateFailure value)? failure,
-    TResult Function(PlayerGetBlocStateSuccess value)? success,
+    TResult Function(PlayersGetBlocStateInitial value)? initial,
+    TResult Function(PlayersGetBlocStateLoading value)? loading,
+    TResult Function(PlayersGetBlocStateFailure value)? failure,
+    TResult Function(PlayersGetBlocStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -500,31 +502,33 @@ class _$PlayerGetBlocStateInitial implements PlayerGetBlocStateInitial {
   }
 }
 
-abstract class PlayerGetBlocStateInitial implements PlayersGetBlocState {
-  factory PlayerGetBlocStateInitial() = _$PlayerGetBlocStateInitial;
+abstract class PlayersGetBlocStateInitial implements PlayersGetBlocState {
+  factory PlayersGetBlocStateInitial() = _$PlayersGetBlocStateInitial;
 }
 
 /// @nodoc
-abstract class _$$PlayerGetBlocStateLoadingCopyWith<$Res> {
-  factory _$$PlayerGetBlocStateLoadingCopyWith(
-          _$PlayerGetBlocStateLoading value,
-          $Res Function(_$PlayerGetBlocStateLoading) then) =
-      __$$PlayerGetBlocStateLoadingCopyWithImpl<$Res>;
+abstract class _$$PlayersGetBlocStateLoadingCopyWith<$Res> {
+  factory _$$PlayersGetBlocStateLoadingCopyWith(
+          _$PlayersGetBlocStateLoading value,
+          $Res Function(_$PlayersGetBlocStateLoading) then) =
+      __$$PlayersGetBlocStateLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PlayerGetBlocStateLoadingCopyWithImpl<$Res>
-    extends _$PlayersGetBlocStateCopyWithImpl<$Res, _$PlayerGetBlocStateLoading>
-    implements _$$PlayerGetBlocStateLoadingCopyWith<$Res> {
-  __$$PlayerGetBlocStateLoadingCopyWithImpl(_$PlayerGetBlocStateLoading _value,
-      $Res Function(_$PlayerGetBlocStateLoading) _then)
+class __$$PlayersGetBlocStateLoadingCopyWithImpl<$Res>
+    extends _$PlayersGetBlocStateCopyWithImpl<$Res,
+        _$PlayersGetBlocStateLoading>
+    implements _$$PlayersGetBlocStateLoadingCopyWith<$Res> {
+  __$$PlayersGetBlocStateLoadingCopyWithImpl(
+      _$PlayersGetBlocStateLoading _value,
+      $Res Function(_$PlayersGetBlocStateLoading) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$PlayerGetBlocStateLoading implements PlayerGetBlocStateLoading {
-  _$PlayerGetBlocStateLoading();
+class _$PlayersGetBlocStateLoading implements PlayersGetBlocStateLoading {
+  _$PlayersGetBlocStateLoading();
 
   @override
   String toString() {
@@ -535,7 +539,7 @@ class _$PlayerGetBlocStateLoading implements PlayerGetBlocStateLoading {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PlayerGetBlocStateLoading);
+            other is _$PlayersGetBlocStateLoading);
   }
 
   @override
@@ -581,10 +585,10 @@ class _$PlayerGetBlocStateLoading implements PlayerGetBlocStateLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PlayerGetBlocStateInitial value) initial,
-    required TResult Function(PlayerGetBlocStateLoading value) loading,
-    required TResult Function(PlayerGetBlocStateFailure value) failure,
-    required TResult Function(PlayerGetBlocStateSuccess value) success,
+    required TResult Function(PlayersGetBlocStateInitial value) initial,
+    required TResult Function(PlayersGetBlocStateLoading value) loading,
+    required TResult Function(PlayersGetBlocStateFailure value) failure,
+    required TResult Function(PlayersGetBlocStateSuccess value) success,
   }) {
     return loading(this);
   }
@@ -592,10 +596,10 @@ class _$PlayerGetBlocStateLoading implements PlayerGetBlocStateLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(PlayerGetBlocStateInitial value)? initial,
-    TResult? Function(PlayerGetBlocStateLoading value)? loading,
-    TResult? Function(PlayerGetBlocStateFailure value)? failure,
-    TResult? Function(PlayerGetBlocStateSuccess value)? success,
+    TResult? Function(PlayersGetBlocStateInitial value)? initial,
+    TResult? Function(PlayersGetBlocStateLoading value)? loading,
+    TResult? Function(PlayersGetBlocStateFailure value)? failure,
+    TResult? Function(PlayersGetBlocStateSuccess value)? success,
   }) {
     return loading?.call(this);
   }
@@ -603,10 +607,10 @@ class _$PlayerGetBlocStateLoading implements PlayerGetBlocStateLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PlayerGetBlocStateInitial value)? initial,
-    TResult Function(PlayerGetBlocStateLoading value)? loading,
-    TResult Function(PlayerGetBlocStateFailure value)? failure,
-    TResult Function(PlayerGetBlocStateSuccess value)? success,
+    TResult Function(PlayersGetBlocStateInitial value)? initial,
+    TResult Function(PlayersGetBlocStateLoading value)? loading,
+    TResult Function(PlayersGetBlocStateFailure value)? failure,
+    TResult Function(PlayersGetBlocStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -616,31 +620,33 @@ class _$PlayerGetBlocStateLoading implements PlayerGetBlocStateLoading {
   }
 }
 
-abstract class PlayerGetBlocStateLoading implements PlayersGetBlocState {
-  factory PlayerGetBlocStateLoading() = _$PlayerGetBlocStateLoading;
+abstract class PlayersGetBlocStateLoading implements PlayersGetBlocState {
+  factory PlayersGetBlocStateLoading() = _$PlayersGetBlocStateLoading;
 }
 
 /// @nodoc
-abstract class _$$PlayerGetBlocStateFailureCopyWith<$Res> {
-  factory _$$PlayerGetBlocStateFailureCopyWith(
-          _$PlayerGetBlocStateFailure value,
-          $Res Function(_$PlayerGetBlocStateFailure) then) =
-      __$$PlayerGetBlocStateFailureCopyWithImpl<$Res>;
+abstract class _$$PlayersGetBlocStateFailureCopyWith<$Res> {
+  factory _$$PlayersGetBlocStateFailureCopyWith(
+          _$PlayersGetBlocStateFailure value,
+          $Res Function(_$PlayersGetBlocStateFailure) then) =
+      __$$PlayersGetBlocStateFailureCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PlayerGetBlocStateFailureCopyWithImpl<$Res>
-    extends _$PlayersGetBlocStateCopyWithImpl<$Res, _$PlayerGetBlocStateFailure>
-    implements _$$PlayerGetBlocStateFailureCopyWith<$Res> {
-  __$$PlayerGetBlocStateFailureCopyWithImpl(_$PlayerGetBlocStateFailure _value,
-      $Res Function(_$PlayerGetBlocStateFailure) _then)
+class __$$PlayersGetBlocStateFailureCopyWithImpl<$Res>
+    extends _$PlayersGetBlocStateCopyWithImpl<$Res,
+        _$PlayersGetBlocStateFailure>
+    implements _$$PlayersGetBlocStateFailureCopyWith<$Res> {
+  __$$PlayersGetBlocStateFailureCopyWithImpl(
+      _$PlayersGetBlocStateFailure _value,
+      $Res Function(_$PlayersGetBlocStateFailure) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$PlayerGetBlocStateFailure implements PlayerGetBlocStateFailure {
-  _$PlayerGetBlocStateFailure();
+class _$PlayersGetBlocStateFailure implements PlayersGetBlocStateFailure {
+  _$PlayersGetBlocStateFailure();
 
   @override
   String toString() {
@@ -651,7 +657,7 @@ class _$PlayerGetBlocStateFailure implements PlayerGetBlocStateFailure {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PlayerGetBlocStateFailure);
+            other is _$PlayersGetBlocStateFailure);
   }
 
   @override
@@ -697,10 +703,10 @@ class _$PlayerGetBlocStateFailure implements PlayerGetBlocStateFailure {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PlayerGetBlocStateInitial value) initial,
-    required TResult Function(PlayerGetBlocStateLoading value) loading,
-    required TResult Function(PlayerGetBlocStateFailure value) failure,
-    required TResult Function(PlayerGetBlocStateSuccess value) success,
+    required TResult Function(PlayersGetBlocStateInitial value) initial,
+    required TResult Function(PlayersGetBlocStateLoading value) loading,
+    required TResult Function(PlayersGetBlocStateFailure value) failure,
+    required TResult Function(PlayersGetBlocStateSuccess value) success,
   }) {
     return failure(this);
   }
@@ -708,10 +714,10 @@ class _$PlayerGetBlocStateFailure implements PlayerGetBlocStateFailure {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(PlayerGetBlocStateInitial value)? initial,
-    TResult? Function(PlayerGetBlocStateLoading value)? loading,
-    TResult? Function(PlayerGetBlocStateFailure value)? failure,
-    TResult? Function(PlayerGetBlocStateSuccess value)? success,
+    TResult? Function(PlayersGetBlocStateInitial value)? initial,
+    TResult? Function(PlayersGetBlocStateLoading value)? loading,
+    TResult? Function(PlayersGetBlocStateFailure value)? failure,
+    TResult? Function(PlayersGetBlocStateSuccess value)? success,
   }) {
     return failure?.call(this);
   }
@@ -719,10 +725,10 @@ class _$PlayerGetBlocStateFailure implements PlayerGetBlocStateFailure {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PlayerGetBlocStateInitial value)? initial,
-    TResult Function(PlayerGetBlocStateLoading value)? loading,
-    TResult Function(PlayerGetBlocStateFailure value)? failure,
-    TResult Function(PlayerGetBlocStateSuccess value)? success,
+    TResult Function(PlayersGetBlocStateInitial value)? initial,
+    TResult Function(PlayersGetBlocStateLoading value)? loading,
+    TResult Function(PlayersGetBlocStateFailure value)? failure,
+    TResult Function(PlayersGetBlocStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -732,26 +738,28 @@ class _$PlayerGetBlocStateFailure implements PlayerGetBlocStateFailure {
   }
 }
 
-abstract class PlayerGetBlocStateFailure implements PlayersGetBlocState {
-  factory PlayerGetBlocStateFailure() = _$PlayerGetBlocStateFailure;
+abstract class PlayersGetBlocStateFailure implements PlayersGetBlocState {
+  factory PlayersGetBlocStateFailure() = _$PlayersGetBlocStateFailure;
 }
 
 /// @nodoc
-abstract class _$$PlayerGetBlocStateSuccessCopyWith<$Res> {
-  factory _$$PlayerGetBlocStateSuccessCopyWith(
-          _$PlayerGetBlocStateSuccess value,
-          $Res Function(_$PlayerGetBlocStateSuccess) then) =
-      __$$PlayerGetBlocStateSuccessCopyWithImpl<$Res>;
+abstract class _$$PlayersGetBlocStateSuccessCopyWith<$Res> {
+  factory _$$PlayersGetBlocStateSuccessCopyWith(
+          _$PlayersGetBlocStateSuccess value,
+          $Res Function(_$PlayersGetBlocStateSuccess) then) =
+      __$$PlayersGetBlocStateSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({List<PlayerModel> players});
 }
 
 /// @nodoc
-class __$$PlayerGetBlocStateSuccessCopyWithImpl<$Res>
-    extends _$PlayersGetBlocStateCopyWithImpl<$Res, _$PlayerGetBlocStateSuccess>
-    implements _$$PlayerGetBlocStateSuccessCopyWith<$Res> {
-  __$$PlayerGetBlocStateSuccessCopyWithImpl(_$PlayerGetBlocStateSuccess _value,
-      $Res Function(_$PlayerGetBlocStateSuccess) _then)
+class __$$PlayersGetBlocStateSuccessCopyWithImpl<$Res>
+    extends _$PlayersGetBlocStateCopyWithImpl<$Res,
+        _$PlayersGetBlocStateSuccess>
+    implements _$$PlayersGetBlocStateSuccessCopyWith<$Res> {
+  __$$PlayersGetBlocStateSuccessCopyWithImpl(
+      _$PlayersGetBlocStateSuccess _value,
+      $Res Function(_$PlayersGetBlocStateSuccess) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -759,7 +767,7 @@ class __$$PlayerGetBlocStateSuccessCopyWithImpl<$Res>
   $Res call({
     Object? players = null,
   }) {
-    return _then(_$PlayerGetBlocStateSuccess(
+    return _then(_$PlayersGetBlocStateSuccess(
       null == players
           ? _value._players
           : players // ignore: cast_nullable_to_non_nullable
@@ -770,8 +778,8 @@ class __$$PlayerGetBlocStateSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PlayerGetBlocStateSuccess implements PlayerGetBlocStateSuccess {
-  _$PlayerGetBlocStateSuccess(final List<PlayerModel> players)
+class _$PlayersGetBlocStateSuccess implements PlayersGetBlocStateSuccess {
+  _$PlayersGetBlocStateSuccess(final List<PlayerModel> players)
       : _players = players;
 
   final List<PlayerModel> _players;
@@ -791,7 +799,7 @@ class _$PlayerGetBlocStateSuccess implements PlayerGetBlocStateSuccess {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PlayerGetBlocStateSuccess &&
+            other is _$PlayersGetBlocStateSuccess &&
             const DeepCollectionEquality().equals(other._players, _players));
   }
 
@@ -802,9 +810,9 @@ class _$PlayerGetBlocStateSuccess implements PlayerGetBlocStateSuccess {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PlayerGetBlocStateSuccessCopyWith<_$PlayerGetBlocStateSuccess>
-      get copyWith => __$$PlayerGetBlocStateSuccessCopyWithImpl<
-          _$PlayerGetBlocStateSuccess>(this, _$identity);
+  _$$PlayersGetBlocStateSuccessCopyWith<_$PlayersGetBlocStateSuccess>
+      get copyWith => __$$PlayersGetBlocStateSuccessCopyWithImpl<
+          _$PlayersGetBlocStateSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -846,10 +854,10 @@ class _$PlayerGetBlocStateSuccess implements PlayerGetBlocStateSuccess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(PlayerGetBlocStateInitial value) initial,
-    required TResult Function(PlayerGetBlocStateLoading value) loading,
-    required TResult Function(PlayerGetBlocStateFailure value) failure,
-    required TResult Function(PlayerGetBlocStateSuccess value) success,
+    required TResult Function(PlayersGetBlocStateInitial value) initial,
+    required TResult Function(PlayersGetBlocStateLoading value) loading,
+    required TResult Function(PlayersGetBlocStateFailure value) failure,
+    required TResult Function(PlayersGetBlocStateSuccess value) success,
   }) {
     return success(this);
   }
@@ -857,10 +865,10 @@ class _$PlayerGetBlocStateSuccess implements PlayerGetBlocStateSuccess {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(PlayerGetBlocStateInitial value)? initial,
-    TResult? Function(PlayerGetBlocStateLoading value)? loading,
-    TResult? Function(PlayerGetBlocStateFailure value)? failure,
-    TResult? Function(PlayerGetBlocStateSuccess value)? success,
+    TResult? Function(PlayersGetBlocStateInitial value)? initial,
+    TResult? Function(PlayersGetBlocStateLoading value)? loading,
+    TResult? Function(PlayersGetBlocStateFailure value)? failure,
+    TResult? Function(PlayersGetBlocStateSuccess value)? success,
   }) {
     return success?.call(this);
   }
@@ -868,10 +876,10 @@ class _$PlayerGetBlocStateSuccess implements PlayerGetBlocStateSuccess {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(PlayerGetBlocStateInitial value)? initial,
-    TResult Function(PlayerGetBlocStateLoading value)? loading,
-    TResult Function(PlayerGetBlocStateFailure value)? failure,
-    TResult Function(PlayerGetBlocStateSuccess value)? success,
+    TResult Function(PlayersGetBlocStateInitial value)? initial,
+    TResult Function(PlayersGetBlocStateLoading value)? loading,
+    TResult Function(PlayersGetBlocStateFailure value)? failure,
+    TResult Function(PlayersGetBlocStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -881,12 +889,12 @@ class _$PlayerGetBlocStateSuccess implements PlayerGetBlocStateSuccess {
   }
 }
 
-abstract class PlayerGetBlocStateSuccess implements PlayersGetBlocState {
-  factory PlayerGetBlocStateSuccess(final List<PlayerModel> players) =
-      _$PlayerGetBlocStateSuccess;
+abstract class PlayersGetBlocStateSuccess implements PlayersGetBlocState {
+  factory PlayersGetBlocStateSuccess(final List<PlayerModel> players) =
+      _$PlayersGetBlocStateSuccess;
 
   List<PlayerModel> get players;
   @JsonKey(ignore: true)
-  _$$PlayerGetBlocStateSuccessCopyWith<_$PlayerGetBlocStateSuccess>
+  _$$PlayersGetBlocStateSuccessCopyWith<_$PlayersGetBlocStateSuccess>
       get copyWith => throw _privateConstructorUsedError;
 }
