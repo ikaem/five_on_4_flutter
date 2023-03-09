@@ -2,6 +2,7 @@ import 'package:five_on_4_flutter/src/features/matches/data/data.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_sources.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/args/match_join/match_join.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invite/args.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/models/match/model.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 
@@ -70,5 +71,16 @@ class MatchesAppRepository implements MatchesRepository {
   @override
   Future<void> unjoinMatch(MatchJoinArgs matchJoinArgs) async {
     await matchesRemoteDataSource.unjoinMatch(matchJoinArgs);
+  }
+
+  @override
+  Future<void> invitePlayersToMatch(MatchParticipantsInviteArgs args) async {
+// get match
+
+// get match participants
+
+// check if any of invited players has already been invited or declined or something
+
+// then add multiple subcollection items
   }
 }

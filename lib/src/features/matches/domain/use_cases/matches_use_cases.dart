@@ -1,6 +1,7 @@
 import 'package:five_on_4_flutter/src/features/auth/data/repositories/repositories.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invite/args.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 import 'package:five_on_4_flutter/src/features/players/data/repositories/repository.dart';
@@ -16,6 +17,10 @@ class MatchesUseCases {
   final MatchesRepository matchesRepository;
   final AuthRepository authRepository;
   final PlayersRepository playersRepository;
+
+  Future<void> invitePlayersToMatch(MatchParticipantsInviteArgs args) async {
+    await matchesRepository.invitePlayersToMatch(args);
+  }
 
   Future<void> participateInMatch({
     required String matchId,

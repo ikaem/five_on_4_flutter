@@ -3,6 +3,7 @@ import 'package:five_on_4_flutter/src/features/matches/domain/extensions/extensi
 import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/match_get/cubit.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/match_join/cubit.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/widgets/match_content.dart';
+import 'package:five_on_4_flutter/src/features/matches/presentation/widgets/match_participant_invite.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:five_on_4_flutter/src/features/players/presentation/blocs/players_get/bloc.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/layout/app_bar_more_actions.dart';
@@ -25,7 +26,7 @@ class _MatchScreenViewState extends State<MatchScreenView> {
   late final MatchGetCubit _matchGetCubit = context.read<MatchGetCubit>();
   // late final AuthStatusCubit _authStatusCubit = context.read<AuthStatusCubit>();
 
-  late final PlayersGetBloc _playersGetBloc = context.read<PlayersGetBloc>();
+  // late final PlayersGetBloc _playersGetBloc = context.read<PlayersGetBloc>();
 
   @override
   void initState() {
@@ -90,7 +91,9 @@ class _MatchScreenViewState extends State<MatchScreenView> {
   }
 
   Scaffold _matchGetCubitSuccessBuilder(
-      MatchModel match, PlayerModel? currentPlayer) {
+    MatchModel match,
+    PlayerModel? currentPlayer,
+  ) {
     final bool hasUserJoinedMatch =
         match.checkHasUserJoinedMatch(playerId: currentPlayer?.id);
 
@@ -103,20 +106,23 @@ class _MatchScreenViewState extends State<MatchScreenView> {
         actions: [
           // TODO note sure if bloc builder should be here
           // it should probably be in app bar match participatns action, to be honest
-          BlocBuilder<PlayersGetBloc, PlayersGetBlocState>(
-            builder: (context, state) {
-              final bool isLoading = state is PlayersGetBlocStateLoading;
-              final List<PlayerModel> foundPlayers =
-                  state is PlayersGetBlocStateSuccess ? state.players : [];
+          // BlocBuilder<PlayersGetBloc, PlayersGetBlocState>(
+          //   builder: (context, state) {
+          //     final bool isLoading = state is PlayersGetBlocStateLoading;
+          //     final List<PlayerModel> foundPlayers =
+          //         state is PlayersGetBlocStateSuccess ? state.players : [];
 
-              return AppBarMatchParticipantsAction(
-                onPlayersSearch: (filters) => _playersGetBloc.add(
-                  PlayersGetBlocEventSearchMany(filters),
-                ),
-                foundPlayers: foundPlayers,
-                isLoading: isLoading,
-              );
-            },
+          //     return AppBarMatchParticipantsAction(
+          //       onPlayersSearch: (filters) => _playersGetBloc.add(
+          //         PlayersGetBlocEventSearchMany(filters),
+          //       ),
+          //       foundPlayers: foundPlayers,
+          //       isLoading: isLoading,
+          //     );
+          //   },
+          // ),
+          MatchParticipantInvite(
+            match: match,
           ),
           // TODO test
           AppBarMatchJoinAction(
@@ -183,25 +189,33 @@ class AppBarMatchParticipantsAction extends StatelessWidget {
     );
   }
 
-  Future<void> Function() _onParticipantsActionTap(BuildContext context) =>
-      () async {
-        await showDialog(
-          context: context,
-          builder: (context) => _participantsDialogBuilder(
-            context,
-            onPlayersSearch,
-          ),
-          // builder: (context) {
-          //   return Material(child: TextField());
-          // },
-        );
-      };
+  Future<void> Function() _onParticipantsActionTap(BuildContext context) {
+    final players = foundPlayers;
+
+    // todo TEST
+    return () async {
+      // TODo TEST
+      await showDialog(
+        context: context,
+        builder: (context) => _participantsDialogBuilder(
+          context,
+          onPlayersSearch,
+          players,
+        ),
+        // builder: (context) {
+        //   return Material(child: TextField());
+        // },
+      );
+    };
+  }
 
   Widget _participantsDialogBuilder(
     BuildContext context,
     Function(PlayersGetSearchFilters) onSearchInputChanged,
+    List<PlayerModel> players,
     // TODO i dont get data here - i need to get data here, but this is already rendered when i open it
   ) {
+    // TODO test
     return Material(
       child: Container(
         color: Colors.white,
@@ -233,13 +247,45 @@ class AppBarMatchParticipantsAction extends StatelessWidget {
               SizedBox(height: SpacingConstants.medium),
               TextButton(onPressed: () {}, child: Text('Search')),
               SizedBox(height: SpacingConstants.medium),
-              if (isLoading)
-                Center(
-                  child: CircularProgressIndicator(),
-                ),
+              // if (isLoading)
+              //   Center(
+              //     child: CircularProgressIndicator(),
+              //   ),
 
-              // TODO this needs to be better - maybe a separate widget as a sliver or somehting
-              for (final player in foundPlayers) Text(player.nickname)
+              // // TODO this needs to be better - maybe a separate widget as a sliver or somehting
+              // for (final player in foundPlayers) Text(player.nickname)
+
+              BlocSelector<PlayersGetBloc, PlayersGetBlocState, bool>(
+                selector: (state) {
+                  return state is PlayersGetBlocStateLoading;
+                },
+                builder: (context, state) {
+                  if (state == false) {
+                    return Text('false');
+                  }
+
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+
+              // BlocSelector<PlayersGetBloc, PlayersGetBlocState,
+              //     List<PlayerModel>>(
+              //   selector: (state) {
+              //     if (state is! PlayersGetBlocStateSuccess) return [];
+
+              //     return state.players;
+              //   },
+              //   builder: (context, players) {
+              //     // TODO test
+              //     return ListView(
+              //       // TODO move this away
+              //       shrinkWrap: true,
+              //       children: [for (final player in players) Text('Hello')],
+              //     );
+              //   },
+              // ),
             ],
           ),
         ),

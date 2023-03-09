@@ -1,3 +1,4 @@
+import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invite/args.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 
@@ -8,4 +9,5 @@ abstract class MatchesRepository {
   Future<String> createMatch(NewMatchValue newMatch);
   Future<void> joinMatch(MatchJoinArgs matchJoinArgs);
   Future<void> unjoinMatch(MatchJoinArgs matchJoinArgs);
+  Future<void> invitePlayersToMatch(MatchParticipantsInviteArgs args);
 }
