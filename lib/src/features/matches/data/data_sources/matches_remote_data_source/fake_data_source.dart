@@ -5,6 +5,7 @@ import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_so
 import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_participant_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/args/match_join/match_join.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invite/args.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/exceptions/exceptions.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 import 'package:five_on_4_flutter/src/features/players/data/data_sources/players_remote_data_source/fake_data_source.dart';
@@ -125,6 +126,12 @@ class MatchesRemoteFakeDataSource implements MatchesRemoteDataSource {
         _matches.indexWhere((match) => matchRemoteDTO == match);
 
     _matches[matchLocation] = updatedMatch;
+  }
+
+  @override
+  Future<void> inviteToMatch(MatchParticipantsInviteArgs args) {
+    // TODO: implement inviteToMatch
+    throw UnimplementedError();
   }
 }
 

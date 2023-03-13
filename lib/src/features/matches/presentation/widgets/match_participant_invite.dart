@@ -1,4 +1,5 @@
 import 'package:five_on_4_flutter/src/features/matches/matches.dart';
+import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/match_participants_invite/cubit.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/use_cases/players_use_cases.dart';
 import 'package:five_on_4_flutter/src/features/players/presentation/blocs/players_get/bloc.dart';
@@ -24,19 +25,32 @@ class MatchParticipantInvite extends StatelessWidget {
 
   Future<void> Function() _onParticipantsActionTap(BuildContext context) {
     final PlayersUseCases playersUseCases = context.read<PlayersUseCases>();
+    final MatchesUseCases matchesUseCases = context.read<MatchesUseCases>();
     // todo TEST
     return () async {
       // TODo TEST
       await showDialog(
         context: context,
         builder: (context) {
-          return BlocProvider(
-            create: (context) => PlayersGetBloc(
-              playersUseCases: playersUseCases,
-            ),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => PlayersGetBloc(
+                  playersUseCases: playersUseCases,
+                ),
+              ),
+              BlocProvider(
+                create: (context) => MatchParticipantsInviteCubit(
+                  matchesUseCases: matchesUseCases,
+                ),
+              ),
+            ],
             child: Builder(builder: (context) {
-              late final PlayersGetBloc _playersGetBloc =
+              final PlayersGetBloc playersGetBloc =
                   context.read<PlayersGetBloc>();
+
+              final MatchParticipantsInviteCubit matchParticipantsInviteCubit =
+                  context.read<MatchParticipantsInviteCubit>();
 
               return Dialog(
                 child: Column(
@@ -50,7 +64,7 @@ class MatchParticipantInvite extends StatelessWidget {
 
                         // onSearchInputChanged(filters);
 
-                        _playersGetBloc
+                        playersGetBloc
                             .add(PlayersGetBlocEventSearchMany(filters));
                       },
                       decoration: InputDecoration(
@@ -59,31 +73,44 @@ class MatchParticipantInvite extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: BlocBuilder<PlayersGetBloc, PlayersGetBlocState>(
-                        builder: (context, state) {
-                          return state.when(
-                            initial: () => SizedBox.shrink(),
-                            loading: () => Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            failure: () =>
-                                Center(child: Text('Something wrong')),
-                            success: (players) => ListView.builder(
-                              itemCount: players.length,
-                              itemBuilder: (context, index) {
-                                final PlayerModel player = players[index];
-                                return ListTile(
-                                  title: Text(player.nickname),
-                                );
-                              },
-                            ),
-                          );
+                    StreamBuilder<List<PlayerModel>>(
+                      stream: matchParticipantsInviteCubit
+                          .playersForInvitationStream,
+                      builder: (context, snapshot) {
+                        final List<PlayerModel>? players = snapshot.data;
+                        if (players == null || players.isEmpty)
+                          return SizedBox.shrink();
 
-                          // return ListView();
-                        },
-                      ),
+                        return Wrap(
+                          spacing: 8.0,
+                          children: players.map((e) {
+                            return Chip(
+                              label: Text(e.nickname),
+                              deleteIcon: Icon(Icons.delete),
+                              onDeleted: () => matchParticipantsInviteCubit
+                                  .onRemovePlayer(e),
+                            );
+                          }).toList(),
+                        );
+
+                        // return ListView.separated(
+                        //   scrollDirection: Axis.horizontal,
+                        //   itemBuilder: (context, index) {
+                        //     return null;
+                        //   },
+                        //   separatorBuilder: separatorBuilder,
+                        //   itemCount: itemCount,
+                        // );
+                      },
                     ),
+                    TextButton(
+                      onPressed: () => matchParticipantsInviteCubit
+                          .onInviteParticipants(match.id),
+                      child: Text('Invite'),
+                    ),
+                    SearchPlayersList(
+                        matchParticipantsInviteCubit:
+                            matchParticipantsInviteCubit),
                   ],
                 ),
               );
@@ -92,5 +119,54 @@ class MatchParticipantInvite extends StatelessWidget {
         },
       );
     };
+  }
+
+// invite player
+  // Future<void> _handleInvitePlayerToMatch({
+  //   required BuildContext context,
+  //   required String playerId,
+  // }) async {
+
+  //   final
+
+  // }
+}
+
+class SearchPlayersList extends StatelessWidget {
+  const SearchPlayersList({
+    super.key,
+    required this.matchParticipantsInviteCubit,
+  });
+
+// TODO later, remove this from here being acceptet as an argument
+  final MatchParticipantsInviteCubit matchParticipantsInviteCubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: BlocBuilder<PlayersGetBloc, PlayersGetBlocState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () => SizedBox.shrink(),
+            loading: () => Center(
+              child: CircularProgressIndicator(),
+            ),
+            failure: () => Center(child: Text('Something wrong')),
+            success: (players) => ListView.builder(
+              itemCount: players.length,
+              itemBuilder: (context, index) {
+                final PlayerModel player = players[index];
+                return ListTile(
+                  onTap: () => matchParticipantsInviteCubit.onAddPlayer(player),
+                  title: Text(player.nickname),
+                );
+              },
+            ),
+          );
+
+          // return ListView();
+        },
+      ),
+    );
   }
 }

@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:five_on_4_flutter/src/features/matches/data/data.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_sources.dart';
+import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_participant_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/args/match_join/match_join.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invite/args.dart';
@@ -76,18 +79,50 @@ class MatchesAppRepository implements MatchesRepository {
   @override
   Future<void> invitePlayersToMatch(MatchParticipantsInviteArgs args) async {
 // get match
+// not using this one above because htis will also update match
+    // final MatchModel match = await getMatch(args.matchId);
+
+    final MatchRemoteDTO remoteMatchDto =
+        await matchesRemoteDataSource.getMatch(args.matchId);
+
+    log('This is invited players: ${args.playersIds}');
+    log('This is match: $remoteMatchDto');
 
 // get match participants
+// TODO move this to a function
+    final List<MatchParticipantRemoteDTO> existingParticipants =
+        remoteMatchDto.participants;
+
+    final Map<String, bool> invitedPlayersMap = Map.fromIterable(
+      args.playersIds,
+      key: (element) => element as String,
+      value: (element) => true,
+    );
+
+    final Map<String, bool> existingPlayersMap = {
+      for (final existingParticipant in existingParticipants)
+        existingParticipant.userId: true
+    };
+
+    List<String> filteredPlayersForInvite = args.playersIds.where((player) {
+      if (existingPlayersMap.containsKey(player)) {
+        log('Player $player has already been invited to the match');
+
+        return false;
+      }
+
+      return true;
+    }).toList();
+
+    final MatchParticipantsInviteArgs updatedArgs = MatchParticipantsInviteArgs(
+      playersIds: filteredPlayersForInvite,
+      matchId: args.matchId,
+    );
+
+    await matchesRemoteDataSource.inviteToMatch(updatedArgs);
 
 // check if any of invited players has already been invited or declined or something
 
 // then add multiple subcollection items
-
-
-final 
-
-await match
-
-
   }
 }
