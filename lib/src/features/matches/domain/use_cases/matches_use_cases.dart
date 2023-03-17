@@ -18,8 +18,20 @@ class MatchesUseCases {
   final AuthRepository authRepository;
   final PlayersRepository playersRepository;
 
-  Future<void> invitePlayersToMatch(MatchParticipantsInviteArgs args) async {
-    await matchesRepository.invitePlayersToMatch(args);
+  Future<void> invitePlayersToMatch({
+    required String matchId,
+    required List<PlayerModel> players,
+  }) async {
+    final List<MatchParticipantInviteArgs> participantsArgs =
+        players.map(MatchParticipantInviteArgs.fromPlayerModel).toList();
+
+    final MatchParticipantsInviteArgs matchParticipantsInviteArgs =
+        MatchParticipantsInviteArgs(
+      participantsArgs: participantsArgs,
+      matchId: matchId,
+    );
+
+    await matchesRepository.invitePlayersToMatch(matchParticipantsInviteArgs);
   }
 
   Future<void> participateInMatch({
@@ -89,13 +101,16 @@ class MatchesUseCases {
     return id;
   }
 
-  Future<void> getMyInvitedMatches() async {
+  Future<List<MatchModel>> getMyInvitedMatches() async {
     final PlayerModel? currentPlayer = await playersRepository.currentPlayer;
     // TODO not sure if this should be error to throw
     if (currentPlayer == null) throw AuthNoSessionException();
 
     final String playerId = currentPlayer.id;
 
-    await matchesRepository.getInvitedMatches(playerId);
+    final List<MatchModel> matches =
+        await matchesRepository.getInvitedMatches(playerId);
+
+    return matches;
   }
 }

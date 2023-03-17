@@ -10,5 +10,5 @@ abstract class MatchesRepository {
   Future<void> joinMatch(MatchJoinArgs matchJoinArgs);
   Future<void> unjoinMatch(MatchJoinArgs matchJoinArgs);
   Future<void> invitePlayersToMatch(MatchParticipantsInviteArgs args);
-  Future<void> getInvitedMatches(String playerId);
+  Future<List<MatchModel>> getInvitedMatches(String playerId);
 }

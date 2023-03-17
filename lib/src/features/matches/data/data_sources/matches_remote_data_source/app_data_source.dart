@@ -185,8 +185,39 @@ class MatchesRemoteAppDataSource implements MatchesRemoteDataSource {
   }
 
   @override
-  Future<void> getInvitedMatches(String playerId) async {
+  Future<List<MatchRemoteDTO>> getInvitedMatches(String playerId) async {
+    final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await _firestoreWrapper.db
+            .collectionGroup('match_participants')
+            .where('playerId', isEqualTo: playerId)
+            .where('status', isEqualTo: 'invited')
+            .get();
+
+    final Iterable<Future<DocumentSnapshot<Map<String, dynamic>>>>
+        futureMatches = querySnapshot.docs.map(
+      (participantDoc) async {
+        final DocumentReference<Map<String, dynamic>>? matchReference =
+            participantDoc.reference.parent.parent;
+
+        final matchDocSnapshot = await matchReference!.get();
+
+        return matchDocSnapshot;
+
+        // TODO remove
+      },
+    );
+
+    final List<DocumentSnapshot<Map<String, dynamic>>> matchesDocSnapshots =
+        await Future.wait(futureMatches);
+
+    final List<MatchRemoteDTO> matches = matchesDocSnapshots
+        .map((s) => MatchRemoteDTO.fromFirestoreSnapshots(
+            matchSnapshot: s, participantsSnapshots: []))
+        .toList();
+
+    return matches;
+
     // TODO: implement getInvitedMatches
-    await _firestoreWrapper.getInvitedMatches(playerId);
+    // await _firestoreWrapper.getInvitedMatches(playerId);
   }
 }

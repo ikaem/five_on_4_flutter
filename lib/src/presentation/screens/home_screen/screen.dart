@@ -1,6 +1,7 @@
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_all/bloc.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_todays/bloc.dart';
+import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/matches_invited_get/cubit.dart';
 import 'package:five_on_4_flutter/src/features/weather/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/weather/presentation/cubits/cubits.dart';
 import 'package:five_on_4_flutter/src/presentation/screens/home_screen/screen_view.dart';
@@ -30,6 +31,10 @@ class HomeScreen extends StatelessWidget {
           create: (context) =>
               MatchesGetMyAllBloc(matchesUseCases: matchesUseCases)
                 ..add(MatchesGetMyAllBlocLoadMatchesEvent()),
+        ),
+        BlocProvider<MatchesInvitedGetCubit>(
+          create: (context) =>
+              MatchesInvitedGetCubit(matchesUseCases: matchesUseCases),
         ),
       ],
       child: const HomeScreenView(),

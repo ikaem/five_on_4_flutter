@@ -1,9 +1,10 @@
-import 'package:five_on_4_flutter/src/features/matches/matches.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_all/bloc.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_todays/bloc.dart';
+import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/matches_invited_get/cubit.dart';
 import 'package:five_on_4_flutter/src/features/weather/presentation/cubits/cubits.dart';
 import 'package:five_on_4_flutter/src/navigation/app_routes.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/home_view/home_view.dart';
+import 'package:five_on_4_flutter/src/presentation/widgets/home_view/my_invited_matches_overview.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/layout/app_bar_more_actions.dart';
 import 'package:five_on_4_flutter/src/theme/constants/constants.dart';
 import 'package:five_on_4_flutter/src/utils/extensions/build_context_extension.dart';
@@ -27,7 +28,7 @@ class HomeScreenView extends StatelessWidget {
         onPressed: () => _onCreateMatch(context: context),
         child: const Icon(Icons.sports_soccer),
       ),
-      body: Column(
+      body: ListView(
         children: <Widget>[
           BlocConsumer<MatchesGetMyTodaysBloc, MatchesGetMyTodaysBlocState>(
             listener: _matchesGetMyTodaysBlocListener,
@@ -36,14 +37,25 @@ class HomeScreenView extends StatelessWidget {
           const SizedBox(
             height: SpacingConstants.small,
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Pending invitations'),
-                MatchBriefCard(),
-              ],
-            ),
+          BlocConsumer<MatchesInvitedGetCubit, MatchesInvitedGetCubitState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              return state.when(
+                matchesInvitedInitial: () => SizedBox.shrink(),
+                matchesInvitedLoading: () =>
+                    Center(child: CircularProgressIndicator()),
+                matchesInvitedError: (message) =>
+                    Center(child: Text('There was an error')),
+                matchesInvitedLoaded: (matches) => MyInvitedMatchesOverview(
+                  matches: matches,
+                  onMatchBriefCardTap: _onGoToMatch,
+                ),
+              );
+
+              // return MyInvitedMatchesOverview();
+            },
           ),
           const SizedBox(
             height: SpacingConstants.small,
@@ -108,7 +120,7 @@ class HomeScreenView extends StatelessWidget {
           ],
         ),
       ),
-      success: (matches) => MyMatchesOverview(
+      success: (matches) => MyJoinedMatchesOverview(
         onMatchBriefCardTap: _onGoToMatch,
         matches: matches,
       ),

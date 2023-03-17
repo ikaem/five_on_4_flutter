@@ -8,15 +8,18 @@ part 'cubit.freezed.dart';
 class MatchesInvitedGetCubit extends Cubit<MatchesInvitedGetCubitState> {
   MatchesInvitedGetCubit({
     required this.matchesUseCases,
-  }) : super(MatchesInvitedGetCubitStateInitial());
+  }) : super(MatchesInvitedGetCubitStateInitial()) {
+    _getMyInvitedMatches();
+  }
 
   final MatchesUseCases matchesUseCases;
 
-  Future<void> getMyInvitedMatches() async {
+  Future<void> _getMyInvitedMatches() async {
     emit(MatchesInvitedGetCubitStateLoading());
 
     try {
-      final invitedMatches = await matchesUseCases.getMyTodaysMatches();
+      final List<MatchModel> invitedMatches =
+          await matchesUseCases.getMyInvitedMatches();
       emit(MatchesInvitedGetCubitStateLoaded(invitedMatches));
     } catch (e) {
       emit(MatchesInvitedGetCubitStateError(e.toString()));

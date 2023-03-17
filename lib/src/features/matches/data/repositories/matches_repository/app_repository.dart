@@ -126,7 +126,13 @@ class MatchesAppRepository implements MatchesRepository {
 // then add multiple subcollection items
   }
 
-  Future<void> getInvitedMatches(String playerId) async {
-    await matchesRemoteDataSource.getInvitedMatches(playerId);
+  Future<List<MatchModel>> getInvitedMatches(String playerId) async {
+    final List<MatchRemoteDTO> matchesDTOs =
+        await matchesRemoteDataSource.getInvitedMatches(playerId);
+
+    final List<MatchModel> matches =
+        matchesDTOs.map((e) => MatchModel.fromRemoteDto(e)).toList();
+
+    return matches;
   }
 }

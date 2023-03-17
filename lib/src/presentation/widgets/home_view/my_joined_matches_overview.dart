@@ -2,8 +2,8 @@ import 'package:five_on_4_flutter/src/features/matches/matches.dart'
     show MatchBriefCard, MatchModel, OnMatchBriefCardTap;
 import 'package:flutter/material.dart';
 
-class MyMatchesOverview extends StatelessWidget {
-  const MyMatchesOverview({
+class MyJoinedMatchesOverview extends StatelessWidget {
+  const MyJoinedMatchesOverview({
     super.key,
     required this.onMatchBriefCardTap,
     required this.matches,

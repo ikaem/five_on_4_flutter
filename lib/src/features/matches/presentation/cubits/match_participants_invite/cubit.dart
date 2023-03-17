@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invite/args.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,16 +47,11 @@ class MatchParticipantsInviteCubit extends Cubit<MatchParticipantsInviteState> {
   ) async {
     emit(MatchParticipantsInviteStateLoading());
 
-    final List<String> playersIds =
-        _playersForInvitationSubject.value.map((p) => p.id).toList();
-
-    final MatchParticipantsInviteArgs args = MatchParticipantsInviteArgs(
-      playersIds: playersIds,
-      matchId: matchId,
-    );
-
     try {
-      await matchesUseCases.invitePlayersToMatch(args);
+      await matchesUseCases.invitePlayersToMatch(
+        players: _playersForInvitationSubject.value,
+        matchId: matchId,
+      );
 
       emit(MatchParticipantsInviteStateSuccess(matchId));
     } catch (e) {

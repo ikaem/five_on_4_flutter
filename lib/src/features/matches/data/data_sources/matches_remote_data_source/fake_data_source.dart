@@ -135,7 +135,7 @@ class MatchesRemoteFakeDataSource implements MatchesRemoteDataSource {
   }
 
   @override
-  Future<void> getInvitedMatches(String playerId) {
+  Future<List<MatchRemoteDTO>> getInvitedMatches(String playerId) {
     // TODO: implement getInvitedMatches
     throw UnimplementedError();
   }

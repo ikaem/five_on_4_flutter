@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_on_4_flutter/src/domain/domain.dart';
 
@@ -26,6 +24,8 @@ typedef QueryFilter<T> = Query<T> Function(
 
 class FirestoreWrapper {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  FirebaseFirestore get db => _db;
 
 // TODO rename this possibley
 // also, we might actually expose the whole query
@@ -217,16 +217,58 @@ class FirestoreWrapper {
     // }
   }
 
-  Future<void> getInvitedMatches(String playerId) async {
-    final QuerySnapshot<Map<String, dynamic>> matchParticipantsQuerySnapshot =
-        await _db.collection('matches').where('match_participants',
-            arrayContains: {'playerId': playerId, 'status': 'invited'}).get();
+  // Future<void> getInvitedMatches(String playerId) async {
+  //   final QuerySnapshot<Map<String, dynamic>> matchParticipantsQuerySnapshot =
+  //       await _db.collection('matches').where('match_participants',
+  //           arrayContains: {'playerId': playerId, 'status': 'invited'}).get();
 
-    log(matchParticipantsQuerySnapshot.toString());
+  //   log(matchParticipantsQuerySnapshot.toString());
 
-    // final matchDocuments = await Future.wait(matchParticipantsQuerySnapshot.docs.map((matchParticipantDoc) async {
-    //   return await _firestore.doc('matches/${matchParticipantDoc.reference.parent.parent.id}').get();
-    // }));
-    // return matchDocuments;
-  }
+  //   // final matchDocuments = await Future.wait(matchParticipantsQuerySnapshot.docs.map((matchParticipantDoc) async {
+  //   //   return await _firestore.doc('matches/${matchParticipantDoc.reference.parent.parent.id}').get();
+  //   // }));
+  //   // return matchDocuments;
+  // }
+
+// TOOO eventually, do just expose firebase as is
+  // Future<void> getInvitedMatches(String userId) async {
+  //   final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _db
+  //       .collectionGroup('match_participants')
+  //       .where('playerId', isEqualTo: userId)
+  //       .where('status', isEqualTo: 'invited')
+  //       .get();
+
+  //   final Iterable<Future<DocumentSnapshot<Map<String, dynamic>>>>
+  //       futureMatches = querySnapshot.docs.map(
+  //     (participantDoc) async {
+  //       final DocumentReference<Map<String, dynamic>>? matchReference =
+  //           participantDoc.reference.parent.parent;
+
+  //       final matchDocSnapshot = await matchReference!.get();
+
+  //       return matchDocSnapshot;
+
+  //       // TODO remove
+  //     },
+  //   );
+
+  //   final List<DocumentSnapshot<Map<String, dynamic>>> matchesDocSnapshots =
+  //       await Future.wait(futureMatches);
+
+  //   final List<MatchRemoteDTO> matches = matchesDocSnapshots
+  //       .map((s) => MatchRemoteDTO.fromFirestoreSnapshots(
+  //           matchSnapshot: s, participantsSnapshots: []))
+  //       .toList();
+
+  //   // final matchDocuments = await Future.wait(querySnapshot.docs.map((doc) async {
+  //   //   final matchRef = doc.reference.parent;
+  //   //   final matchDocSnapshot = await matchRef.get();
+  //   //   final matchData = matchDocSnapshot.;
+  //   //   return Match.fromFirestore(matchData, matchDocSnapshot.id);
+  //   // }).toList());
+
+  //   // return matchDocuments;
+
+  //   log(querySnapshot.toString());
+  // }
 }
