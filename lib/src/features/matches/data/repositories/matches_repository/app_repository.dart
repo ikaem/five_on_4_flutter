@@ -125,4 +125,8 @@ class MatchesAppRepository implements MatchesRepository {
 
 // then add multiple subcollection items
   }
+
+  Future<void> getInvitedMatches(String playerId) async {
+    await matchesRemoteDataSource.getInvitedMatches(playerId);
+  }
 }

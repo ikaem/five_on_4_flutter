@@ -133,6 +133,12 @@ class MatchesRemoteFakeDataSource implements MatchesRemoteDataSource {
     // TODO: implement inviteToMatch
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> getInvitedMatches(String playerId) {
+    // TODO: implement getInvitedMatches
+    throw UnimplementedError();
+  }
 }
 
 // TODO temp only

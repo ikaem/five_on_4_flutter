@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_on_4_flutter/src/domain/domain.dart';
 
@@ -213,5 +215,18 @@ class FirestoreWrapper {
     //   log('There was an error performing batch write operation: $e');
     //   rethrow;
     // }
+  }
+
+  Future<void> getInvitedMatches(String playerId) async {
+    final QuerySnapshot<Map<String, dynamic>> matchParticipantsQuerySnapshot =
+        await _db.collection('matches').where('match_participants',
+            arrayContains: {'playerId': playerId, 'status': 'invited'}).get();
+
+    log(matchParticipantsQuerySnapshot.toString());
+
+    // final matchDocuments = await Future.wait(matchParticipantsQuerySnapshot.docs.map((matchParticipantDoc) async {
+    //   return await _firestore.doc('matches/${matchParticipantDoc.reference.parent.parent.id}').get();
+    // }));
+    // return matchDocuments;
   }
 }

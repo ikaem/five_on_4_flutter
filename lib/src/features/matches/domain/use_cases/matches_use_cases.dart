@@ -88,4 +88,14 @@ class MatchesUseCases {
 
     return id;
   }
+
+  Future<void> getMyInvitedMatches() async {
+    final PlayerModel? currentPlayer = await playersRepository.currentPlayer;
+    // TODO not sure if this should be error to throw
+    if (currentPlayer == null) throw AuthNoSessionException();
+
+    final String playerId = currentPlayer.id;
+
+    await matchesRepository.getInvitedMatches(playerId);
+  }
 }

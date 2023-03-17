@@ -10,4 +10,5 @@ abstract class MatchesRemoteDataSource {
   Future<void> joinMatch(MatchJoinArgs args);
   Future<void> unjoinMatch(MatchJoinArgs args);
   Future<void> inviteToMatch(MatchParticipantsInviteArgs args);
+  Future<void> getInvitedMatches(String playerId);
 }

@@ -183,4 +183,10 @@ class MatchesRemoteAppDataSource implements MatchesRemoteDataSource {
     // TODO: implement inviteToMatch
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> getInvitedMatches(String playerId) async {
+    // TODO: implement getInvitedMatches
+    await _firestoreWrapper.getInvitedMatches(playerId);
+  }
 }
