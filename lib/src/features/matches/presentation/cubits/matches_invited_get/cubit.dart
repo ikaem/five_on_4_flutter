@@ -5,8 +5,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'cubit_state.dart';
 part 'cubit.freezed.dart';
 
-class MatchesInvitedgetCubit extends Cubit<MatchesInvitedGetCubitState> {
-  MatchesInvitedgetCubit({
+class MatchesInvitedGetCubit extends Cubit<MatchesInvitedGetCubitState> {
+  MatchesInvitedGetCubit({
     required this.matchesUseCases,
   }) : super(MatchesInvitedGetCubitStateInitial());
 
