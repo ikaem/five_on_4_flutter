@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_sources.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_participant_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/args/match_join/match_join.dart';
-import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invite/args.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invitations/args.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/exceptions/match_participants_exceptions.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 import 'package:five_on_4_flutter/src/libraries/firebase/firebase.dart';
@@ -110,8 +112,8 @@ class MatchesRemoteAppDataSource implements MatchesRemoteDataSource {
     };
 
 // TODO not sure if i need id
-    final String participantId =
-        await _firestoreWrapper.insertSubcollectionItem(
+
+    await _firestoreWrapper.insertSubcollectionItem(
       collectionName: firestoreMatchesCollection,
       parentItemId: args.matchId,
       subcollectionName: firestoreMatchPartipantsSubcollection,
@@ -179,9 +181,35 @@ class MatchesRemoteAppDataSource implements MatchesRemoteDataSource {
   }
 
   @override
-  Future<void> inviteToMatch(MatchParticipantsInviteArgs args) {
-    // TODO: implement inviteToMatch
-    throw UnimplementedError();
+  Future<void> inviteToMatch(MatchParticipantsInvitationsArgs args) async {
+    final List<MatchParticipantInviteArgs> participantsInvitations =
+        args.participantsArgs;
+    final String matchId = args.matchId;
+
+    try {
+      await _firestoreWrapper.performingBatchWriteOperation((batchSet) async {
+        for (final MatchParticipantInviteArgs participantInvite
+            in participantsInvitations) {
+          final Map<String, dynamic> invitationData =
+              participantInvite.toInvitationMap();
+
+          final DocumentReference<Map<String, dynamic>> inviteReference =
+              await _firestoreWrapper.insertSubcollectionItem(
+            collectionName: firestoreMatchesCollection,
+            parentItemId: matchId,
+            subcollectionName: firestoreMatchPartipantsSubcollection,
+            subcollectionItem: invitationData,
+          );
+
+          batchSet(inviteReference, invitationData);
+        }
+      });
+    } catch (e) {
+      log('There was an error with inviting players to a match: players: ${participantsInvitations}, match: ${matchId}, error: ${e.toString()}');
+
+      // examine and throw a better error here;
+      rethrow;
+    }
   }
 
   @override

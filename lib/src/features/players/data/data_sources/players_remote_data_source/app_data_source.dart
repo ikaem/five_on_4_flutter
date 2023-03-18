@@ -53,6 +53,7 @@ class PlayersRemoteAppDataSource implements PlayersRemoteDataSource {
   @override
   Future<List<PlayerRemoteDTO>> searchPlayers(
     PlayersGetSearchFilters filters,
+    String? currentPlayerId,
   ) async {
     final String? searchTerm = filters.searchTerm;
 
@@ -67,12 +68,14 @@ class PlayersRemoteAppDataSource implements PlayersRemoteDataSource {
 
     log('this is search term: ${filters.searchTerm}');
 
-    playersCollectionQuery = playersCollectionQuery.where(
-      'nickname',
-      // arrayContainsAny: [searchTerm],
-      // TODO later, implement better search with fuzzy and so on
-      isEqualTo: searchTerm,
-    );
+    playersCollectionQuery = playersCollectionQuery
+        .where(
+          'nickname',
+          // arrayContainsAny: [searchTerm],
+          // TODO later, implement better search with fuzzy and so on
+          isEqualTo: searchTerm,
+        )
+        .where(FieldPath.documentId, isNotEqualTo: currentPlayerId);
 
     // playersCollectionQuery = playersCollectionQuery.where(
     //   'nickname',

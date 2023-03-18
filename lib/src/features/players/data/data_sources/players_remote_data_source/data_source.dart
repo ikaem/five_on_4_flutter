@@ -9,5 +9,6 @@ abstract class PlayersRemoteDataSource {
   Future<String> createPlayer(PlayerArgs args);
   Future<List<PlayerRemoteDTO>> searchPlayers(
     PlayersGetSearchFilters filters,
+    String? currentPlayerId,
   );
 }

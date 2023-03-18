@@ -4,6 +4,7 @@ import 'package:five_on_4_flutter/src/features/players/domain/models/player/mode
 import 'package:five_on_4_flutter/src/features/players/domain/use_cases/players_use_cases.dart';
 import 'package:five_on_4_flutter/src/features/players/presentation/blocs/players_get/bloc.dart';
 import 'package:five_on_4_flutter/src/theme/constants/constants.dart';
+import 'package:five_on_4_flutter/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,66 +53,83 @@ class MatchParticipantInvite extends StatelessWidget {
               final MatchParticipantsInviteCubit matchParticipantsInviteCubit =
                   context.read<MatchParticipantsInviteCubit>();
 
-              return Dialog(
-                child: Column(
-                  children: [
-                    Text('Search player to invite to a match'),
-                    SizedBox(height: SpacingConstants.medium),
-                    TextField(
-                      onChanged: (value) {
-                        final PlayersGetSearchFilters filters =
-                            PlayersGetSearchFilters(searchTerm: value);
+              return BlocListener<MatchParticipantsInviteCubit,
+                  MatchParticipantsInviteCubitState>(
+                // TODO move this to a function
+                listener: (context, state) {
+                  state.when(
+                    initial: () => null,
+                    loading: () => null,
+                    success: (matchId) {
+                      Navigator.of(context).pop();
+                      context.showSnackBarMessage(
+                          'Invitations have been sent successfully');
+                    },
+                    failure: (message) => context.showSnackBarMessage(
+                        message, SnackBarVariant.error),
+                  );
+                },
+                child: Dialog(
+                  child: Column(
+                    children: [
+                      Text('Search player to invite to a match'),
+                      SizedBox(height: SpacingConstants.medium),
+                      TextField(
+                        onChanged: (value) {
+                          final PlayersGetSearchFilters filters =
+                              PlayersGetSearchFilters(searchTerm: value);
 
-                        // onSearchInputChanged(filters);
+                          // onSearchInputChanged(filters);
 
-                        playersGetBloc
-                            .add(PlayersGetBlocEventSearchMany(filters));
-                      },
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                          playersGetBloc
+                              .add(PlayersGetBlocEventSearchMany(filters));
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
+                          ),
                         ),
                       ),
-                    ),
-                    StreamBuilder<List<PlayerModel>>(
-                      stream: matchParticipantsInviteCubit
-                          .playersForInvitationStream,
-                      builder: (context, snapshot) {
-                        final List<PlayerModel>? players = snapshot.data;
-                        if (players == null || players.isEmpty)
-                          return SizedBox.shrink();
+                      StreamBuilder<List<PlayerModel>>(
+                        stream: matchParticipantsInviteCubit
+                            .playersForInvitationStream,
+                        builder: (context, snapshot) {
+                          final List<PlayerModel>? players = snapshot.data;
+                          if (players == null || players.isEmpty)
+                            return SizedBox.shrink();
 
-                        return Wrap(
-                          spacing: 8.0,
-                          children: players.map((e) {
-                            return Chip(
-                              label: Text(e.nickname),
-                              deleteIcon: Icon(Icons.delete),
-                              onDeleted: () => matchParticipantsInviteCubit
-                                  .onRemovePlayer(e),
-                            );
-                          }).toList(),
-                        );
+                          return Wrap(
+                            spacing: 8.0,
+                            children: players.map((e) {
+                              return Chip(
+                                label: Text(e.nickname),
+                                deleteIcon: Icon(Icons.delete),
+                                onDeleted: () => matchParticipantsInviteCubit
+                                    .onRemovePlayer(e),
+                              );
+                            }).toList(),
+                          );
 
-                        // return ListView.separated(
-                        //   scrollDirection: Axis.horizontal,
-                        //   itemBuilder: (context, index) {
-                        //     return null;
-                        //   },
-                        //   separatorBuilder: separatorBuilder,
-                        //   itemCount: itemCount,
-                        // );
-                      },
-                    ),
-                    TextButton(
-                      onPressed: () => matchParticipantsInviteCubit
-                          .onInviteParticipants(match.id),
-                      child: Text('Invite'),
-                    ),
-                    SearchPlayersList(
-                        matchParticipantsInviteCubit:
-                            matchParticipantsInviteCubit),
-                  ],
+                          // return ListView.separated(
+                          //   scrollDirection: Axis.horizontal,
+                          //   itemBuilder: (context, index) {
+                          //     return null;
+                          //   },
+                          //   separatorBuilder: separatorBuilder,
+                          //   itemCount: itemCount,
+                          // );
+                        },
+                      ),
+                      TextButton(
+                        onPressed: () => matchParticipantsInviteCubit
+                            .onInviteParticipants(match.id),
+                        child: Text('Invite'),
+                      ),
+                      SearchPlayersList(
+                          matchParticipantsInviteCubit:
+                              matchParticipantsInviteCubit),
+                    ],
+                  ),
                 ),
               );
             }),

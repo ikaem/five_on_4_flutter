@@ -85,8 +85,13 @@ class PlayersAppRepository implements PlayersRepository {
   @override
   Stream<List<PlayerModel>> searchPlayersStream(
       PlayersGetSearchFilters filters) async* {
+    final String? currentPlayerId = _currentPlayerSubject.value?.id;
+
     final List<PlayerRemoteDTO> results =
-        await playersRemoteDataSource.searchPlayers(filters);
+        await playersRemoteDataSource.searchPlayers(
+      filters,
+      currentPlayerId,
+    );
 
     final List<PlayerModel> players =
         results.map(PlayerModel.fromRemoteDTO).toList();

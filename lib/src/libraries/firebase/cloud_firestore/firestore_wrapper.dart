@@ -130,7 +130,7 @@ class FirestoreWrapper {
     return subcollectionItems;
   }
 
-  Future<String> insertSubcollectionItem({
+  Future<DocumentReference<Map<String, dynamic>>> insertSubcollectionItem({
     required String collectionName,
     required String parentItemId,
     required String subcollectionName,
@@ -145,7 +145,7 @@ class FirestoreWrapper {
     final DocumentReference<Map<String, dynamic>> insertReference =
         await subcollectionReference.add(subcollectionItem);
 
-    return insertReference.id;
+    return insertReference;
   }
 
   Future<void> removeSubcollectionItemWhereEqual({

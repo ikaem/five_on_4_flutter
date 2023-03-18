@@ -5,7 +5,7 @@ import 'package:five_on_4_flutter/src/features/matches/data/data_sources/data_so
 import 'package:five_on_4_flutter/src/features/matches/data/dtos/match_participant_remote/dto.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/args/match_join/match_join.dart';
-import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invite/args.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invitations/args.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/models/match/model.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 
@@ -77,15 +77,12 @@ class MatchesAppRepository implements MatchesRepository {
   }
 
   @override
-  Future<void> invitePlayersToMatch(MatchParticipantsInviteArgs args) async {
-// get match
-// not using this one above because htis will also update match
-    // final MatchModel match = await getMatch(args.matchId);
-
+  Future<void> invitePlayersToMatch(
+      MatchParticipantsInvitationsArgs args) async {
     final MatchRemoteDTO remoteMatchDto =
         await matchesRemoteDataSource.getMatch(args.matchId);
 
-    log('This is invited players: ${args.playersIds}');
+    log('This is invited players: ${args.participantsArgs}');
     log('This is match: $remoteMatchDto');
 
 // get match participants
@@ -93,18 +90,19 @@ class MatchesAppRepository implements MatchesRepository {
     final List<MatchParticipantRemoteDTO> existingParticipants =
         remoteMatchDto.participants;
 
-    final Map<String, bool> invitedPlayersMap = Map.fromIterable(
-      args.playersIds,
-      key: (element) => element as String,
-      value: (element) => true,
-    );
+    // final Map<String, bool> invitedPlayersMap = Map.fromIterable(
+    //   args.playersIds,
+    //   key: (element) => element as String,
+    //   value: (element) => true,
+    // );
 
     final Map<String, bool> existingPlayersMap = {
       for (final existingParticipant in existingParticipants)
         existingParticipant.userId: true
     };
 
-    List<String> filteredPlayersForInvite = args.playersIds.where((player) {
+    List<MatchParticipantInviteArgs> filteredParticipantsForInvite =
+        args.participantsArgs.where((player) {
       if (existingPlayersMap.containsKey(player)) {
         log('Player $player has already been invited to the match');
 
@@ -114,12 +112,13 @@ class MatchesAppRepository implements MatchesRepository {
       return true;
     }).toList();
 
-    final MatchParticipantsInviteArgs updatedArgs = MatchParticipantsInviteArgs(
-      playersIds: filteredPlayersForInvite,
+    final MatchParticipantsInvitationsArgs invitationsArgs =
+        MatchParticipantsInvitationsArgs(
+      participantsArgs: filteredParticipantsForInvite,
       matchId: args.matchId,
     );
 
-    await matchesRemoteDataSource.inviteToMatch(updatedArgs);
+    await matchesRemoteDataSource.inviteToMatch(invitationsArgs);
 
 // check if any of invited players has already been invited or declined or something
 

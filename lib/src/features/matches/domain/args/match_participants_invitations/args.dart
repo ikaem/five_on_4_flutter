@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/enums/enums.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 @immutable
-class MatchParticipantsInviteArgs {
-  const MatchParticipantsInviteArgs({
+class MatchParticipantsInvitationsArgs {
+  const MatchParticipantsInvitationsArgs({
     required this.participantsArgs,
     required this.matchId,
   });
@@ -27,10 +29,16 @@ class MatchParticipantInviteArgs {
       : playerId = model.id,
         nickname = model.nickname;
 
-  Map<String, String> toMap() {
+// TODO move this to extensions
+  Map<String, dynamic> toInvitationMap() {
+    final DateTime nowDatetime = DateTime.now();
+
     return {
       'playerId': playerId,
       'nickname': nickname,
+      'createdAt': Timestamp.fromDate(nowDatetime),
+      'expiresAt': Timestamp.fromDate(nowDatetime.add(Duration(days: 7))),
+      'status': MatchParticipantStatus.invited.name,
     };
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:five_on_4_flutter/src/features/auth/domain/models/auth/model.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +46,9 @@ class InitialDataProvider extends ChangeNotifier {
     _isLoading = false;
     _auth = auth;
     _currentPlayer = player;
+
+    // TODO DO THIS only for dev later
+    log('This is the player that logged in: ${player}');
 
     notifyListeners();
   }

@@ -9,10 +9,11 @@ import 'package:rxdart/rxdart.dart';
 part 'cubit_state.dart';
 part 'cubit.freezed.dart';
 
-class MatchParticipantsInviteCubit extends Cubit<MatchParticipantsInviteState> {
+class MatchParticipantsInviteCubit
+    extends Cubit<MatchParticipantsInviteCubitState> {
   MatchParticipantsInviteCubit({
     required this.matchesUseCases,
-  }) : super(MatchParticipantsInviteStateInitial());
+  }) : super(MatchParticipantsInviteCubitStateInitial());
 
   final MatchesUseCases matchesUseCases;
 
@@ -45,7 +46,7 @@ class MatchParticipantsInviteCubit extends Cubit<MatchParticipantsInviteState> {
     // MatchParticipantsInviteArgs args,
     String matchId,
   ) async {
-    emit(MatchParticipantsInviteStateLoading());
+    emit(MatchParticipantsInviteCubitStateLoading());
 
     try {
       await matchesUseCases.invitePlayersToMatch(
@@ -53,9 +54,9 @@ class MatchParticipantsInviteCubit extends Cubit<MatchParticipantsInviteState> {
         matchId: matchId,
       );
 
-      emit(MatchParticipantsInviteStateSuccess(matchId));
+      emit(MatchParticipantsInviteCubitStateSuccess(matchId));
     } catch (e) {
-      emit(MatchParticipantsInviteStateFailure(
+      emit(MatchParticipantsInviteCubitStateFailure(
           message: 'There was an error inviting players to the match'));
     }
   }

@@ -1,7 +1,7 @@
 import 'package:five_on_4_flutter/src/features/auth/data/repositories/repositories.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
-import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invite/args.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invitations/args.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 import 'package:five_on_4_flutter/src/features/players/data/repositories/repository.dart';
@@ -25,8 +25,8 @@ class MatchesUseCases {
     final List<MatchParticipantInviteArgs> participantsArgs =
         players.map(MatchParticipantInviteArgs.fromPlayerModel).toList();
 
-    final MatchParticipantsInviteArgs matchParticipantsInviteArgs =
-        MatchParticipantsInviteArgs(
+    final MatchParticipantsInvitationsArgs matchParticipantsInviteArgs =
+        MatchParticipantsInvitationsArgs(
       participantsArgs: participantsArgs,
       matchId: matchId,
     );

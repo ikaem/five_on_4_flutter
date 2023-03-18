@@ -44,7 +44,10 @@ class PlayersFakeDataSource implements PlayersRemoteDataSource {
   }
 
   @override
-  Future<List<PlayerRemoteDTO>> searchPlayers(PlayersGetSearchFilters filters) {
+  Future<List<PlayerRemoteDTO>> searchPlayers(
+    PlayersGetSearchFilters filters,
+    String? currentPlayerId,
+  ) {
     // TODO: implement searchPlayers
     throw UnimplementedError();
   }

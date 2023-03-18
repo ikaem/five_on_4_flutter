@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$MatchParticipantsInviteState {
+mixin _$MatchParticipantsInviteCubitState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -43,49 +43,49 @@ mixin _$MatchParticipantsInviteState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchParticipantsInviteStateInitial value)
+    required TResult Function(MatchParticipantsInviteCubitStateInitial value)
         initial,
-    required TResult Function(MatchParticipantsInviteStateLoading value)
+    required TResult Function(MatchParticipantsInviteCubitStateLoading value)
         loading,
-    required TResult Function(MatchParticipantsInviteStateSuccess value)
+    required TResult Function(MatchParticipantsInviteCubitStateSuccess value)
         success,
-    required TResult Function(MatchParticipantsInviteStateFailure value)
+    required TResult Function(MatchParticipantsInviteCubitStateFailure value)
         failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchParticipantsInviteStateInitial value)? initial,
-    TResult? Function(MatchParticipantsInviteStateLoading value)? loading,
-    TResult? Function(MatchParticipantsInviteStateSuccess value)? success,
-    TResult? Function(MatchParticipantsInviteStateFailure value)? failure,
+    TResult? Function(MatchParticipantsInviteCubitStateInitial value)? initial,
+    TResult? Function(MatchParticipantsInviteCubitStateLoading value)? loading,
+    TResult? Function(MatchParticipantsInviteCubitStateSuccess value)? success,
+    TResult? Function(MatchParticipantsInviteCubitStateFailure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchParticipantsInviteStateInitial value)? initial,
-    TResult Function(MatchParticipantsInviteStateLoading value)? loading,
-    TResult Function(MatchParticipantsInviteStateSuccess value)? success,
-    TResult Function(MatchParticipantsInviteStateFailure value)? failure,
+    TResult Function(MatchParticipantsInviteCubitStateInitial value)? initial,
+    TResult Function(MatchParticipantsInviteCubitStateLoading value)? loading,
+    TResult Function(MatchParticipantsInviteCubitStateSuccess value)? success,
+    TResult Function(MatchParticipantsInviteCubitStateFailure value)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MatchParticipantsInviteStateCopyWith<$Res> {
-  factory $MatchParticipantsInviteStateCopyWith(
-          MatchParticipantsInviteState value,
-          $Res Function(MatchParticipantsInviteState) then) =
-      _$MatchParticipantsInviteStateCopyWithImpl<$Res,
-          MatchParticipantsInviteState>;
+abstract class $MatchParticipantsInviteCubitStateCopyWith<$Res> {
+  factory $MatchParticipantsInviteCubitStateCopyWith(
+          MatchParticipantsInviteCubitState value,
+          $Res Function(MatchParticipantsInviteCubitState) then) =
+      _$MatchParticipantsInviteCubitStateCopyWithImpl<$Res,
+          MatchParticipantsInviteCubitState>;
 }
 
 /// @nodoc
-class _$MatchParticipantsInviteStateCopyWithImpl<$Res,
-        $Val extends MatchParticipantsInviteState>
-    implements $MatchParticipantsInviteStateCopyWith<$Res> {
-  _$MatchParticipantsInviteStateCopyWithImpl(this._value, this._then);
+class _$MatchParticipantsInviteCubitStateCopyWithImpl<$Res,
+        $Val extends MatchParticipantsInviteCubitState>
+    implements $MatchParticipantsInviteCubitStateCopyWith<$Res> {
+  _$MatchParticipantsInviteCubitStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -94,40 +94,40 @@ class _$MatchParticipantsInviteStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$MatchParticipantsInviteStateInitialCopyWith<$Res> {
-  factory _$$MatchParticipantsInviteStateInitialCopyWith(
-          _$MatchParticipantsInviteStateInitial value,
-          $Res Function(_$MatchParticipantsInviteStateInitial) then) =
-      __$$MatchParticipantsInviteStateInitialCopyWithImpl<$Res>;
+abstract class _$$MatchParticipantsInviteCubitStateInitialCopyWith<$Res> {
+  factory _$$MatchParticipantsInviteCubitStateInitialCopyWith(
+          _$MatchParticipantsInviteCubitStateInitial value,
+          $Res Function(_$MatchParticipantsInviteCubitStateInitial) then) =
+      __$$MatchParticipantsInviteCubitStateInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$MatchParticipantsInviteStateInitialCopyWithImpl<$Res>
-    extends _$MatchParticipantsInviteStateCopyWithImpl<$Res,
-        _$MatchParticipantsInviteStateInitial>
-    implements _$$MatchParticipantsInviteStateInitialCopyWith<$Res> {
-  __$$MatchParticipantsInviteStateInitialCopyWithImpl(
-      _$MatchParticipantsInviteStateInitial _value,
-      $Res Function(_$MatchParticipantsInviteStateInitial) _then)
+class __$$MatchParticipantsInviteCubitStateInitialCopyWithImpl<$Res>
+    extends _$MatchParticipantsInviteCubitStateCopyWithImpl<$Res,
+        _$MatchParticipantsInviteCubitStateInitial>
+    implements _$$MatchParticipantsInviteCubitStateInitialCopyWith<$Res> {
+  __$$MatchParticipantsInviteCubitStateInitialCopyWithImpl(
+      _$MatchParticipantsInviteCubitStateInitial _value,
+      $Res Function(_$MatchParticipantsInviteCubitStateInitial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$MatchParticipantsInviteStateInitial
-    implements MatchParticipantsInviteStateInitial {
-  _$MatchParticipantsInviteStateInitial();
+class _$MatchParticipantsInviteCubitStateInitial
+    implements MatchParticipantsInviteCubitStateInitial {
+  _$MatchParticipantsInviteCubitStateInitial();
 
   @override
   String toString() {
-    return 'MatchParticipantsInviteState.initial()';
+    return 'MatchParticipantsInviteCubitState.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchParticipantsInviteStateInitial);
+            other is _$MatchParticipantsInviteCubitStateInitial);
   }
 
   @override
@@ -173,13 +173,13 @@ class _$MatchParticipantsInviteStateInitial
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchParticipantsInviteStateInitial value)
+    required TResult Function(MatchParticipantsInviteCubitStateInitial value)
         initial,
-    required TResult Function(MatchParticipantsInviteStateLoading value)
+    required TResult Function(MatchParticipantsInviteCubitStateLoading value)
         loading,
-    required TResult Function(MatchParticipantsInviteStateSuccess value)
+    required TResult Function(MatchParticipantsInviteCubitStateSuccess value)
         success,
-    required TResult Function(MatchParticipantsInviteStateFailure value)
+    required TResult Function(MatchParticipantsInviteCubitStateFailure value)
         failure,
   }) {
     return initial(this);
@@ -188,10 +188,10 @@ class _$MatchParticipantsInviteStateInitial
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchParticipantsInviteStateInitial value)? initial,
-    TResult? Function(MatchParticipantsInviteStateLoading value)? loading,
-    TResult? Function(MatchParticipantsInviteStateSuccess value)? success,
-    TResult? Function(MatchParticipantsInviteStateFailure value)? failure,
+    TResult? Function(MatchParticipantsInviteCubitStateInitial value)? initial,
+    TResult? Function(MatchParticipantsInviteCubitStateLoading value)? loading,
+    TResult? Function(MatchParticipantsInviteCubitStateSuccess value)? success,
+    TResult? Function(MatchParticipantsInviteCubitStateFailure value)? failure,
   }) {
     return initial?.call(this);
   }
@@ -199,10 +199,10 @@ class _$MatchParticipantsInviteStateInitial
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchParticipantsInviteStateInitial value)? initial,
-    TResult Function(MatchParticipantsInviteStateLoading value)? loading,
-    TResult Function(MatchParticipantsInviteStateSuccess value)? success,
-    TResult Function(MatchParticipantsInviteStateFailure value)? failure,
+    TResult Function(MatchParticipantsInviteCubitStateInitial value)? initial,
+    TResult Function(MatchParticipantsInviteCubitStateLoading value)? loading,
+    TResult Function(MatchParticipantsInviteCubitStateSuccess value)? success,
+    TResult Function(MatchParticipantsInviteCubitStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -212,47 +212,47 @@ class _$MatchParticipantsInviteStateInitial
   }
 }
 
-abstract class MatchParticipantsInviteStateInitial
-    implements MatchParticipantsInviteState {
-  factory MatchParticipantsInviteStateInitial() =
-      _$MatchParticipantsInviteStateInitial;
+abstract class MatchParticipantsInviteCubitStateInitial
+    implements MatchParticipantsInviteCubitState {
+  factory MatchParticipantsInviteCubitStateInitial() =
+      _$MatchParticipantsInviteCubitStateInitial;
 }
 
 /// @nodoc
-abstract class _$$MatchParticipantsInviteStateLoadingCopyWith<$Res> {
-  factory _$$MatchParticipantsInviteStateLoadingCopyWith(
-          _$MatchParticipantsInviteStateLoading value,
-          $Res Function(_$MatchParticipantsInviteStateLoading) then) =
-      __$$MatchParticipantsInviteStateLoadingCopyWithImpl<$Res>;
+abstract class _$$MatchParticipantsInviteCubitStateLoadingCopyWith<$Res> {
+  factory _$$MatchParticipantsInviteCubitStateLoadingCopyWith(
+          _$MatchParticipantsInviteCubitStateLoading value,
+          $Res Function(_$MatchParticipantsInviteCubitStateLoading) then) =
+      __$$MatchParticipantsInviteCubitStateLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$MatchParticipantsInviteStateLoadingCopyWithImpl<$Res>
-    extends _$MatchParticipantsInviteStateCopyWithImpl<$Res,
-        _$MatchParticipantsInviteStateLoading>
-    implements _$$MatchParticipantsInviteStateLoadingCopyWith<$Res> {
-  __$$MatchParticipantsInviteStateLoadingCopyWithImpl(
-      _$MatchParticipantsInviteStateLoading _value,
-      $Res Function(_$MatchParticipantsInviteStateLoading) _then)
+class __$$MatchParticipantsInviteCubitStateLoadingCopyWithImpl<$Res>
+    extends _$MatchParticipantsInviteCubitStateCopyWithImpl<$Res,
+        _$MatchParticipantsInviteCubitStateLoading>
+    implements _$$MatchParticipantsInviteCubitStateLoadingCopyWith<$Res> {
+  __$$MatchParticipantsInviteCubitStateLoadingCopyWithImpl(
+      _$MatchParticipantsInviteCubitStateLoading _value,
+      $Res Function(_$MatchParticipantsInviteCubitStateLoading) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$MatchParticipantsInviteStateLoading
-    implements MatchParticipantsInviteStateLoading {
-  _$MatchParticipantsInviteStateLoading();
+class _$MatchParticipantsInviteCubitStateLoading
+    implements MatchParticipantsInviteCubitStateLoading {
+  _$MatchParticipantsInviteCubitStateLoading();
 
   @override
   String toString() {
-    return 'MatchParticipantsInviteState.loading()';
+    return 'MatchParticipantsInviteCubitState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchParticipantsInviteStateLoading);
+            other is _$MatchParticipantsInviteCubitStateLoading);
   }
 
   @override
@@ -298,13 +298,13 @@ class _$MatchParticipantsInviteStateLoading
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchParticipantsInviteStateInitial value)
+    required TResult Function(MatchParticipantsInviteCubitStateInitial value)
         initial,
-    required TResult Function(MatchParticipantsInviteStateLoading value)
+    required TResult Function(MatchParticipantsInviteCubitStateLoading value)
         loading,
-    required TResult Function(MatchParticipantsInviteStateSuccess value)
+    required TResult Function(MatchParticipantsInviteCubitStateSuccess value)
         success,
-    required TResult Function(MatchParticipantsInviteStateFailure value)
+    required TResult Function(MatchParticipantsInviteCubitStateFailure value)
         failure,
   }) {
     return loading(this);
@@ -313,10 +313,10 @@ class _$MatchParticipantsInviteStateLoading
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchParticipantsInviteStateInitial value)? initial,
-    TResult? Function(MatchParticipantsInviteStateLoading value)? loading,
-    TResult? Function(MatchParticipantsInviteStateSuccess value)? success,
-    TResult? Function(MatchParticipantsInviteStateFailure value)? failure,
+    TResult? Function(MatchParticipantsInviteCubitStateInitial value)? initial,
+    TResult? Function(MatchParticipantsInviteCubitStateLoading value)? loading,
+    TResult? Function(MatchParticipantsInviteCubitStateSuccess value)? success,
+    TResult? Function(MatchParticipantsInviteCubitStateFailure value)? failure,
   }) {
     return loading?.call(this);
   }
@@ -324,10 +324,10 @@ class _$MatchParticipantsInviteStateLoading
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchParticipantsInviteStateInitial value)? initial,
-    TResult Function(MatchParticipantsInviteStateLoading value)? loading,
-    TResult Function(MatchParticipantsInviteStateSuccess value)? success,
-    TResult Function(MatchParticipantsInviteStateFailure value)? failure,
+    TResult Function(MatchParticipantsInviteCubitStateInitial value)? initial,
+    TResult Function(MatchParticipantsInviteCubitStateLoading value)? loading,
+    TResult Function(MatchParticipantsInviteCubitStateSuccess value)? success,
+    TResult Function(MatchParticipantsInviteCubitStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -337,30 +337,30 @@ class _$MatchParticipantsInviteStateLoading
   }
 }
 
-abstract class MatchParticipantsInviteStateLoading
-    implements MatchParticipantsInviteState {
-  factory MatchParticipantsInviteStateLoading() =
-      _$MatchParticipantsInviteStateLoading;
+abstract class MatchParticipantsInviteCubitStateLoading
+    implements MatchParticipantsInviteCubitState {
+  factory MatchParticipantsInviteCubitStateLoading() =
+      _$MatchParticipantsInviteCubitStateLoading;
 }
 
 /// @nodoc
-abstract class _$$MatchParticipantsInviteStateSuccessCopyWith<$Res> {
-  factory _$$MatchParticipantsInviteStateSuccessCopyWith(
-          _$MatchParticipantsInviteStateSuccess value,
-          $Res Function(_$MatchParticipantsInviteStateSuccess) then) =
-      __$$MatchParticipantsInviteStateSuccessCopyWithImpl<$Res>;
+abstract class _$$MatchParticipantsInviteCubitStateSuccessCopyWith<$Res> {
+  factory _$$MatchParticipantsInviteCubitStateSuccessCopyWith(
+          _$MatchParticipantsInviteCubitStateSuccess value,
+          $Res Function(_$MatchParticipantsInviteCubitStateSuccess) then) =
+      __$$MatchParticipantsInviteCubitStateSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({String matchId});
 }
 
 /// @nodoc
-class __$$MatchParticipantsInviteStateSuccessCopyWithImpl<$Res>
-    extends _$MatchParticipantsInviteStateCopyWithImpl<$Res,
-        _$MatchParticipantsInviteStateSuccess>
-    implements _$$MatchParticipantsInviteStateSuccessCopyWith<$Res> {
-  __$$MatchParticipantsInviteStateSuccessCopyWithImpl(
-      _$MatchParticipantsInviteStateSuccess _value,
-      $Res Function(_$MatchParticipantsInviteStateSuccess) _then)
+class __$$MatchParticipantsInviteCubitStateSuccessCopyWithImpl<$Res>
+    extends _$MatchParticipantsInviteCubitStateCopyWithImpl<$Res,
+        _$MatchParticipantsInviteCubitStateSuccess>
+    implements _$$MatchParticipantsInviteCubitStateSuccessCopyWith<$Res> {
+  __$$MatchParticipantsInviteCubitStateSuccessCopyWithImpl(
+      _$MatchParticipantsInviteCubitStateSuccess _value,
+      $Res Function(_$MatchParticipantsInviteCubitStateSuccess) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -368,7 +368,7 @@ class __$$MatchParticipantsInviteStateSuccessCopyWithImpl<$Res>
   $Res call({
     Object? matchId = null,
   }) {
-    return _then(_$MatchParticipantsInviteStateSuccess(
+    return _then(_$MatchParticipantsInviteCubitStateSuccess(
       null == matchId
           ? _value.matchId
           : matchId // ignore: cast_nullable_to_non_nullable
@@ -379,23 +379,23 @@ class __$$MatchParticipantsInviteStateSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MatchParticipantsInviteStateSuccess
-    implements MatchParticipantsInviteStateSuccess {
-  _$MatchParticipantsInviteStateSuccess(this.matchId);
+class _$MatchParticipantsInviteCubitStateSuccess
+    implements MatchParticipantsInviteCubitStateSuccess {
+  _$MatchParticipantsInviteCubitStateSuccess(this.matchId);
 
   @override
   final String matchId;
 
   @override
   String toString() {
-    return 'MatchParticipantsInviteState.success(matchId: $matchId)';
+    return 'MatchParticipantsInviteCubitState.success(matchId: $matchId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchParticipantsInviteStateSuccess &&
+            other is _$MatchParticipantsInviteCubitStateSuccess &&
             (identical(other.matchId, matchId) || other.matchId == matchId));
   }
 
@@ -405,10 +405,10 @@ class _$MatchParticipantsInviteStateSuccess
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MatchParticipantsInviteStateSuccessCopyWith<
-          _$MatchParticipantsInviteStateSuccess>
-      get copyWith => __$$MatchParticipantsInviteStateSuccessCopyWithImpl<
-          _$MatchParticipantsInviteStateSuccess>(this, _$identity);
+  _$$MatchParticipantsInviteCubitStateSuccessCopyWith<
+          _$MatchParticipantsInviteCubitStateSuccess>
+      get copyWith => __$$MatchParticipantsInviteCubitStateSuccessCopyWithImpl<
+          _$MatchParticipantsInviteCubitStateSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -450,13 +450,13 @@ class _$MatchParticipantsInviteStateSuccess
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchParticipantsInviteStateInitial value)
+    required TResult Function(MatchParticipantsInviteCubitStateInitial value)
         initial,
-    required TResult Function(MatchParticipantsInviteStateLoading value)
+    required TResult Function(MatchParticipantsInviteCubitStateLoading value)
         loading,
-    required TResult Function(MatchParticipantsInviteStateSuccess value)
+    required TResult Function(MatchParticipantsInviteCubitStateSuccess value)
         success,
-    required TResult Function(MatchParticipantsInviteStateFailure value)
+    required TResult Function(MatchParticipantsInviteCubitStateFailure value)
         failure,
   }) {
     return success(this);
@@ -465,10 +465,10 @@ class _$MatchParticipantsInviteStateSuccess
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchParticipantsInviteStateInitial value)? initial,
-    TResult? Function(MatchParticipantsInviteStateLoading value)? loading,
-    TResult? Function(MatchParticipantsInviteStateSuccess value)? success,
-    TResult? Function(MatchParticipantsInviteStateFailure value)? failure,
+    TResult? Function(MatchParticipantsInviteCubitStateInitial value)? initial,
+    TResult? Function(MatchParticipantsInviteCubitStateLoading value)? loading,
+    TResult? Function(MatchParticipantsInviteCubitStateSuccess value)? success,
+    TResult? Function(MatchParticipantsInviteCubitStateFailure value)? failure,
   }) {
     return success?.call(this);
   }
@@ -476,10 +476,10 @@ class _$MatchParticipantsInviteStateSuccess
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchParticipantsInviteStateInitial value)? initial,
-    TResult Function(MatchParticipantsInviteStateLoading value)? loading,
-    TResult Function(MatchParticipantsInviteStateSuccess value)? success,
-    TResult Function(MatchParticipantsInviteStateFailure value)? failure,
+    TResult Function(MatchParticipantsInviteCubitStateInitial value)? initial,
+    TResult Function(MatchParticipantsInviteCubitStateLoading value)? loading,
+    TResult Function(MatchParticipantsInviteCubitStateSuccess value)? success,
+    TResult Function(MatchParticipantsInviteCubitStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -489,36 +489,36 @@ class _$MatchParticipantsInviteStateSuccess
   }
 }
 
-abstract class MatchParticipantsInviteStateSuccess
-    implements MatchParticipantsInviteState {
-  factory MatchParticipantsInviteStateSuccess(final String matchId) =
-      _$MatchParticipantsInviteStateSuccess;
+abstract class MatchParticipantsInviteCubitStateSuccess
+    implements MatchParticipantsInviteCubitState {
+  factory MatchParticipantsInviteCubitStateSuccess(final String matchId) =
+      _$MatchParticipantsInviteCubitStateSuccess;
 
   String get matchId;
   @JsonKey(ignore: true)
-  _$$MatchParticipantsInviteStateSuccessCopyWith<
-          _$MatchParticipantsInviteStateSuccess>
+  _$$MatchParticipantsInviteCubitStateSuccessCopyWith<
+          _$MatchParticipantsInviteCubitStateSuccess>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MatchParticipantsInviteStateFailureCopyWith<$Res> {
-  factory _$$MatchParticipantsInviteStateFailureCopyWith(
-          _$MatchParticipantsInviteStateFailure value,
-          $Res Function(_$MatchParticipantsInviteStateFailure) then) =
-      __$$MatchParticipantsInviteStateFailureCopyWithImpl<$Res>;
+abstract class _$$MatchParticipantsInviteCubitStateFailureCopyWith<$Res> {
+  factory _$$MatchParticipantsInviteCubitStateFailureCopyWith(
+          _$MatchParticipantsInviteCubitStateFailure value,
+          $Res Function(_$MatchParticipantsInviteCubitStateFailure) then) =
+      __$$MatchParticipantsInviteCubitStateFailureCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$MatchParticipantsInviteStateFailureCopyWithImpl<$Res>
-    extends _$MatchParticipantsInviteStateCopyWithImpl<$Res,
-        _$MatchParticipantsInviteStateFailure>
-    implements _$$MatchParticipantsInviteStateFailureCopyWith<$Res> {
-  __$$MatchParticipantsInviteStateFailureCopyWithImpl(
-      _$MatchParticipantsInviteStateFailure _value,
-      $Res Function(_$MatchParticipantsInviteStateFailure) _then)
+class __$$MatchParticipantsInviteCubitStateFailureCopyWithImpl<$Res>
+    extends _$MatchParticipantsInviteCubitStateCopyWithImpl<$Res,
+        _$MatchParticipantsInviteCubitStateFailure>
+    implements _$$MatchParticipantsInviteCubitStateFailureCopyWith<$Res> {
+  __$$MatchParticipantsInviteCubitStateFailureCopyWithImpl(
+      _$MatchParticipantsInviteCubitStateFailure _value,
+      $Res Function(_$MatchParticipantsInviteCubitStateFailure) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -526,7 +526,7 @@ class __$$MatchParticipantsInviteStateFailureCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$MatchParticipantsInviteStateFailure(
+    return _then(_$MatchParticipantsInviteCubitStateFailure(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -537,23 +537,23 @@ class __$$MatchParticipantsInviteStateFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MatchParticipantsInviteStateFailure
-    implements MatchParticipantsInviteStateFailure {
-  _$MatchParticipantsInviteStateFailure({required this.message});
+class _$MatchParticipantsInviteCubitStateFailure
+    implements MatchParticipantsInviteCubitStateFailure {
+  _$MatchParticipantsInviteCubitStateFailure({required this.message});
 
   @override
   final String message;
 
   @override
   String toString() {
-    return 'MatchParticipantsInviteState.failure(message: $message)';
+    return 'MatchParticipantsInviteCubitState.failure(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MatchParticipantsInviteStateFailure &&
+            other is _$MatchParticipantsInviteCubitStateFailure &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -563,10 +563,10 @@ class _$MatchParticipantsInviteStateFailure
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MatchParticipantsInviteStateFailureCopyWith<
-          _$MatchParticipantsInviteStateFailure>
-      get copyWith => __$$MatchParticipantsInviteStateFailureCopyWithImpl<
-          _$MatchParticipantsInviteStateFailure>(this, _$identity);
+  _$$MatchParticipantsInviteCubitStateFailureCopyWith<
+          _$MatchParticipantsInviteCubitStateFailure>
+      get copyWith => __$$MatchParticipantsInviteCubitStateFailureCopyWithImpl<
+          _$MatchParticipantsInviteCubitStateFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -608,13 +608,13 @@ class _$MatchParticipantsInviteStateFailure
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(MatchParticipantsInviteStateInitial value)
+    required TResult Function(MatchParticipantsInviteCubitStateInitial value)
         initial,
-    required TResult Function(MatchParticipantsInviteStateLoading value)
+    required TResult Function(MatchParticipantsInviteCubitStateLoading value)
         loading,
-    required TResult Function(MatchParticipantsInviteStateSuccess value)
+    required TResult Function(MatchParticipantsInviteCubitStateSuccess value)
         success,
-    required TResult Function(MatchParticipantsInviteStateFailure value)
+    required TResult Function(MatchParticipantsInviteCubitStateFailure value)
         failure,
   }) {
     return failure(this);
@@ -623,10 +623,10 @@ class _$MatchParticipantsInviteStateFailure
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(MatchParticipantsInviteStateInitial value)? initial,
-    TResult? Function(MatchParticipantsInviteStateLoading value)? loading,
-    TResult? Function(MatchParticipantsInviteStateSuccess value)? success,
-    TResult? Function(MatchParticipantsInviteStateFailure value)? failure,
+    TResult? Function(MatchParticipantsInviteCubitStateInitial value)? initial,
+    TResult? Function(MatchParticipantsInviteCubitStateLoading value)? loading,
+    TResult? Function(MatchParticipantsInviteCubitStateSuccess value)? success,
+    TResult? Function(MatchParticipantsInviteCubitStateFailure value)? failure,
   }) {
     return failure?.call(this);
   }
@@ -634,10 +634,10 @@ class _$MatchParticipantsInviteStateFailure
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(MatchParticipantsInviteStateInitial value)? initial,
-    TResult Function(MatchParticipantsInviteStateLoading value)? loading,
-    TResult Function(MatchParticipantsInviteStateSuccess value)? success,
-    TResult Function(MatchParticipantsInviteStateFailure value)? failure,
+    TResult Function(MatchParticipantsInviteCubitStateInitial value)? initial,
+    TResult Function(MatchParticipantsInviteCubitStateLoading value)? loading,
+    TResult Function(MatchParticipantsInviteCubitStateSuccess value)? success,
+    TResult Function(MatchParticipantsInviteCubitStateFailure value)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -647,14 +647,15 @@ class _$MatchParticipantsInviteStateFailure
   }
 }
 
-abstract class MatchParticipantsInviteStateFailure
-    implements MatchParticipantsInviteState {
-  factory MatchParticipantsInviteStateFailure({required final String message}) =
-      _$MatchParticipantsInviteStateFailure;
+abstract class MatchParticipantsInviteCubitStateFailure
+    implements MatchParticipantsInviteCubitState {
+  factory MatchParticipantsInviteCubitStateFailure(
+          {required final String message}) =
+      _$MatchParticipantsInviteCubitStateFailure;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$MatchParticipantsInviteStateFailureCopyWith<
-          _$MatchParticipantsInviteStateFailure>
+  _$$MatchParticipantsInviteCubitStateFailureCopyWith<
+          _$MatchParticipantsInviteCubitStateFailure>
       get copyWith => throw _privateConstructorUsedError;
 }
