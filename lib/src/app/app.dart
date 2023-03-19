@@ -1,5 +1,6 @@
 import 'package:five_on_4_flutter/src/navigation/app_router.dart';
 import 'package:five_on_4_flutter/src/presentation/cubits/initial_data/cubit.dart';
+import 'package:five_on_4_flutter/src/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -32,9 +33,9 @@ class FiveOn4App extends StatelessWidget {
       ],
       onGenerateTitle: (BuildContext context) =>
           AppLocalizations.of(context)!.appTitle,
-      theme: ThemeData(),
-      darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.dark,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.light,
       routeInformationProvider: appRouter.router.routeInformationProvider,
       routeInformationParser: appRouter.router.routeInformationParser,
       routerDelegate: appRouter.router.routerDelegate,
