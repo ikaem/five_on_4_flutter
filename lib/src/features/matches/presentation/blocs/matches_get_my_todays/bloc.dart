@@ -33,7 +33,7 @@ class MatchesGetMyTodaysBloc
     try {
       // TODO eventually, this will require a pagination of some sort
       final List<MatchModel> matches =
-          await matchesUseCases.getMyTodaysMatches();
+          await matchesUseCases.getMyNextMatchInfo();
 
       emitter(MatchesGetMyTodaysBlocStateSuccess(matches: matches));
     } catch (e) {

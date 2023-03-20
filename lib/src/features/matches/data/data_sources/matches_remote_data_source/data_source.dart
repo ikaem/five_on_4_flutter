@@ -5,6 +5,7 @@ import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/v
 
 abstract class MatchesRemoteDataSource {
   Future<MatchRemoteDTO> getMatch(String id);
+  Future<MatchRemoteDTO> getPlayerNextMatch(String playerId);
   Future<List<MatchRemoteDTO>> getMatches();
   Future<String> createMatch(NewMatchValue newMatch);
   Future<void> joinMatch(MatchJoinArgs args);

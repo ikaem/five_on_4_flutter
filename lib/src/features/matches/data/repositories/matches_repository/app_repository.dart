@@ -134,4 +134,14 @@ class MatchesAppRepository implements MatchesRepository {
 
     return matches;
   }
+
+  @override
+  Future<MatchModel> getPlayerNextMatch(String playerId) async {
+    final MatchRemoteDTO matchRemoteDTO =
+        await matchesRemoteDataSource.getPlayerNextMatch(playerId);
+
+    final MatchModel matchModel = MatchModel.fromRemoteDto(matchRemoteDTO);
+
+    return matchModel;
+  }
 }

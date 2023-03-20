@@ -1,16 +1,17 @@
+import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_all/bloc.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_todays/bloc.dart';
 import 'package:five_on_4_flutter/src/features/weather/presentation/cubits/cubits.dart';
 import 'package:five_on_4_flutter/src/navigation/app_routes.dart';
-import 'package:five_on_4_flutter/src/presentation/widgets/home_view/current_player_info_overview.dart';
+import 'package:five_on_4_flutter/src/presentation/widgets/home_view/my_info_overview.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/home_view/home_view.dart';
+import 'package:five_on_4_flutter/src/presentation/widgets/home_view/my_next_match_overview.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/layout/app_bar_more_actions.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/layout/custom_app_bar.dart';
-import 'package:five_on_4_flutter/src/theme/constants/color_constants.dart';
 import 'package:five_on_4_flutter/src/theme/constants/constants.dart';
-import 'package:five_on_4_flutter/src/theme/constants/font_size_constants.dart';
 import 'package:five_on_4_flutter/src/utils/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeScreenView extends StatelessWidget {
@@ -39,66 +40,33 @@ class HomeScreenView extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             // this should be its own widget that would use some initial data bloc or something to get info about player
-            CurrentPlayerInfoOverview(),
+            MyInfoOverview(),
             SizedBox(
               height: SpacingConstants.xxLarge,
             ),
 
             // create proper widget from this,
 
-            Container(
-              decoration: BoxDecoration(
-                color: ColorConstants.greenDark,
-                borderRadius: BorderRadius.circular(DimensionsConstants.d10),
-              ),
-              padding: EdgeInsets.all(SpacingConstants.small),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'My next match',
-                    style: textTheme.titleSmall!.copyWith(
-                      color: ColorConstants.yellow,
-                    ),
+            BlocConsumer<MatchesGetMyTodaysBloc, MatchesGetMyTodaysBlocState>(
+              listener: (context, state) {
+                // TODO: implement listener
+              },
+              builder: (context, state) {
+                return state.when(
+                  initial: () => SizedBox.shrink(),
+                  loading: () => Center(
+                    child: CircularProgressIndicator(),
                   ),
-                  SizedBox(
-                    height: SpacingConstants.medium,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Some match name',
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: DimensionsConstants.d50,
-                        height: DimensionsConstants.d50,
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.sunny,
-                              size: FontSizeConstants.xxxLarge,
-                              color: ColorConstants.yellow
-                              
-                              ,
-                            ),
-                            SizedBox(
-                              height: SpacingConstants.small,
-                            ),
-                            Text('Sunny'),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                  failure: (message) => Center(child: Text(message)),
+                  success: (matches) {
+                    final MatchModel match = matches[0];
+
+                    return MyNextMatchOverview(match: match);
+                  },
+                );
+
+                // make function out of this
+              },
             ),
 
             // BlocConsumer<MatchesGetMyTodaysBloc, MatchesGetMyTodaysBlocState>(

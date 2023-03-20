@@ -6,17 +6,20 @@ import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 import 'package:five_on_4_flutter/src/features/players/data/repositories/repository.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
+import 'package:five_on_4_flutter/src/features/weather/data/repositories/weather_repository/weather_repository.dart';
 
 class MatchesUseCases {
   const MatchesUseCases({
     required this.matchesRepository,
     required this.authRepository,
     required this.playersRepository,
+    required this.weatherRepository,
   });
 
   final MatchesRepository matchesRepository;
   final AuthRepository authRepository;
   final PlayersRepository playersRepository;
+  final WeatherRepository weatherRepository;
 
   Future<void> invitePlayersToMatch({
     required String matchId,
@@ -64,7 +67,7 @@ class MatchesUseCases {
 
 // TODO this should probably return paginated class of some sort
 // TODO ALSO, this function can maybe be unified later with some general gunction - and just pass it date period, and if matches are for me
-  Future<List<MatchModel>> getMyTodaysMatches() async {
+  Future<List<MatchModel>> getMyNextMatchInfo() async {
 /* TODO this probably needs to be formatted to remove time, and just include todays data  */
 // TODO will need to use this in future
     final String today = DateTime.now().toIso8601String();

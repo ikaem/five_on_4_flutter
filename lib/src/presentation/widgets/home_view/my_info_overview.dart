@@ -2,8 +2,8 @@ import 'package:five_on_4_flutter/src/theme/constants/color_constants.dart';
 import 'package:five_on_4_flutter/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 
-class CurrentPlayerInfoOverview extends StatelessWidget {
-  const CurrentPlayerInfoOverview({
+class MyInfoOverview extends StatelessWidget {
+  const MyInfoOverview({
     super.key,
   });
 
