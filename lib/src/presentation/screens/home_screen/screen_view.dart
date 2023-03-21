@@ -1,6 +1,6 @@
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/match_get_my_next/cubit.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_all/bloc.dart';
-import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_todays/bloc.dart';
 import 'package:five_on_4_flutter/src/features/weather/presentation/cubits/cubits.dart';
 import 'package:five_on_4_flutter/src/navigation/app_routes.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/home_view/my_info_overview.dart';
@@ -8,6 +8,7 @@ import 'package:five_on_4_flutter/src/presentation/widgets/home_view/home_view.d
 import 'package:five_on_4_flutter/src/presentation/widgets/home_view/my_next_match_overview.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/layout/app_bar_more_actions.dart';
 import 'package:five_on_4_flutter/src/presentation/widgets/layout/custom_app_bar.dart';
+import 'package:five_on_4_flutter/src/theme/constants/color_constants.dart';
 import 'package:five_on_4_flutter/src/theme/constants/constants.dart';
 import 'package:five_on_4_flutter/src/utils/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class HomeScreenView extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(SpacingConstants.small),
-        child: ListView(
+        child: Column(
           children: <Widget>[
             // this should be its own widget that would use some initial data bloc or something to get info about player
             MyInfoOverview(),
@@ -47,10 +48,11 @@ class HomeScreenView extends StatelessWidget {
 
             // create proper widget from this,
 
-            BlocConsumer<MatchesGetMyTodaysBloc, MatchesGetMyTodaysBlocState>(
+            BlocConsumer<MatchGetMyNextCubit, MatchGetMyNextCubitState>(
               listener: (context, state) {
                 // TODO: implement listener
               },
+              // make function out of this
               builder: (context, state) {
                 return state.when(
                   initial: () => SizedBox.shrink(),
@@ -58,15 +60,38 @@ class HomeScreenView extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   ),
                   failure: (message) => Center(child: Text(message)),
-                  success: (matches) {
-                    final MatchModel match = matches[0];
-
-                    return MyNextMatchOverview(match: match);
+                  success: (matchInfo) {
+                    return MyNextMatchOverview(matchInfo: matchInfo);
                   },
                 );
-
-                // make function out of this
               },
+            ),
+            SizedBox(
+              height: SpacingConstants.xxLarge,
+            ),
+
+            // make widget out of this
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(SpacingConstants.small),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(DimensionsConstants.d10),
+                  color: ColorConstants.white,
+                ),
+                child: ListView.builder(
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    final MatchModel match = MatchModel(id: id, name: name, joinedParticipants: joinedParticipants, invitedParticipants: invitedParticipants)
+                    return Container(
+                      child: Column(
+                        children: [
+                          Text()
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
 
             // BlocConsumer<MatchesGetMyTodaysBloc, MatchesGetMyTodaysBlocState>(
@@ -182,47 +207,47 @@ class HomeScreenView extends StatelessWidget {
 
   // my today's matches
 
-  Widget _matchesGetMyTodaysBlocBuilder(
-    BuildContext context,
-    MatchesGetMyTodaysBlocState state,
-  ) {
-    return state.when(
-      initial: () => const SizedBox.shrink(),
-      loading: () => Center(
-        child: Column(
-          children: const [
-            Text("Loading today's matches..."),
-            CircularProgressIndicator()
-          ],
-        ),
-      ),
-      failure: (message) => Center(
-        child: Column(
-          children: [
-            Text(message),
-            const Icon(Icons.sports_soccer_sharp),
-          ],
-        ),
-      ),
-      success: (matches) => MyTodayMatchesOverview(
-        onMatchBriefCardTap: _onGoToMatch,
-        matches: matches,
-      ),
-    );
-  }
+  // Widget _matchesGetMyTodaysBlocBuilder(
+  //   BuildContext context,
+  //   MatchesGetMyTodaysBlocState state,
+  // ) {
+  //   return state.when(
+  //     initial: () => const SizedBox.shrink(),
+  //     loading: () => Center(
+  //       child: Column(
+  //         children: const [
+  //           Text("Loading today's matches..."),
+  //           CircularProgressIndicator()
+  //         ],
+  //       ),
+  //     ),
+  //     failure: (message) => Center(
+  //       child: Column(
+  //         children: [
+  //           Text(message),
+  //           const Icon(Icons.sports_soccer_sharp),
+  //         ],
+  //       ),
+  //     ),
+  //     success: (matches) => MyTodayMatchesOverview(
+  //       onMatchBriefCardTap: _onGoToMatch,
+  //       matches: matches,
+  //     ),
+  //   );
+  // }
 
-  void _matchesGetMyTodaysBlocListener(
-    BuildContext context,
-    MatchesGetMyTodaysBlocState state,
-  ) {
-    state.when(
-      initial: () => null,
-      loading: () => null,
-      success: (weather) => null,
-      failure: (message) =>
-          context.showSnackBarMessage(message, SnackBarVariant.error),
-    );
-  }
+  // void _matchesGetMyTodaysBlocListener(
+  //   BuildContext context,
+  //   MatchesGetMyTodaysBlocState state,
+  // ) {
+  //   state.when(
+  //     initial: () => null,
+  //     loading: () => null,
+  //     success: (weather) => null,
+  //     failure: (message) =>
+  //         context.showSnackBarMessage(message, SnackBarVariant.error),
+  //   );
+  // }
 
 // weather
   Widget _weatherGetCubitBuilder(

@@ -38,6 +38,21 @@ class MatchModel {
     return match;
   }
 
+  // TODO test
+  factory MatchModel.fromRandom() {
+    final String id = '1';
+    final String name = 'Some random match name';
+    final List<MatchParticipantModel> joinedParticipants = [];
+    final List<MatchParticipantModel> invitedParticipants = [];
+
+    return MatchModel(
+      id: id,
+      name: name,
+      joinedParticipants: joinedParticipants,
+      invitedParticipants: invitedParticipants,
+    );
+  }
+
   final String id;
   final String name;
   final List<MatchParticipantModel> joinedParticipants;
@@ -57,5 +72,4 @@ extension MatchModelExtension on MatchModel {
   }
 }
 
-
-// TODO move this somewhere 
+// TODO move this somewhere

@@ -1,12 +1,16 @@
+import 'package:five_on_4_flutter/src/data/repositories/repositories.dart';
+import 'package:five_on_4_flutter/src/domain/values/geo_coordinates/value.dart';
 import 'package:five_on_4_flutter/src/features/auth/data/repositories/repositories.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/matches/data/repositories/matches_repository/matches_repository.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/args/match_participants_invitations/args.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/models/match_info/model.dart';
 import 'package:five_on_4_flutter/src/features/matches/domain/values/new_match/value.dart';
 import 'package:five_on_4_flutter/src/features/players/data/repositories/repository.dart';
 import 'package:five_on_4_flutter/src/features/players/domain/models/player/model.dart';
 import 'package:five_on_4_flutter/src/features/weather/data/repositories/weather_repository/weather_repository.dart';
+import 'package:five_on_4_flutter/src/features/weather/domain/models/weather_model/weather_model.dart';
 
 class MatchesUseCases {
   const MatchesUseCases({
@@ -14,12 +18,14 @@ class MatchesUseCases {
     required this.authRepository,
     required this.playersRepository,
     required this.weatherRepository,
+    required this.locationRepository,
   });
 
   final MatchesRepository matchesRepository;
   final AuthRepository authRepository;
   final PlayersRepository playersRepository;
   final WeatherRepository weatherRepository;
+  final LocationRepository locationRepository;
 
   Future<void> invitePlayersToMatch({
     required String matchId,
@@ -67,17 +73,39 @@ class MatchesUseCases {
 
 // TODO this should probably return paginated class of some sort
 // TODO ALSO, this function can maybe be unified later with some general gunction - and just pass it date period, and if matches are for me
-  Future<List<MatchModel>> getMyNextMatchInfo() async {
+  Future<MatchInfoModel> getMyNextMatchInfo() async {
 /* TODO this probably needs to be formatted to remove time, and just include todays data  */
 // TODO will need to use this in future
     final String today = DateTime.now().toIso8601String();
     final String tomorrow =
         DateTime.now().add(const Duration(days: 1)).toIso8601String();
 
-// TODO arguments here would be period i guess - make sure it gets these arguments later
-    final List<MatchModel> matches = await matchesRepository.getMatches();
+    final PlayerModel? currentPlayer = await playersRepository.currentPlayer;
+    // TODO not sure if this should be error to throw
+    if (currentPlayer == null) throw AuthNoSessionException();
 
-    return matches;
+    final String playerId = currentPlayer.id;
+
+// TODO arguments here would be period i guess - make sure it gets these arguments later
+    // final List<MatchModel> matches = await matchesRepository.getMatches();
+    final MatchModel match =
+        await matchesRepository.getPlayerNextMatch(playerId);
+
+// normally, we would get coordinates from location of the match
+    final GeoCoordinatesValue coordinates =
+        await locationRepository.getCurrentPosition();
+
+    final WeatherModel weather =
+        await weatherRepository.getWeather(coordinates);
+
+    final MatchInfoModel matchInfo = MatchInfoModel.fromWeatherAndMatchModels(
+      match: match,
+      weather: weather,
+    );
+
+    return matchInfo;
+
+    // return matches;
   }
 
   Future<List<MatchModel>> getMyAllMatches() async {

@@ -1,4 +1,6 @@
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/matches/domain/models/match_info/model.dart';
+import 'package:five_on_4_flutter/src/features/weather/domain/domain.dart';
 import 'package:five_on_4_flutter/src/theme/constants/color_constants.dart';
 import 'package:five_on_4_flutter/src/theme/constants/constants.dart';
 import 'package:five_on_4_flutter/src/theme/constants/font_size_constants.dart';
@@ -7,15 +9,18 @@ import 'package:flutter/material.dart';
 class MyNextMatchOverview extends StatelessWidget {
   const MyNextMatchOverview({
     super.key,
-    required this.match,
+    required this.matchInfo,
   });
 
-  final MatchModel match;
+  final MatchInfoModel matchInfo;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
+
+    final MatchModel match = matchInfo.match;
+    final WeatherModel weather = matchInfo.weather;
 
     return Container(
       decoration: BoxDecoration(
@@ -69,7 +74,7 @@ class MyNextMatchOverview extends StatelessWidget {
                       height: SpacingConstants.medium,
                     ),
                     Text(
-                      'Come location here',
+                      '${match.joinedParticipants.length} player(s) arriving',
                       style: textTheme.bodySmall!.copyWith(
                         color: ColorConstants.white,
                         fontWeight: FontWeight.bold,
@@ -80,12 +85,12 @@ class MyNextMatchOverview extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.all(SpacingConstants.medium),
-                width: DimensionsConstants.d50,
+                width: DimensionsConstants.d60,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
-                      Icons.sunny,
+                      weather.getWeatherIcon(),
                       size: FontSizeConstants.xxxLarge,
                       color: ColorConstants.yellow,
                     ),
@@ -93,7 +98,8 @@ class MyNextMatchOverview extends StatelessWidget {
                       height: SpacingConstants.small,
                     ),
                     Text(
-                      'Sunny',
+                      weather.getWeatherDescription(),
+                      textAlign: TextAlign.center,
                       style: textTheme.labelMedium!.copyWith(
                         fontWeight: FontWeight.bold,
                         color: ColorConstants.yellow,

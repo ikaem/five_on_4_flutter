@@ -1,6 +1,6 @@
 import 'package:five_on_4_flutter/src/features/matches/domain/domain.dart';
+import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/match_get_my_next/cubit.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_all/bloc.dart';
-import 'package:five_on_4_flutter/src/features/matches/presentation/blocs/matches_get_my_todays/bloc.dart';
 import 'package:five_on_4_flutter/src/features/matches/presentation/cubits/matches_invited_get/cubit.dart';
 import 'package:five_on_4_flutter/src/features/weather/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/weather/presentation/cubits/cubits.dart';
@@ -22,15 +22,22 @@ class HomeScreen extends StatelessWidget {
           create: (context) => WeatherGetCubit(weatherUseCases: weatherUseCases)
             ..loadHereAndNowWeather(),
         ),
-        BlocProvider<MatchesGetMyTodaysBloc>(
+        // BlocProvider<MatchGetMyNext>(
+        //   create: (context) => MatchGetMyNext(matchesUseCases: matchesUseCases)
+        //     ..add(MatchesGetMyTodaysBlocLoadMatchesEvent()),
+        // ),
+
+        BlocProvider<MatchGetMyNextCubit>(
           create: (context) =>
-              MatchesGetMyTodaysBloc(matchesUseCases: matchesUseCases)
-                ..add(MatchesGetMyTodaysBlocLoadMatchesEvent()),
+              MatchGetMyNextCubit(matchesUseCases: matchesUseCases)
+                ..onMatchLoad(),
         ),
         BlocProvider<MatchesGetMyAllBloc>(
           create: (context) =>
               MatchesGetMyAllBloc(matchesUseCases: matchesUseCases)
-                ..add(MatchesGetMyAllBlocLoadMatchesEvent()),
+                ..add(
+                  MatchesGetMyAllBlocLoadMatchesEvent(),
+                ),
         ),
         BlocProvider<MatchesInvitedGetCubit>(
           create: (context) =>

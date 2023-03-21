@@ -22,6 +22,8 @@ class AppUseCases {
     matchesRepository: appRepositories.matchesRepository,
     authRepository: appRepositories.authRepository,
     playersRepository: appRepositories.playersRepository,
+    locationRepository: appRepositories.locationRepository,
+    weatherRepository: appRepositories.weatherRepository,
   );
   late final AuthUseCases authUseCases = AuthUseCases(
     authRepository: appRepositories.authRepository,

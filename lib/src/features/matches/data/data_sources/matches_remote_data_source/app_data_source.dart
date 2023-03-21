@@ -248,4 +248,43 @@ class MatchesRemoteAppDataSource implements MatchesRemoteDataSource {
     // TODO: implement getInvitedMatches
     // await _firestoreWrapper.getInvitedMatches(playerId);
   }
+
+  @override
+  Future<MatchRemoteDTO> getPlayerNextMatch(String playerId) async {
+    // final QuerySnapshot<Map<String, dynamic>> collectionQuerySnapshot =
+    //     await _firestoreWrapper.db.collection(firestoreMatchesCollection).get();
+
+    // final List<QueryDocumentSnapshot<Map<String, dynamic>>>
+    //     queryDocumentSnapshots = collectionQuerySnapshot.docs;
+
+    final CollectionReference<Map<String, dynamic>> collection =
+        _firestoreWrapper.db.collection(firestoreMatchesCollection);
+
+    // final QuerySnapshot<Map<String, dynamic>> matchQuerySnapshot  = await collection.get();
+    final QuerySnapshot<Map<String, dynamic>> matchQuerySnapshot =
+        await collection.limit(1).get();
+
+    final QueryDocumentSnapshot<Map<String, dynamic>> document =
+        matchQuerySnapshot.docs.first;
+
+    // getting participants
+    final QuerySnapshot<Map<String, dynamic>> participantsQuerySnapshot =
+        await _firestoreWrapper.db
+            .collection(firestoreMatchesCollection)
+            .doc(document.id)
+            .collection(firestoreMatchPartipantsSubcollection)
+            .get();
+
+    final List<QueryDocumentSnapshot<Map<String, dynamic>>> participantsItems =
+        participantsQuerySnapshot.docs;
+
+// TODO it is important that single document is of different type that multple
+
+    final MatchRemoteDTO matchRemoteDTO = MatchRemoteDTO.fromFirestoreSnapshots(
+      matchSnapshot: document,
+      participantsSnapshots: participantsItems,
+    );
+
+    return matchRemoteDTO;
+  }
 }

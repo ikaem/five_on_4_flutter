@@ -1,5 +1,6 @@
 import 'package:five_on_4_flutter/src/features/weather/data/data.dart'
     show WeatherRemoteDTO;
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'model.freezed.dart';
@@ -24,5 +25,36 @@ class WeatherModel with _$WeatherModel {
     );
 
     return model;
+  }
+}
+
+// TODO move to extensions
+extension WeatherModelExtension on WeatherModel {
+  IconData getWeatherIcon() {
+    switch (weatherDescription) {
+      // TODO make these cosntants
+      case 'Light rain':
+        {
+          return Icons.grain;
+        }
+      default:
+        {
+          return Icons.help_outline;
+        }
+    }
+  }
+
+  String getWeatherDescription() {
+    switch (weatherDescription) {
+      // TODO make these cosntants
+      case 'Light rain':
+        {
+          return 'Light rain';
+        }
+      default:
+        {
+          return 'Unknown weather';
+        }
+    }
   }
 }
