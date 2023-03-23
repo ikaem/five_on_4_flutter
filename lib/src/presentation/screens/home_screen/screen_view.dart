@@ -81,11 +81,18 @@ class HomeScreenView extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: 3,
                   itemBuilder: (context, index) {
-                    final MatchModel match = MatchModel(id: id, name: name, joinedParticipants: joinedParticipants, invitedParticipants: invitedParticipants)
+                    final MatchModel match = MatchModel(
+                      id: 'id',
+                      name: 'name',
+                      joinedParticipants: [],
+                      invitedParticipants: [],
+                    );
                     return Container(
                       child: Column(
                         children: [
-                          Text()
+                          Text(
+                            match.id,
+                          ),
                         ],
                       ),
                     );

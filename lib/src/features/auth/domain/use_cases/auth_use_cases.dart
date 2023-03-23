@@ -4,7 +4,6 @@ import 'package:five_on_4_flutter/src/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/auth/data/data.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/domain.dart';
 import 'package:five_on_4_flutter/src/features/auth/domain/models/auth/auth.dart';
-import 'package:five_on_4_flutter/src/features/players/domain/args/player_args.dart';
 import 'package:five_on_4_flutter/src/utils/mixins/validation_mixin.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -62,11 +61,11 @@ class AuthUseCases with ValidationMixin {
   Future<void> register(RegisterCredentialsArgs credentialsArgs) async {
     final String authId = await authRepository.register(credentialsArgs);
 
-    final PlayerArgs newPlayerArgs = PlayerArgs(
-      authId: authId,
-      nickname: credentialsArgs.nickname,
-      email: credentialsArgs.email,
-    );
+    // final PlayerArgs newPlayerArgs = PlayerArgs(
+    //   authId: authId,
+    //   nickname: credentialsArgs.nickname,
+    //   email: credentialsArgs.email,
+    // );
 
     // await playersRepository.createPlayer(newPlayerArgs);
   }
