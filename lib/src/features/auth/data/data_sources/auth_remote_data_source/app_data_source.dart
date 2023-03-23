@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_on_4_flutter/src/features/auth/auth.dart'
     show AuthRemoteDataSource;
@@ -56,61 +58,32 @@ class AuthRemoteAppDataSource implements AuthRemoteDataSource {
 
   @override
   Future<User> register(RegisterCredentialsArgs credentialsArgs) async {
+    final Map<String, dynamic> newPlayerData = {
+      'email': credentialsArgs.email,
+      'nickname': credentialsArgs.nickname,
+    };
+
     try {
-      final User user = await firestoreWrapper.performingBatchWriteOperation(
-        (batchSet) async {
-          final User? userResponse = await firebaseAuthWrapper
-              .registerWithUsernameAndPassword(credentialsArgs);
+      final User? userResponse = await firebaseAuthWrapper
+          .registerWithUsernameAndPassword(credentialsArgs);
 
-          if (userResponse == null) {
-            throw const AuthRegistrationFailedException();
-          }
+      if (userResponse == null) {
+        throw const AuthRegistrationFailedException();
+      }
 
-          final String uid = userResponse.uid;
-          final Map<String, dynamic> newPlayerData = {
-            'email': credentialsArgs.email,
-            'nickname': credentialsArgs.nickname,
-          };
+      final DocumentReference<Map<String, dynamic>> insertReference =
+          await firestoreWrapper.db
+              .collection(PlayersRemoteAppDataSource.firestorePlayersCollection)
+              .doc(userResponse.uid);
 
-// TODO we could have auth id passed in as player id as well - lets try that?
-          final DocumentReference<Map<String, dynamic>> newPlayerReference =
-              await firestoreWrapper.getCollectionDocumentReference(
-            collectionName:
-                PlayersRemoteAppDataSource.firestorePlayersCollection,
-            documentId: uid,
-          );
+      await insertReference.set(newPlayerData);
+      // .add(newPlayerData);
 
-          batchSet(
-            newPlayerReference,
-            newPlayerData,
-          );
-
-          return userResponse;
-        },
-      );
-
-      return user;
-
-// TODO old
-
-//       final User? user = await firebaseAuthWrapper
-//           .registerWithUsernameAndPassword(credentialsArgs);
-
-// // TODO not sure if this is correct
-// // TODO also check why does this allow to be null?
-//       if (user == null) {
-//         throw const AuthRegistrationFailedException();
-//       }
-
-//       return user;
-    } on FirebaseAuthException catch (e) {
-      throw AuthException(message: e.message);
-      // TODO we could have firestore exceptions here as well
+      return userResponse;
     } catch (e) {
-      // TODO will need to check for different exception types
-      throw const AuthException(
-        message: 'There was an error while registering',
-      );
+      log('There was an error with registering new player: $e');
+      // TODO maybe delete created auth if something fails
+      rethrow;
     }
   }
 

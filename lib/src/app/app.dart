@@ -1,8 +1,6 @@
 import 'package:five_on_4_flutter/src/navigation/app_router.dart';
-import 'package:five_on_4_flutter/src/presentation/cubits/initial_data/cubit.dart';
 import 'package:five_on_4_flutter/src/theme/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -13,7 +11,7 @@ class FiveOn4App extends StatelessWidget {
   Widget build(BuildContext context) {
     // final AuthStatusCubit authStatusCubit = context.read<AuthStatusCubit>();
     // final LogoutCubit logoutCubit = context.read<LogoutCubit>();
-    final InitialDataCubit initialDataCubit = context.read<InitialDataCubit>();
+    // final InitialDataCubit initialDataCubit = context.read<InitialDataCubit>();
 
 // potentually make some utils multirepository provider in future
     final AppRouter appRouter = AppRouter(
